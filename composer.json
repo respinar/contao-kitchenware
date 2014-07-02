@@ -1,8 +1,9 @@
-me": "respinar/kitchenware",
+{
+    "name": "respinar/kitchenware",
     "description":"Kitchenware catalog list module for Contao",
     "keywords":["contao", "kitchenware","catalog"],
     "type": "contao-module",
-    "homepage":"https://github.com/respinar/airquality",
+    "homepage":"https://github.com/respinar/kitchenware",
     "license":"LGPL-3.0+",
     "authors":[
         {
