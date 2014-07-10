@@ -23,7 +23,7 @@ namespace Kitchenware;
  *
  * @copyright  2014
  * @author     Hamid Abbaszadeh
- * @package    Devtools
+ * @package    Kitchenware
  */
 class ModuleKitchenwareMenu extends \Module
 {
@@ -69,6 +69,45 @@ class ModuleKitchenwareMenu extends \Module
 	 */
 	protected function compile()
 	{
+		$objKitchenware = $this->Database->prepare("SELECT * FROM tl_kitchenware")->execute();
+
+		//$objKitchenwareSet = $this->Database->prepare("SELECT * FROM tl_kitchenware_set WHERE published=1 ORDER BY sorting")->execute();
+
+		// Return if no Catalog were found
+		if (!$objKitchenware->numRows)
+		{
+			$this->Template = new \FrontendTemplate('mod_kitchenware_menu_empty');
+			$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyKitchenwareMenu'];
+			return;
+		}
+
+
+
+		$arrKitchenwareMenu = array();
+
+		// Generate Kitchenware Menu
+		while ($objKitchenware->next())
+		{
+
+			$strLink = '';
+			// Generate a jumpTo link
+			if ($objKitchenware->jumpTo > 0)
+			{
+				$objJump = \PageModel::findByPk($objKitchenware->jumpTo);
+				if ($objJump !== null)
+				{
+					$strLink = $this->generateFrontendUrl($objJump->row());
+				}
+			}
+
+			$arrKitchenwareMenu[] = array
+			(
+				'title' => $objKitchenware->title,
+				'link'  => $strLink,
+			);
+		}
+
+		$this->Template->kitchenwaremenu = $arrKitchenwareMenu;
 
 	}
 }

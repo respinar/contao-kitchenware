@@ -5,4 +5,20 @@
     <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
   <?php endif; ?>
 
+  <div class="sets">
+  <?php foreach($this->kitchenwarelist as $item) { ?>
+	<div class="<?php echo $this->itemClass; ?>">
+		<a href="<?php echo $item[link]; ?>">
+			<?php echo $item[image]; ?>
+		</a>
+		<a href="<?php echo $item[link]; ?>">
+			<?php echo $item[title]; ?>
+		</a>
+		<?php if ($this->kitchenware_price)  {?>
+			<p class="price">قیمت: <?php echo $item[price]; ?> ریال</p>
+		<?php } ?>
+	</div>
+  <?php } ?>
+  </div>
+
 </div>

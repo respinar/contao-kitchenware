@@ -1,0 +1,56 @@
+
+<div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+
+  <?php if ($this->headline): ?>
+    <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+  <?php endif; ?>
+
+  <div class="description grid_6">
+    <h2><?php echo $this->title; ?></h2>
+    <p class="code"><?php echo $this->code; ?></p>
+    <?php if ($this->kitchenware_price)  {?>
+		<p class="price">قیمت: <?php echo $this->price; ?> ریال</p>
+    <?php } ?>
+    <p class="warranty">گارانتی: <?php echo $this->warranty; ?> ماه</p>
+    <p><?php echo $this->description; ?></p>
+  </div>
+  <div class="image grid_6">
+	  <?php echo $this->image; ?>
+  </div>
+
+  <div class="spec grid_4">
+    <h3>خصوصیات</h3>
+    <p>جنس بدنه: <?php echo $this->base; ?></p>
+    <p>پوشش سطح: <?php echo $this->surface; ?></p>
+    <p>درب: <?php echo $this->lids; ?></p>
+    <p>دسته‌ها: <?php echo $this->handle; ?></p>
+    <p>رنگ: <?php echo $this->colors; ?></p>
+  </div>
+
+  <div class="features grid_4">
+    <h3>ویژگی‌ها</h3>
+    <ul>
+      <?php foreach($this->features as $feature) { ?>
+        <li><?php echo $feature; ?></li>
+      <?php } ?>
+    </ul>
+  </div>
+
+  <div class="elements grid_12">
+  <h3>محتوی</h3>
+  <?php foreach($this->elements as $element) { ?>
+	<div class="element <?php echo $this->itemClass; ?>">
+		<?php echo $element[image]; ?>
+		<h4><?php echo $element[title]; ?></h4>
+		<ul>
+		  <li>ابعاد: <?php echo $element[dimensions]; ?></li>
+		  <li>ظرفیت: <?php echo $element[capacity]; ?></li>
+		  <?php if ($element[description]) { ?>
+		    <li><?php echo $element[description]; ?></li>
+		  <?php } ?>
+		</ul>
+	</div>
+  <?php } ?>
+  </div>
+
+</div>

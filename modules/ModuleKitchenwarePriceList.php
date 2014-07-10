@@ -25,14 +25,14 @@ namespace Kitchenware;
  * @author     Hamid Abbaszadeh
  * @package    Devtools
  */
-class ModuleKitchenwareList extends \Module
+class ModuleKitchenwarePriceList extends \Module
 {
 
 	/**
 	 * Template
 	 * @var string
 	 */
-	protected $strTemplate = 'mod_kitchenware_list';
+	protected $strTemplate = 'mod_kitchenware_pricelist';
 
 	/**
 	 * Display a wildcard in the back end
@@ -44,19 +44,13 @@ class ModuleKitchenwareList extends \Module
 		{
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['customers_detail'][0]) . ' ###';
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['kitchenware_pricelist'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
 			$objTemplate->href = 'contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $this->id;
 
 			return $objTemplate->parse();
-		}
-
-		// Show the kitchenware detail if an item has been selected
-		if ($this->kitchenware_detailModule > 0 && (isset($_GET['items']) || ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))))
-		{
-			return $this->getFrontendModule($this->kitchenware_detailModule, $this->strColumn);
 		}
 
 		return parent::generate();
@@ -69,8 +63,6 @@ class ModuleKitchenwareList extends \Module
 	protected function compile()
 	{
 		$objKitchenware = $this->Database->prepare("SELECT * FROM tl_kitchenware WHERE id=?")->execute($this->kitchenware);
-
-		$this->Template->kitchenwaretitle = $objKitchenware->title;
 
 		$objKitchenwareSet = $this->Database->prepare("SELECT * FROM tl_kitchenware_set WHERE published=1 AND pid=? ORDER BY sorting")->execute($this->kitchenware);
 
@@ -101,7 +93,7 @@ class ModuleKitchenwareList extends \Module
 		{
 
 			$strImage = '';
-			$objImage = \FilesModel::findByPk($objKitchenwareSet->singleSRC);
+			$objImage = \FilesModel::findByPk($objKitchenwareSet->image);
 
 			// Add photo image
 			if ($objImage !== null)
@@ -109,18 +101,12 @@ class ModuleKitchenwareList extends \Module
 				$strImage = \Image::getHtml(\Image::get($objImage->path, '300', '300', 'center_center'));
 			}
 
-			if ($this->kitchenware_price) {
-				$price   = number_format($objKitchenwareSet->price);
-			}
-
 			$arrKitchenwareList[] = array
 			(
 				'title' => $objKitchenwareSet->title,
 				'model' => $objKitchenwareSet->model,
-				'price' => $price,
 				'image' => $strImage,
 				'link'  => strlen($strLink) ? sprintf($strLink, $objKitchenwareSet->alias) : ''
-
 			);
 		}
 

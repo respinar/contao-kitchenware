@@ -18,7 +18,7 @@ array_insert($GLOBALS['BE_MOD']['content'], 1, array
 (
 	'kitchenware' => array
 	(
-		'tables' => array('tl_kitchenware_category', 'tl_kitchenware_set','tl_kitchenware_element'),
+		'tables' => array('tl_kitchenware', 'tl_kitchenware_set','tl_kitchenware_element','tl_kitchenware_rating,tl_kitchenware_tag'),
 		'icon'   => 'system/modules/kitchenware/assets/icon.png'
 	)
 ));
@@ -34,7 +34,7 @@ array_insert($GLOBALS['FE_MOD'], 2, array
 	(
 		'kitchenware_menu'    => 'ModuleKitchenwareMenu',
 		'kitchenware_list'    => 'ModuleKitchenwareList',
-		'kitchenware_set'     => 'ModuleKitchenwareSet',
+		'kitchenware_detail'  => 'ModuleKitchenwareDetail',
 		'kitchenware_related' => 'ModuleKitchenwareRelated',
 
 	)

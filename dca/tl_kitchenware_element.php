@@ -101,7 +101,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_element'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},title,alias,price;{image_legend},image;{meta_legend},dimensions,capacity;{description_legend:hide},description;{publish_legend},published'
+		'default'                     => '{title_legend},title,model,code;{price_legend},price;{image_legend},singleSRC;{meta_legend},dimensions,capacity;{description_legend:hide},description;{publish_legend},published'
 	),
 
 	// Fields
@@ -129,12 +129,21 @@ $GLOBALS['TL_DCA']['tl_kitchenware_element'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>128),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
-		'alias' => array
+		'model' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_element']['alias'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_element']['model'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
+		'code' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_element']['code'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -168,9 +177,9 @@ $GLOBALS['TL_DCA']['tl_kitchenware_element'] = array
 			'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
-		'image' => array
+		'singleSRC' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_element']['image'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_element']['singleSRC'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes']),
@@ -211,7 +220,7 @@ class tl_kitchenware_element extends Backend
 	 */
 	public function generateItemRow($arrRow)
 	{
-		$objImage = \FilesModel::findByPk($arrRow['image']);
+		$objImage = \FilesModel::findByPk($arrRow['singleSRC']);
 
 		if ($objImage !== null)
 		{

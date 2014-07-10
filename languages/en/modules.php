@@ -15,14 +15,14 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['kitchenware'] = array('Kitchenware', 'Manage kitchenware sets and products');
+$GLOBALS['TL_LANG']['MOD']['kitchenware'] = array('Kitchenware', 'Manage kitchenware Sets and Products');
 
 
 /**
  * Front end modules
  */
 $GLOBALS['TL_LANG']['FMD']['kitchenware']         = 'Kitchenware';
-$GLOBALS['TL_LANG']['FMD']['kitchenware_menu']    = array('Kitchenware Categoty Menu', '');
-$GLOBALS['TL_LANG']['FMD']['kitchenware_list']    = array('Kitchenware Set List', '');
-$GLOBALS['TL_LANG']['FMD']['kitchenware_set']     = array('Kitchenware Set detail', '');
-$GLOBALS['TL_LANG']['FMD']['kitchenware_related'] = array('Kitchenware Related sets', '');
+$GLOBALS['TL_LANG']['FMD']['kitchenware_menu']    = array('Kitchenware Menu', '');
+$GLOBALS['TL_LANG']['FMD']['kitchenware_list']    = array('Kitchenware List', '');
+$GLOBALS['TL_LANG']['FMD']['kitchenware_detail']  = array('Kitchenware Detail', '');
+$GLOBALS['TL_LANG']['FMD']['kitchenware_related'] = array('Kitchenware Related', '');

@@ -26,18 +26,21 @@ ClassLoader::addNamespaces(array
 ClassLoader::addClasses(array
 (
 	// Classes
-	'Kitchenware\Kitchenware'              => 'system/modules/kitchenware/classes/Kitchenware.php',
+	'Kitchenware\Kitchenware'                => 'system/modules/kitchenware/classes/Kitchenware.php',
 
 	// Models
-	'Kitchenware\KitchenwareCategoryModel' => 'system/modules/kitchenware/models/KitchenwareCategoryModel.php',
-	'Kitchenware\KitchenwareSetModel'      => 'system/modules/kitchenware/models/KitchenwareSetModel.php',
-	'Kitchenware\KitchenwareProductModel'  => 'system/modules/kitchenware/models/KitchenwareProductModel.php',
+	'Kitchenware\KitchenwareElementModel'    => 'system/modules/kitchenware/models/KitchenwareElementModel.php',
+	'Kitchenware\KitchenwareTagModel'        => 'system/modules/kitchenware/models/KitchenwareTagModel.php',
+	'Kitchenware\KitchenwareSetModel'        => 'system/modules/kitchenware/models/KitchenwareSetModel.php',
+	'Kitchenware\KitchenwareModel'           => 'system/modules/kitchenware/models/KitchenwareModel.php',
+	'Kitchenware\KitchenwareRatingModel'     => 'system/modules/kitchenware/models/KitchenwareRatingModel.php',
 
 	// Modules
-	'Kitchenware\ModuleKitchenwareMenu'    => 'system/modules/kitchenware/modules/ModuleKitchenwareMenu.php',
-	'Kitchenware\ModuleKitchenwareList'    => 'system/modules/kitchenware/modules/ModuleKitchenwareList.php',
-	'Kitchenware\ModuleKitchenwareSet' => 'system/modules/kitchenware/modules/ModuleKitchenwareSet.php',
-	'Kitchenware\ModuleKitchenwareRelated' => 'system/modules/kitchenware/modules/ModuleKitchenwareRelated.php',
+	'Kitchenware\ModuleKitchenwareRelated'   => 'system/modules/kitchenware/modules/ModuleKitchenwareRelated.php',
+	'Kitchenware\ModuleKitchenwarePriceList' => 'system/modules/kitchenware/modules/ModuleKitchenwarePriceList.php',
+	'Kitchenware\ModuleKitchenwareList'      => 'system/modules/kitchenware/modules/ModuleKitchenwareList.php',
+	'Kitchenware\ModuleKitchenwareMenu'      => 'system/modules/kitchenware/modules/ModuleKitchenwareMenu.php',
+	'Kitchenware\ModuleKitchenwareDetail'    => 'system/modules/kitchenware/modules/ModuleKitchenwareDetail.php',
 ));
 
 
@@ -46,8 +49,9 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (
-	'mod_kitchenware_menu'         => 'system/modules/kitchenware/templates/modules',
-	'mod_kitchenware_list'         => 'system/modules/kitchenware/templates/modules',
-	'mod_kitchenware_set'          => 'system/modules/kitchenware/templates/modules',
-	'mod_kitchenware_related'      => 'system/modules/kitchenware/templates/modules',
+	'mod_kitchenware_detail'    => 'system/modules/kitchenware/templates/modules',
+	'mod_kitchenware_set_empty' => 'system/modules/kitchenware/templates/modules',
+	'mod_kitchenware_menu'      => 'system/modules/kitchenware/templates/modules',
+	'mod_kitchenware_list'      => 'system/modules/kitchenware/templates/modules',
+	'mod_kitchenware_related'   => 'system/modules/kitchenware/templates/modules',
 ));

@@ -16,10 +16,11 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_kitchenware_set']['title']         = array('Set title', 'Please enter the set title.');
-$GLOBALS['TL_LANG']['tl_kitchenware_set']['alias']         = array('Set code', 'please enter the set code.');
+$GLOBALS['TL_LANG']['tl_kitchenware_set']['alias']         = array('Set alias', 'please enter the set alias.');
 $GLOBALS['TL_LANG']['tl_kitchenware_set']['origin']        = array('Origin country', '');
 $GLOBALS['TL_LANG']['tl_kitchenware_set']['model']         = array('Model', '');
 $GLOBALS['TL_LANG']['tl_kitchenware_set']['price']         = array('Price', '');
+$GLOBALS['TL_LANG']['tl_kitchenware_set']['code']          = array('Code', 'please enter the set code.');
 $GLOBALS['TL_LANG']['tl_kitchenware_set']['pieces']        = array('Pieces', '');
 $GLOBALS['TL_LANG']['tl_kitchenware_set']['standard_sign'] = array('Standard', '');
 $GLOBALS['TL_LANG']['tl_kitchenware_set']['warranty_sign'] = array('Warranty', '');
@@ -40,6 +41,7 @@ $GLOBALS['TL_LANG']['tl_kitchenware_set']['featured']      = array('Feature set'
  * Legends
  */
 $GLOBALS['TL_LANG']['tl_kitchenware_set']['title_legend']       = 'Title';
+$GLOBALS['TL_LANG']['tl_kitchenware_set']['price_legend']       = 'Price';
 $GLOBALS['TL_LANG']['tl_kitchenware_set']['meta_legend']        = 'Meta';
 $GLOBALS['TL_LANG']['tl_kitchenware_set']['spec_legend']        = 'Spesification';
 $GLOBALS['TL_LANG']['tl_kitchenware_set']['features_legend']    = 'Features';
