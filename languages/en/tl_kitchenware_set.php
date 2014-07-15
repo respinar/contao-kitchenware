@@ -15,26 +15,25 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_kitchenware_set']['title']         = array('Set title', 'Please enter the set title.');
-$GLOBALS['TL_LANG']['tl_kitchenware_set']['alias']         = array('Set alias', 'please enter the set alias.');
-$GLOBALS['TL_LANG']['tl_kitchenware_set']['origin']        = array('Origin country', '');
-$GLOBALS['TL_LANG']['tl_kitchenware_set']['model']         = array('Model', '');
-$GLOBALS['TL_LANG']['tl_kitchenware_set']['price']         = array('Price', '');
-$GLOBALS['TL_LANG']['tl_kitchenware_set']['code']          = array('Code', 'please enter the set code.');
-$GLOBALS['TL_LANG']['tl_kitchenware_set']['pieces']        = array('Pieces', '');
-$GLOBALS['TL_LANG']['tl_kitchenware_set']['standard_sign'] = array('Standard', '');
-$GLOBALS['TL_LANG']['tl_kitchenware_set']['warranty_sign'] = array('Warranty', '');
-$GLOBALS['TL_LANG']['tl_kitchenware_set']['base']          = array('Base', '');
-$GLOBALS['TL_LANG']['tl_kitchenware_set']['surfaces']      = array('Surface', '');
-$GLOBALS['TL_LANG']['tl_kitchenware_set']['lids']          = array('Lids', '');
-$GLOBALS['TL_LANG']['tl_kitchenware_set']['handles']       = array('Handle', '');
-$GLOBALS['TL_LANG']['tl_kitchenware_set']['colors']        = array('Colors', '');
-$GLOBALS['TL_LANG']['tl_kitchenware_set']['features']      = array('Features', '');
-$GLOBALS['TL_LANG']['tl_kitchenware_set']['image']         = array('Image', '');
-$GLOBALS['TL_LANG']['tl_kitchenware_set']['package']       = array('Package', '');
-$GLOBALS['TL_LANG']['tl_kitchenware_set']['description']   = array('Description', '');
-$GLOBALS['TL_LANG']['tl_kitchenware_set']['published']     = array('Publish set', 'Make the set item publicly visible on the website.');
-$GLOBALS['TL_LANG']['tl_kitchenware_set']['featured']      = array('Feature set', 'Show the set item in a featured set list.');
+$GLOBALS['TL_LANG']['tl_kitchenware_set']['title']       = array('Set title', 'Please enter the set title.');
+$GLOBALS['TL_LANG']['tl_kitchenware_set']['alias']       = array('Set alias', 'please enter the set alias.');
+$GLOBALS['TL_LANG']['tl_kitchenware_set']['origin']      = array('Origin country', '');
+$GLOBALS['TL_LANG']['tl_kitchenware_set']['model']       = array('Model or code', 'Please enter model or code of this set.');
+$GLOBALS['TL_LANG']['tl_kitchenware_set']['price']       = array('Price', '');
+$GLOBALS['TL_LANG']['tl_kitchenware_set']['pieces']      = array('Pieces', '');
+$GLOBALS['TL_LANG']['tl_kitchenware_set']['signs']       = array('Signs', '');
+$GLOBALS['TL_LANG']['tl_kitchenware_set']['warranty']    = array('Warranty', '');
+$GLOBALS['TL_LANG']['tl_kitchenware_set']['base']        = array('Base', '');
+$GLOBALS['TL_LANG']['tl_kitchenware_set']['surfaces']    = array('Surface', '');
+$GLOBALS['TL_LANG']['tl_kitchenware_set']['lids']        = array('Lids', '');
+$GLOBALS['TL_LANG']['tl_kitchenware_set']['handles']     = array('Handle', '');
+$GLOBALS['TL_LANG']['tl_kitchenware_set']['colors']      = array('Colors', '');
+$GLOBALS['TL_LANG']['tl_kitchenware_set']['features']    = array('Features', '');
+$GLOBALS['TL_LANG']['tl_kitchenware_set']['singleSRC']   = array('Image', '');
+$GLOBALS['TL_LANG']['tl_kitchenware_set']['package']     = array('Package', '');
+$GLOBALS['TL_LANG']['tl_kitchenware_set']['description'] = array('Description', '');
+$GLOBALS['TL_LANG']['tl_kitchenware_set']['published']   = array('Publish set', 'Make the set item publicly visible on the website.');
+$GLOBALS['TL_LANG']['tl_kitchenware_set']['featured']    = array('Feature set', 'Show the set item in a featured set list.');
 
 
 /**

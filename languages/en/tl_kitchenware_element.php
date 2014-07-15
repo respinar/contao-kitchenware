@@ -17,6 +17,7 @@
  */
 $GLOBALS['TL_LANG']['tl_kitchenware_element']['title']       = array('Element title', 'Please enter the element title.');
 $GLOBALS['TL_LANG']['tl_kitchenware_element']['alias']       = array('Element alias','');
+$GLOBALS['TL_LANG']['tl_kitchenware_element']['model']       = array('Element model','');
 $GLOBALS['TL_LANG']['tl_kitchenware_element']['price']       = array('Price','');
 $GLOBALS['TL_LANG']['tl_kitchenware_element']['image']       = array('Image','');
 $GLOBALS['TL_LANG']['tl_kitchenware_element']['dimensions']  = array('Dimensrions','Length x Width x Height');

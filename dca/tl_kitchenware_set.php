@@ -115,7 +115,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},title,alias,model,origin;{price_legend:hide},price,warranty;{signs_legend},signs;{spec_legend},base,surface,lids,handle,colors,pieces;{features_legend},features;{image_legend},singleSRC,package;{description_legend:hide},description;{publish_legend},published,featured'
+		'default'                     => '{title_legend},title,alias,model;{price_legend:hide},price,pieces,origin,warranty;{signs_legend},signs;{spec_legend},base,surface,lids,handle;{colors_legend},colors;{features_legend},features;{image_legend},singleSRC,package;{description_legend:hide},description;{publish_legend},published,featured'
 	),
 
 	// Fields
@@ -204,7 +204,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 		),
 		'warranty' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['warranty_sign'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['warranty'],
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'text',
