@@ -115,7 +115,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},title,alias,model;{price_legend:hide},price,pieces,origin,warranty;{signs_legend},signs;{spec_legend},base,surface,lids,handle;{colors_legend},colors;{features_legend},features;{image_legend},singleSRC,package;{description_legend:hide},description;{publish_legend},published,featured'
+		'default'                     => '{title_legend},title,alias,model,date;{price_legend:hide},price,pieces,origin,warranty;{signs_legend},signs;{spec_legend},base,surface,lids,handle;{colors_legend},colors;{features_legend},features;{image_legend},singleSRC,multiSRC;{description_legend:hide},description;{publish_legend},published,featured'
 	),
 
 	// Fields
@@ -154,6 +154,18 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alias','unique'=>true,'maxlength'=>128, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
+		),
+		'date' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['date'],
+			'default'                 => time(),
+			'exclude'                 => true,
+			'filter'                  => true,
+			'sorting'                 => true,
+			'flag'                    => 8,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'date', 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'origin' => array
 		(
@@ -270,17 +282,21 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['singleSRC'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes']),
+			'eval'                    => array('fieldType'=>'radio','mandatory'=>true, 'files'=>true, 'filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes']),
 			'sql'                     => "binary(16) NULL"
 		),
-		'package_image' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['package_image'],
-			'exclude'                 => true,
-			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes']),
-			'sql'                     => "binary(16) NULL"
-		),
+		//'multiSRC' => array
+		//(
+			//'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['multiSRC'],
+			//'exclude'                 => true,
+			//'inputType'               => 'fileTree',
+			//'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'orderField'=>'orderSRC', 'files'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes']),
+			//'sql'                     => "blob NULL",
+			//'load_callback' => array
+			//(
+				//array('tl_kitchenware_set', 'setFileTreeFlags')
+			//)
+		//),		
 		'description' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['description'],

@@ -103,10 +103,11 @@ class ModuleKitchenwareDetail extends \Module
 		if ($objImage !== null)
 		{
 			$size = deserialize($this->imgSize);
-			$strImage = \Image::getHtml(\Image::get($objImage->path, $size[0], $size[1], $size[2]));
+			$strImage = \Image::getHtml(\Image::get($objImage->path, $size[0], $size[1], $size[2]),$objKitchenwareSet->title);
 		}
 
 		$this->Template->image = $strImage;
+		$this->Template->imagepath = $objImage->path;
 
 
 		$arrKitchenwareElement = array();
@@ -121,13 +122,13 @@ class ModuleKitchenwareDetail extends \Module
 			// Add photo image
 			if ($objImage !== null)
 			{
-				$strImage = \Image::getHtml(\Image::get($objImage->path, $size[0], $size[1], $size[2]));
+				$strImage = \Image::getHtml(\Image::get($objImage->path, $size[0], $size[1], $size[2]),$objKitchenwareElement->title);
 			}
 
 			$arrKitchenwareElement[] = array
 			(
 				'title'       => $objKitchenwareElement->title,
-				'code'        => $objKitchenwareElement->code,
+				'model'       => $objKitchenwareElement->model,
 				'dimensions'  => $objKitchenwareElement->dimensions,
 				'capacity'    => $objKitchenwareElement->capacity,
 				'description' => $objKitchenwareElement->description,

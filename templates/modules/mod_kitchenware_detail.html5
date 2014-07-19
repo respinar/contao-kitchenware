@@ -15,16 +15,18 @@
     <p><?php echo $this->description; ?></p>
   </div>
   <div class="image grid_6">
+	  <a data-lightbox="" href="<?php echo $this->imagepath; ?>">
 	  <?php echo $this->image; ?>
+	  </a>
   </div>
 
   <div class="spec grid_4">
     <h3>خصوصیات</h3>
-    <p>جنس بدنه: <?php echo $this->base; ?></p>
-    <p>پوشش سطح: <?php echo $this->surface; ?></p>
-    <p>درب: <?php echo $this->lids; ?></p>
-    <p>دسته‌ها: <?php echo $this->handle; ?></p>
-    <p>رنگ: <?php echo $this->colors; ?></p>
+    <p>جنس بدنه: <?php echo $this->base; ?>
+    <br>پوشش سطح: <?php echo $this->surface; ?>
+    <br>درب: <?php echo $this->lids; ?>
+    <br>دسته‌ها: <?php echo $this->handle; ?>
+    <br>>رنگ: <?php echo $this->colors; ?></p>
   </div>
 
   <div class="features grid_4">
@@ -36,21 +38,27 @@
     </ul>
   </div>
 
+  <?php if ($this->elements) {?>
   <div class="elements grid_12">
   <h3>محتوی</h3>
   <?php foreach($this->elements as $element) { ?>
 	<div class="element <?php echo $this->itemClass; ?>">
-		<?php echo $element[image]; ?>
-		<h4><?php echo $element[title]; ?></h4>
+		<figure><?php echo $element[image]; ?></figure>		
 		<ul>
-		  <li>ابعاد: <?php echo $element[dimensions]; ?></li>
-		  <li>ظرفیت: <?php echo $element[capacity]; ?></li>
-		  <?php if ($element[description]) { ?>
-		    <li><?php echo $element[description]; ?></li>
-		  <?php } ?>
+			<?php if ($element[dimensions]) { ?>
+				<li>ابعاد: <?php echo $element[dimensions]; ?></li>
+			<?php } ?>
+			<?php if ($element[capacity]) { ?>
+				<li>ظرفیت: <?php echo $element[capacity]; ?></li>
+			<?php } ?>
+			<?php if ($element[description]) { ?>
+				<li><?php echo $element[description]; ?></li>
+			<?php } ?>
 		</ul>
 	</div>
   <?php } ?>
   </div>
+
+  <?php } ?>
 
 </div>

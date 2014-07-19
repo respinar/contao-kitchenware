@@ -97,6 +97,8 @@ class ModuleKitchenwareList extends \Module
 
 		$arrKitchenwareList = array();
 
+		$size = deserialize($this->imgSize);
+
 		while ($objKitchenwareSet->next())
 		{
 
@@ -106,7 +108,7 @@ class ModuleKitchenwareList extends \Module
 			// Add photo image
 			if ($objImage !== null)
 			{
-				$strImage = \Image::getHtml(\Image::get($objImage->path, '300', '300', 'center_center'));
+				$strImage = \Image::getHtml(\Image::get($objImage->path, $size[0], $size[1], $size[2]),$objKitchenwareSet->title);
 			}
 
 			if ($this->kitchenware_price) {

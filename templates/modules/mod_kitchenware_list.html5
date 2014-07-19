@@ -7,13 +7,15 @@
 
   <div class="sets">
   <?php foreach($this->kitchenwarelist as $item) { ?>
-	<div class="<?php echo $this->itemClass; ?>">
-		<a href="<?php echo $item[link]; ?>">
-			<?php echo $item[image]; ?>
+	<div class="<?php echo $this->itemClass; ?> set">
+		<a href="<?php echo $item[link]; ?>" title="<?php echo $item[title]; ?>">
+			<figure><?php echo $item[image]; ?></figure>
 		</a>
-		<a href="<?php echo $item[link]; ?>">
+		<?php if ($this->kitchenware_title)  {?>
+		<a href="<?php echo $item[link]; ?>" title="<?php echo $item[title]; ?>">
 			<?php echo $item[title]; ?>
 		</a>
+		<?php } ?>
 		<?php if ($this->kitchenware_price)  {?>
 			<p class="price">قیمت: <?php echo $item[price]; ?> ریال</p>
 		<?php } ?>
