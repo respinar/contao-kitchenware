@@ -77,7 +77,7 @@ class ModuleKitchenwareList extends \Module
 		// Return if no products were found
 		if (!$objKitchenwareSet->numRows)
 		{
-			$this->Template = new \FrontendTemplate('mod_kitchwenware_set_empty');
+			$this->Template = new \FrontendTemplate('mod_kitchenware_empty');
 			$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyKichenwareSet'];
 			return;
 		}
