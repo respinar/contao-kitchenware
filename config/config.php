@@ -45,6 +45,13 @@ $GLOBALS['TL_HOOKS']['getSearchablePages'][] = array('Kitchenware', 'getSearchab
 
 
 /**
+ * Add permissions
+ */
+$GLOBALS['TL_PERMISSIONS'][] = 'kitchenware';
+$GLOBALS['TL_PERMISSIONS'][] = 'setp';
+
+
+/**
  * BACK END MODULES
  *
  * Back end modules are stored in a global array called "BE_MOD". You can add

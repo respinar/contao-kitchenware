@@ -308,7 +308,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 			//(
 				//array('tl_kitchenware_set', 'setFileTreeFlags')
 			//)
-		//),		
+		//),
 		'description' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['description'],
@@ -363,6 +363,126 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
  */
 class tl_kitchenware_set extends Backend
 {
+
+    /**
+	 * Import the back end user object
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+		$this->import('BackendUser', 'User');
+	}
+
+
+	/**
+	 * Check permissions to edit table tl_news
+	 */
+	public function checkPermission()
+	{
+
+		if ($this->User->isAdmin)
+		{
+			return;
+		}
+
+		// Set the root IDs
+		if (!is_array($this->User->Kitchenware) || empty($this->User->Kitchenware))
+		{
+			$root = array(0);
+		}
+		else
+		{
+			$root = $this->User->Kitchenware;
+		}
+
+		$id = strlen(Input::get('id')) ? Input::get('id') : CURRENT_ID;
+
+		// Check current action
+		switch (Input::get('act'))
+		{
+			case 'paste':
+				// Allow
+				break;
+
+			case 'create':
+				if (!strlen(Input::get('pid')) || !in_array(Input::get('pid'), $root))
+				{
+					$this->log('Not enough permissions to create Kitchenware items in Kitchenware archive ID "'.Input::get('pid').'"', __METHOD__, TL_ERROR);
+					$this->redirect('contao/main.php?act=error');
+				}
+				break;
+
+			case 'cut':
+			case 'copy':
+				if (!in_array(Input::get('pid'), $root))
+				{
+					$this->log('Not enough permissions to '.Input::get('act').' Kitchenware item ID "'.$id.'" to Kitchenware archive ID "'.Input::get('pid').'"', __METHOD__, TL_ERROR);
+					$this->redirect('contao/main.php?act=error');
+				}
+				// NO BREAK STATEMENT HERE
+
+			case 'edit':
+			case 'show':
+			case 'delete':
+			case 'toggle':
+			case 'feature':
+				$objArchive = $this->Database->prepare("SELECT pid FROM tl_kitchenware WHERE id=?")
+											 ->limit(1)
+											 ->execute($id);
+
+				if ($objArchive->numRows < 1)
+				{
+					$this->log('Invalid Kitchenware item ID "'.$id.'"', __METHOD__, TL_ERROR);
+					$this->redirect('contao/main.php?act=error');
+				}
+
+				if (!in_array($objArchive->pid, $root))
+				{
+					$this->log('Not enough permissions to '.Input::get('act').' Kitchenware item ID "'.$id.'" of Kitchenware archive ID "'.$objArchive->pid.'"', __METHOD__, TL_ERROR);
+					$this->redirect('contao/main.php?act=error');
+				}
+				break;
+
+			case 'select':
+			case 'editAll':
+			case 'deleteAll':
+			case 'overrideAll':
+			case 'cutAll':
+			case 'copyAll':
+				if (!in_array($id, $root))
+				{
+					$this->log('Not enough permissions to access Kitchenware archive ID "'.$id.'"', __METHOD__, TL_ERROR);
+					$this->redirect('contao/main.php?act=error');
+				}
+
+				$objArchive = $this->Database->prepare("SELECT id FROM tl_kitchenware_set WHERE pid=?")
+											 ->execute($id);
+
+				if ($objArchive->numRows < 1)
+				{
+					$this->log('Invalid Kitchenware archive ID "'.$id.'"', __METHOD__, TL_ERROR);
+					$this->redirect('contao/main.php?act=error');
+				}
+
+				$session = $this->Session->getData();
+				$session['CURRENT']['IDS'] = array_intersect($session['CURRENT']['IDS'], $objArchive->fetchEach('id'));
+				$this->Session->setData($session);
+				break;
+
+			default:
+				if (strlen(Input::get('act')))
+				{
+					$this->log('Invalid command "'.Input::get('act').'"', __METHOD__, TL_ERROR);
+					$this->redirect('contao/main.php?act=error');
+				}
+				elseif (!in_array($id, $root))
+				{
+					$this->log('Not enough permissions to access Kitchenware archive ID ' . $id, __METHOD__, TL_ERROR);
+					$this->redirect('contao/main.php?act=error');
+				}
+				break;
+		}
+	}
 
 	/**
 	 * Generate a song row and return it as HTML string
