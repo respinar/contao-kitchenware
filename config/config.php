@@ -38,6 +38,11 @@ array_insert($GLOBALS['FE_MOD'], 2, array
 	)
 ));
 
+/**
+ * Register hook to add carpets items to the indexer
+ */
+$GLOBALS['TL_HOOKS']['getSearchablePages'][] = array('Kitchenware', 'getSearchablePages');
+
 
 /**
  * BACK END MODULES
