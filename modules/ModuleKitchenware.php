@@ -311,6 +311,11 @@ abstract class ModuleKitchenware extends \Module
 	{
 		$objElement = \KitchenwareElementModel::findPublishedByPid($objSet->id);
 
+		if ($objCategory == null)
+		{
+			return;
+		}
+
 		$arrElement = array();
 
 		$size = deserialize($this->itemImageSize);
