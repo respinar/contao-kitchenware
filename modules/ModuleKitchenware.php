@@ -14,7 +14,7 @@
 /**
  * Run in a custom namespace, so the class can be replaced
  */
-namespace Contao;
+namespace Kitchenware;
 
 
 /**
@@ -40,29 +40,29 @@ abstract class ModuleKitchenware extends \Module
 	 * @param array
 	 * @return array
 	 */
-	protected function sortOutProtected($arrArchives)
+	protected function sortOutProtected($arrCategories)
 	{
-		if (BE_USER_LOGGED_IN || !is_array($arrArchives) || empty($arrArchives))
+		if (BE_USER_LOGGED_IN || !is_array($arrCategories) || empty($arrCategories))
 		{
-			return $arrArchives;
+			return $arrCategories;
 		}
 
 		$this->import('FrontendUser', 'User');
-		$objArchive = \NewsArchiveModel::findMultipleByIds($arrArchives);
-		$arrArchives = array();
+		$objCategory = \KitchenwareModel::findMultipleByIds($arrCategories);
+		$arrCategories = array();
 
-		if ($objArchive !== null)
+		if ($objCategory !== null)
 		{
-			while ($objArchive->next())
+			while ($objCategory->next())
 			{
-				if ($objArchive->protected)
+				if ($objCategory->protected)
 				{
 					if (!FE_USER_LOGGED_IN)
 					{
 						continue;
 					}
 
-					$groups = deserialize($objArchive->groups);
+					$groups = deserialize($objCategory->groups);
 
 					if (!is_array($groups) || empty($groups) || !count(array_intersect($groups, $this->User->groups)))
 					{
@@ -70,11 +70,11 @@ abstract class ModuleKitchenware extends \Module
 					}
 				}
 
-				$arrArchives[] = $objArchive->id;
+				$arrCategories[] = $objCategory->id;
 			}
 		}
 
-		return $arrArchives;
+		return $arrCategories;
 	}
 
 
@@ -86,80 +86,50 @@ abstract class ModuleKitchenware extends \Module
 	 * @param integer
 	 * @return string
 	 */
-	protected function parseArticle($objArticle, $blnAddArchive=false, $strClass='', $intCount=0)
+	protected function parseSet($objSet, $blnAddCategory=false, $strClass='', $intCount=0)
 	{
 		global $objPage;
 
-		$objTemplate = new \FrontendTemplate($this->news_template);
-		$objTemplate->setData($objArticle->row());
+		$objTemplate = new \FrontendTemplate($this->set_template);
+		$objTemplate->setData($objSet->row());
 
-		$objTemplate->class = (($objArticle->cssClass != '') ? ' ' . $objArticle->cssClass : '') . $strClass;
-		$objTemplate->newsHeadline = $objArticle->headline;
-		$objTemplate->subHeadline = $objArticle->subheadline;
-		$objTemplate->hasSubHeadline = $objArticle->subheadline ? true : false;
-		$objTemplate->linkHeadline = $this->generateLink($objArticle->headline, $objArticle, $blnAddArchive);
-		$objTemplate->more = $this->generateLink($GLOBALS['TL_LANG']['MSC']['more'], $objArticle, $blnAddArchive, true);
-		$objTemplate->link = $this->generateNewsUrl($objArticle, $blnAddArchive);
-		$objTemplate->archive = $objArticle->getRelated('pid');
+		$objTemplate->class = (($this->setClass != '') ? ' ' . $this->setClass : '') . $strClass;
+		$objTemplate->elementClass = $this->elementClass;
+
+		$objTemplate->title       = $objSet->title;
+		$objTemplate->code        = $objSet->code;
+		$objTemplate->warranty    = $objSet->warranty;
+		$objTemplate->base        = $objSet->base;
+		$objTemplate->lids        = $objSet->lids;
+		$objTemplate->handle      = $objSet->handle;
+		$objTemplate->surface     = $objSet->surface;
+		$objTemplate->colors      = $objSet->colres;
+		$objTemplate->features    = deserialize($objSet->features);
+		$objTemplate->description = $objSet->description;
+
+		$objTemplate->link        = $this->generateSetUrl($objSet, $blnAddCategory);
+		$objTemplate->more        = $this->generateLink($GLOBALS['TL_LANG']['MSC']['moredetail'], $objSet, $blnAddCategory, true);
+
+		$objTemplate->elements    = $this->parseElement($objSet);
+		
+		$objTemplate->category    = $objSet->getRelated('pid');
+
 		$objTemplate->count = $intCount; // see #5708
 		$objTemplate->text = '';
 
-		// Clean the RTE output
-		if ($objArticle->teaser != '')
-		{
-			if ($objPage->outputFormat == 'xhtml')
-			{
-				$objTemplate->teaser = \String::toXhtml($objArticle->teaser);
-			}
-			else
-			{
-				$objTemplate->teaser = \String::toHtml5($objArticle->teaser);
-			}
-
-			$objTemplate->teaser = \String::encodeEmail($objTemplate->teaser);
-		}
-
-		// Display the "read more" button for external/article links
-		if ($objArticle->source != 'default')
-		{
-			$objTemplate->text = true;
-		}
-
-		// Compile the news text
-		else
-		{
-			$objElement = \ContentModel::findPublishedByPidAndTable($objArticle->id, 'tl_news');
-
-			if ($objElement !== null)
-			{
-				while ($objElement->next())
-				{
-					$objTemplate->text .= $this->getContentElement($objElement->current());
-				}
-			}
-		}
-
-		$arrMeta = $this->getMetaFields($objArticle);
-
-		// Add the meta information
-		$objTemplate->date = $arrMeta['date'];
-		$objTemplate->hasMetaFields = !empty($arrMeta);
-		$objTemplate->numberOfComments = $arrMeta['ccount'];
-		$objTemplate->commentCount = $arrMeta['comments'];
-		$objTemplate->timestamp = $objArticle->date;
-		$objTemplate->author = $arrMeta['author'];
-		$objTemplate->datetime = date('Y-m-d\TH:i:sP', $objArticle->date);
+		$objTemplate->date = \Date::parse($objPage->datimFormat, $objSet->date);
+		$objTemplate->datetime = date('Y-m-d\TH:i:sP', $objSet->date);
 
 		$objTemplate->addImage = false;
 
 		// Add an image
-		if ($objArticle->addImage && $objArticle->singleSRC != '')
+		if ($objSet->addImage && $objSet->singleSRC != '')
 		{
-			$objModel = \FilesModel::findByUuid($objArticle->singleSRC);
+			$objModel = \FilesModel::findByUuid($objSet->singleSRC);
 
 			if ($objModel === null)
 			{
-				if (!\Validator::isUuid($objArticle->singleSRC))
+				if (!\Validator::isUuid($objSet->singleSRC))
 				{
 					$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
 				}
@@ -167,7 +137,7 @@ abstract class ModuleKitchenware extends \Module
 			elseif (is_file(TL_ROOT . '/' . $objModel->path))
 			{
 				// Do not override the field now that we have a model registry (see #6303)
-				$arrArticle = $objArticle->row();
+				$arrSet = $objSet->row();
 
 				// Override the default image size
 				if ($this->imgSize != '')
@@ -176,30 +146,12 @@ abstract class ModuleKitchenware extends \Module
 
 					if ($size[0] > 0 || $size[1] > 0)
 					{
-						$arrArticle['size'] = $this->imgSize;
+						$arrSet['size'] = $this->imgSize;
 					}
 				}
 
-				$arrArticle['singleSRC'] = $objModel->path;
-				$this->addImageToTemplate($objTemplate, $arrArticle);
-			}
-		}
-
-		$objTemplate->enclosure = array();
-
-		// Add enclosures
-		if ($objArticle->addEnclosure)
-		{
-			$this->addEnclosuresToTemplate($objTemplate, $objArticle->row());
-		}
-
-		// HOOK: add custom logic
-		if (isset($GLOBALS['TL_HOOKS']['parseArticles']) && is_array($GLOBALS['TL_HOOKS']['parseArticles']))
-		{
-			foreach ($GLOBALS['TL_HOOKS']['parseArticles'] as $callback)
-			{
-				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($objTemplate, $objArticle->row(), $this);
+				$arrSet['singleSRC'] = $objModel->path;
+				$this->addImageToTemplate($objTemplate, $arrSet);
 			}
 		}
 
@@ -213,9 +165,9 @@ abstract class ModuleKitchenware extends \Module
 	 * @param boolean
 	 * @return array
 	 */
-	protected function parseArticles($objArticles, $blnAddArchive=false)
+	protected function parseSets($objSets, $blnAddCategory=false)
 	{
-		$limit = $objArticles->count();
+		$limit = $objSets->count();
 
 		if ($limit < 1)
 		{
@@ -223,23 +175,23 @@ abstract class ModuleKitchenware extends \Module
 		}
 
 		$count = 0;
-		$arrArticles = array();
+		$arrSets = array();
 
-		while ($objArticles->next())
+		while ($objSets->next())
 		{
-			$arrArticles[] = $this->parseArticle($objArticles, $blnAddArchive, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % 2) == 0) ? ' odd' : ' even'), $count);
+			$arrSets[] = $this->parseSet($objSets, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % 2) == 0) ? ' odd' : ' even'), $count);
 		}
 
-		return $arrArticles;
+		return $arrSets;
 	}
 
 
 	/**
-	 * Return the meta fields of a news article as array
+	 * Return the meta fields of a news Set as array
 	 * @param object
 	 * @return array
 	 */
-	protected function getMetaFields($objArticle)
+	protected function getMetaFields($objSet)
 	{
 		$meta = deserialize($this->news_metaFields);
 
@@ -256,11 +208,11 @@ abstract class ModuleKitchenware extends \Module
 			switch ($field)
 			{
 				case 'date':
-					$return['date'] = \Date::parse($objPage->datimFormat, $objArticle->date);
+					$return['date'] = \Date::parse($objPage->datimFormat, $objSet->date);
 					break;
 
 				case 'author':
-					if (($objAuthor = $objArticle->getRelated('author')) !== null)
+					if (($objAuthor = $objSet->getRelated('author')) !== null)
 					{
 						if ($objAuthor->google != '')
 						{
@@ -274,11 +226,11 @@ abstract class ModuleKitchenware extends \Module
 					break;
 
 				case 'comments':
-					if ($objArticle->noComments || $objArticle->source != 'default')
+					if ($objSet->noComments || $objSet->source != 'default')
 					{
 						break;
 					}
-					$intTotal = \CommentsModel::countPublishedBySourceAndParent('tl_news', $objArticle->id);
+					$intTotal = \CommentsModel::countPublishedBySourceAndParent('tl_news', $objSet->id);
 					$return['ccount'] = $intTotal;
 					$return['comments'] = sprintf($GLOBALS['TL_LANG']['MSC']['commentCount'], $intTotal);
 					break;
@@ -295,7 +247,7 @@ abstract class ModuleKitchenware extends \Module
 	 * @param boolean
 	 * @return string
 	 */
-	protected function generateNewsUrl($objItem, $blnAddArchive=false)
+	protected function generateSetUrl($objItem, $blnAddCategory=false)
 	{
 		$strCacheKey = 'id_' . $objItem->id;
 
@@ -307,37 +259,6 @@ abstract class ModuleKitchenware extends \Module
 
 		// Initialize the cache
 		self::$arrUrlCache[$strCacheKey] = null;
-
-		switch ($objItem->source)
-		{
-			// Link to an external page
-			case 'external':
-				if (substr($objItem->url, 0, 7) == 'mailto:')
-				{
-					self::$arrUrlCache[$strCacheKey] = \String::encodeEmail($objItem->url);
-				}
-				else
-				{
-					self::$arrUrlCache[$strCacheKey] = ampersand($objItem->url);
-				}
-				break;
-
-			// Link to an internal page
-			case 'internal':
-				if (($objTarget = $objItem->getRelated('jumpTo')) !== null)
-				{
-					self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objTarget->row()));
-				}
-				break;
-
-			// Link to an article
-			case 'article':
-				if (($objArticle = \ArticleModel::findByPk($objItem->articleId, array('eager'=>true))) !== null && ($objPid = $objArticle->getRelated('pid')) !== null)
-				{
-					self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objPid->row(), '/articles/' . ((!\Config::get('disableAlias') && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
-				}
-				break;
-		}
 
 		// Link to the default page
 		if (self::$arrUrlCache[$strCacheKey] === null)
@@ -353,11 +274,6 @@ abstract class ModuleKitchenware extends \Module
 				self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objPage->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/' : '/items/') . ((!\Config::get('disableAlias') && $objItem->alias != '') ? $objItem->alias : $objItem->id)));
 			}
 
-			// Add the current archive parameter (news archive)
-			if ($blnAddArchive && \Input::get('month') != '')
-			{
-				self::$arrUrlCache[$strCacheKey] .= (\Config::get('disableAlias') ? '&amp;' : '?') . 'month=' . \Input::get('month');
-			}
 		}
 
 		return self::$arrUrlCache[$strCacheKey];
@@ -372,37 +288,58 @@ abstract class ModuleKitchenware extends \Module
 	 * @param boolean
 	 * @return string
 	 */
-	protected function generateLink($strLink, $objArticle, $blnAddArchive=false, $blnIsReadMore=false)
+	protected function generateLink($strLink, $objSet, $blnAddCategory=false, $blnIsReadMore=false)
 	{
-		// Internal link
-		if ($objArticle->source != 'external')
-		{
-			return sprintf('<a href="%s" title="%s">%s%s</a>',
-							$this->generateNewsUrl($objArticle, $blnAddArchive),
-							specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $objArticle->headline), true),
-							$strLink,
-							($blnIsReadMore ? ' <span class="invisible">'.$objArticle->headline.'</span>' : ''));
-		}
+		
+		return sprintf('<a href="%s" title="%s">%s%s</a>',
+						$this->generateSetUrl($objSet, $blnAddCategory),
+						specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $objSet->title), true),
+						$strLink,
+						($blnIsReadMore ? ' <span class="invisible">'.$objSet->title.'</span>' : ''));	
 
-		// Encode e-mail addresses
-		if (substr($objArticle->url, 0, 7) == 'mailto:')
-		{
-			$strArticleUrl = \String::encodeEmail($objArticle->url);
-		}
-
-		// Ampersand URIs
-		else
-		{
-			$strArticleUrl = ampersand($objArticle->url);
-		}
-
-		global $objPage;
-
-		// External link
-		return sprintf('<a href="%s" title="%s"%s>%s</a>',
-						$strArticleUrl,
-						specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['open'], $strArticleUrl)),
-						($objArticle->target ? (($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"') : ''),
-						$strLink);
 	}
+
+	/**
+	 * Generate a elements as array
+	 * @param string
+	 * @param object
+	 * @param boolean
+	 * @param boolean
+	 * @return string
+	 */
+	protected function parseElement($objSet)
+	{
+		$objElement = \KitchenwareElementModel::findPublishedByPid($objSet->id);
+
+		$arrElement = array();
+
+		$size = deserialize($this->itemImageSize);
+
+		while($objElement->next())
+		{
+			$strImage = '';
+			$objImage = \FilesModel::findByPk($objElement->singleSRC);
+
+			// Add photo image
+			if ($objImage !== null)
+			{
+			$strImage = \Image::getHtml(\Image::get($objImage->path, $size[0], $size[1], $size[2]),$objKitchenwareElement->title);
+			}
+
+			$arrElement[] = array
+			(
+				'title'       => $objElement->title,
+				'model'       => $objElement->model,
+				'dimensions'  => $objElement->dimensions,
+				'capacity'    => $objElement->capacity,
+				'description' => $objElement->description,
+				'image'       => $strImage,
+			);
+		}
+		
+		return $arrElement;
+
+	}
+
+	
 }

@@ -25,7 +25,7 @@ namespace Kitchenware;
  * @author     Hamid Abbaszadeh
  * @package    Devtools
  */
-class ModuleKitchenwareDetail extends \Module
+class ModuleKitchenwareDetail extends \ModuleKitchenware
 {
 
 	/**
@@ -59,11 +59,7 @@ class ModuleKitchenwareDetail extends \Module
 			\Input::setGet('items', \Input::get('auto_item'));
 		}
 
-		// Return if there are no items
-		if (!\Input::get('items'))
-		{
-			return '';
-		}
+		$this->kitchenware_categories = $this->sortOutProtected(deserialize($this->kitchenware_categories));
 
 		return parent::generate();
 	}
@@ -75,68 +71,16 @@ class ModuleKitchenwareDetail extends \Module
 	protected function compile()
 	{
 
-		$objKitchenwareSet = $this->Database->prepare("SELECT * FROM tl_kitchenware_set WHERE alias=?")->execute(\Input::get('items'));
+		global $objPage;
 
-		$objKitchenwareElement = $this->Database->prepare("SELECT * FROM tl_kitchenware_element WHERE published=1 AND pid=?")->execute($objKitchenwareSet->id);
+		$this->Template->articles = '';
+		$this->Template->referer = 'javascript:history.go(-1)';
+		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 
-		$this->Template->title       = $objKitchenwareSet->title;
-		$this->Template->code        = $objKitchenwareSet->code;
-		$this->Template->warranty    = $objKitchenwareSet->warranty;
-		$this->Template->warranty    = $objKitchenwareSet->warranty;
-		$this->Template->base        = $objKitchenwareSet->base;
-		$this->Template->lids        = $objKitchenwareSet->lids;
-		$this->Template->handle      = $objKitchenwareSet->handle;
-		$this->Template->surface     = $objKitchenwareSet->surface;
-		$this->Template->colors      = $objKitchenwareSet->colors;
-		$this->Template->features    = deserialize($objKitchenwareSet->features);
-		$this->Template->description = $objKitchenwareSet->description;
-		$this->Template->standard    = $objKitchenwareSet->standard;
+		$objKitchenwareSet = \KitchenwareSetModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->kitchenware_categories);
 
-		if ($this->kitchenware_price) {
-			$this->Template->price   = number_format($objKitchenwareSet->price);
-		}
-
-		$strImage = '';
-		$objImage = \FilesModel::findByPk($objKitchenwareSet->singleSRC);
-
-		// Add photo image
-		if ($objImage !== null)
-		{
-			$size = deserialize($this->imgSize);
-			$strImage = \Image::getHtml(\Image::get($objImage->path, $size[0], $size[1], $size[2]),$objKitchenwareSet->title);
-		}
-
-		$this->Template->image = $strImage;
-		$this->Template->imagepath = $objImage->path;
-
-
-		$arrKitchenwareElement = array();
-
-		$size = deserialize($this->itemImageSize);
-
-		while($objKitchenwareElement->next())
-		{
-			$strImage = '';
-			$objImage = \FilesModel::findByPk($objKitchenwareElement->singleSRC);
-
-			// Add photo image
-			if ($objImage !== null)
-			{
-				$strImage = \Image::getHtml(\Image::get($objImage->path, $size[0], $size[1], $size[2]),$objKitchenwareElement->title);
-			}
-
-			$arrKitchenwareElement[] = array
-			(
-				'title'       => $objKitchenwareElement->title,
-				'model'       => $objKitchenwareElement->model,
-				'dimensions'  => $objKitchenwareElement->dimensions,
-				'capacity'    => $objKitchenwareElement->capacity,
-				'description' => $objKitchenwareElement->description,
-				'image'       => $strImage,
-			);
-		}
-
-		$this->Template->elements = $arrKitchenwareElement;
+		$arrKitchenwareSet = $this->parseSet($objKitchenwareSet);
+		$this->Template->sets = $arrKitchenwareSet;
 
 	}
 }

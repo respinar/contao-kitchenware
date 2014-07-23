@@ -1,64 +1,12 @@
+<?php $this->extend('block_unsearchable'); ?>
 
-<div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+<?php $this->block('content'); ?>
 
-  <?php if ($this->headline): ?>
-    <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
-  <?php endif; ?>
 
-  <div class="description grid_6">
-    <h2><?php echo $this->title; ?></h2>
-    <p class="code"><?php echo $this->code; ?></p>
-    <?php if ($this->kitchenware_price)  {?>
-		<p class="price">قیمت: <?php echo $this->price; ?> ریال</p>
-    <?php } ?>
-    <p class="warranty">گارانتی: <?php echo $this->warranty; ?> ماه</p>
-    <p><?php echo $this->description; ?></p>
-  </div>
-  <div class="image grid_6">
-	  <a data-lightbox="" href="<?php echo $this->imagepath; ?>">
-	  <?php echo $this->image; ?>
-	  </a>
-  </div>
+  <?php echo $this->sets; ?>
+  
+  <!-- indexer::stop -->
+  <p class="back"><a href="<?php echo $this->referer; ?>" title="<?php echo $this->back; ?>"><?php echo $this->back; ?></a></p>
+  <!-- indexer::continue -->
 
-  <div class="spec grid_4">
-    <h3>خصوصیات</h3>
-    <p>جنس بدنه: <?php echo $this->base; ?>
-    <br>پوشش سطح: <?php echo $this->surface; ?>
-    <br>درب: <?php echo $this->lids; ?>
-    <br>دسته‌ها: <?php echo $this->handle; ?>
-    <br>>رنگ: <?php echo $this->colors; ?></p>
-  </div>
-
-  <div class="features grid_4">
-    <h3>ویژگی‌ها</h3>
-    <ul>
-      <?php foreach($this->features as $feature) { ?>
-        <li><?php echo $feature; ?></li>
-      <?php } ?>
-    </ul>
-  </div>
-
-  <?php if ($this->elements) {?>
-  <div class="elements grid_12">
-  <h3>محتوی</h3>
-  <?php foreach($this->elements as $element) { ?>
-	<div class="element <?php echo $this->itemClass; ?>">
-		<figure><?php echo $element[image]; ?></figure>		
-		<ul>
-			<?php if ($element[dimensions]) { ?>
-				<li>ابعاد: <?php echo $element[dimensions]; ?></li>
-			<?php } ?>
-			<?php if ($element[capacity]) { ?>
-				<li>ظرفیت: <?php echo $element[capacity]; ?></li>
-			<?php } ?>
-			<?php if ($element[description]) { ?>
-				<li><?php echo $element[description]; ?></li>
-			<?php } ?>
-		</ul>
-	</div>
-  <?php } ?>
-  </div>
-
-  <?php } ?>
-
-</div>
+<?php $this->endblock(); ?>

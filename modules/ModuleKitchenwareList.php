@@ -25,7 +25,7 @@ namespace Kitchenware;
  * @author     Hamid Abbaszadeh
  * @package    Devtools
  */
-class ModuleKitchenwareList extends \Module
+class ModuleKitchenwareList extends \ModuleKitchenware
 {
 
 	/**
@@ -53,6 +53,14 @@ class ModuleKitchenwareList extends \Module
 			return $objTemplate->parse();
 		}
 
+		$this->kitchenware_categories = $this->sortOutProtected(deserialize($this->kitchenware_categories));
+
+		// No news archives available
+		if (!is_array($this->kitchenware_categories) || empty($this->kitchenware_categories))
+		{
+			return '';
+		}
+
 		// Show the kitchenware detail if an item has been selected
 		if ($this->kitchenware_detailModule > 0 && (isset($_GET['items']) || ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))))
 		{
@@ -68,65 +76,98 @@ class ModuleKitchenwareList extends \Module
 	 */
 	protected function compile()
 	{
-		$objKitchenware = $this->Database->prepare("SELECT * FROM tl_kitchenware WHERE id=?")->execute($this->kitchenware);
 
-		$this->Template->kitchenwaretitle = $objKitchenware->title;
+		$offset = intval($this->skipFirst);
+		$limit = null;
 
-		$objKitchenwareSet = $this->Database->prepare("SELECT * FROM tl_kitchenware_set WHERE published=1 AND pid=? ORDER BY sorting")->execute($this->kitchenware);
-
-		// Return if no products were found
-		if (!$objKitchenwareSet->numRows)
+		// Maximum number of items
+		if ($this->numberOfItems > 0)
 		{
-			$this->Template = new \FrontendTemplate('mod_kitchenware_empty');
-			$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyKichenwareSet'];
+			$limit = $this->numberOfItems;
+		}
+
+		// Handle featured news
+		if ($this->kitchenware_featured == 'featured')
+		{
+			$blnFeatured = true;
+		}
+		elseif ($this->kitchenware_featured == 'unfeatured')
+		{
+			$blnFeatured = false;
+		}
+		else
+		{
+			$blnFeatured = null;
+		}
+		
+		$intTotal = \KitchenwareSetModel::countPublishedByPids($this->kitchenware_categories);
+
+		if ($intTotal < 1)
+		{
 			return;
 		}
 
-		$strLink = '';
+		$total = $intTotal - $offset;
 
-		// Generate a jumpTo link
-		if ($objKitchenware->jumpTo > 0)
+
+		// Split the results
+		if ($this->perPage > 0 && (!isset($limit) || $this->numberOfItems > $this->perPage))
 		{
-			$objJump = \PageModel::findByPk($objKitchenware->jumpTo);
-
-			if ($objJump !== null)
+			// Adjust the overall limit
+			if (isset($limit))
 			{
-				$strLink = $this->generateFrontendUrl($objJump->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'));
+				$total = min($limit, $total);
 			}
+
+			// Get the current page
+			$id = 'page_n' . $this->id;
+			$page = \Input::get($id) ?: 1;
+
+			// Do not index or cache the page if the page number is outside the range
+			if ($page < 1 || $page > max(ceil($total/$this->perPage), 1))
+			{
+				global $objPage;
+				$objPage->noSearch = 1;
+				$objPage->cache = 0;
+
+				// Send a 404 header
+				header('HTTP/1.1 404 Not Found');
+				return;
+			}
+
+			// Set limit and offset
+			$limit = $this->perPage;
+			$offset += (max($page, 1) - 1) * $this->perPage;
+			$skip = intval($this->skipFirst);
+
+			// Overall limit
+			if ($offset + $limit > $total + $skip)
+			{
+				$limit = $total + $skip - $offset;
+			}
+
+			// Add the pagination menu
+			$objPagination = new \Pagination($total, $this->perPage, \Config::get('maxPaginationLinks'), $id);
+			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
-		$arrKitchenwareList = array();
-
-		$size = deserialize($this->imgSize);
-
-		while ($objKitchenwareSet->next())
+		// Get the items
+		if (isset($limit))
 		{
-
-			$strImage = '';
-			$objImage = \FilesModel::findByPk($objKitchenwareSet->singleSRC);
-
-			// Add photo image
-			if ($objImage !== null)
-			{
-				$strImage = \Image::getHtml(\Image::get($objImage->path, $size[0], $size[1], $size[2]),$objKitchenwareSet->title);
-			}
-
-			if ($this->kitchenware_price) {
-				$price   = number_format($objKitchenwareSet->price);
-			}
-
-			$arrKitchenwareList[] = array
-			(
-				'title' => $objKitchenwareSet->title,
-				'model' => $objKitchenwareSet->model,
-				'price' => $price,
-				'image' => $strImage,
-				'link'  => strlen($strLink) ? sprintf($strLink, $objKitchenwareSet->alias) : ''
-
-			);
+			$objSets = \KitchenwareSetModel::findPublishedByPids($this->kitchenware_categories, $blnFeatured, $limit, $offset);
+		}
+		else
+		{
+			$objSets = \KitchenwareSetModel::findPublishedByPids($this->kitchenware_categories, $blnFeatured, 0, $offset);
 		}
 
-		$this->Template->kitchenwarelist = $arrKitchenwareList;
+		// Add the Sets
+		if ($objSets !== null)
+		{
+			$this->Template->sets = $this->parseSets($objSets);
+		}
+
+		$this->Template->gategories = $this->kitchenware_categories;
 
 	}
 }

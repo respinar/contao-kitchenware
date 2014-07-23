@@ -15,22 +15,20 @@
  * Add palettes to tl_module
  */
 
-$GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_menu']      = '{title_legend},name,headline,type;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_list']      = '{title_legend},name,headline,type;{category_legend},kitchenware;{config_legend},kitchenware_featured,kitchenware_detailModule;{meta_legend},kitchenware_title,kitchenware_price;{template_legend},numberOfItems,perPage,imgSize,itemClass;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_detail']    = '{title_legend},name,headline,type;{template_legend:hide},kitchenware_price,imgSize;{item_legend},itemImageSize,itemClass;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_related']   = '{title_legend},name,headline,type;{template_legend:hide},imgSize,itemClass;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_pricelist'] = '{title_legend},name,headline,type;{category_legend},kitchenware;{config_legend},kitchenware_featured;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_list']      = '{title_legend},name,headline,type;{category_legend},kitchenware_categories;{config_legend},kitchenware_featured,kitchenware_detailModule,set_template;{meta_legend},kitchenware_title,kitchenware_price;{template_legend},numberOfItems,perPage,imgSize,setClass;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_detail']    = '{title_legend},name,headline,type;{category_legend},kitchenware_categories;{template_legend:hide},kitchenware_price,imgSize;{item_legend},itemImageSize,elementClass,set_template;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_related']   = '{title_legend},name,headline,type;{category_legend},kitchenware_categories;{template_legend:hide},imgSize,setClass,set_template;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 /**
  * Add fields to tl_module
  */
-$GLOBALS['TL_DCA']['tl_module']['fields']['kitchenware'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['kitchenware_categories'] = array
 (
-	'label'                => &$GLOBALS['TL_LANG']['tl_module']['kitchenware'],
+	'label'                => &$GLOBALS['TL_LANG']['tl_module']['kitchenware_category'],
 	'exclude'              => true,
-	'inputType'            => 'radio',
-	'foreignKey'           => 'tl_kitchenware.title',
-	'eval'                 => array('multiple'=>false,'mandatory'=>true),
+	'inputType'            => 'checkbox',
+	'options_callback'        => array('tl_module_kitchenware', 'getKitchenwareCategory'),	
+	'eval'                 => array('multiple'=>true,'mandatory'=>true),
     'sql'                  => "blob NULL"
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['kitchenware_featured'] = array
@@ -72,7 +70,15 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['kitchenware_detailModule'] = array
 	'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
 	'sql'                     => "int(10) unsigned NOT NULL default '0'"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['itemClass'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['setClass'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['itemClass'],
+	'exclude'                 => true,
+	'inputType'               => 'text',
+	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
+	'sql'                     => "varchar(255) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['elementClass'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['itemClass'],
 	'exclude'                 => true,
@@ -91,8 +97,44 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['itemImageSize'] = array
 	'sql'                     => "varchar(64) NOT NULL default ''"
 );
 
+$GLOBALS['TL_DCA']['tl_module']['fields']['set_template'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['set_template'],
+	'default'                 => 'set_full',
+	'exclude'                 => true,
+	'inputType'               => 'select',
+	'options_callback'        => array('tl_module_kitchenware', 'getSetTemplates'),
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "varchar(32) NOT NULL default ''"
+);
+
 class tl_module_kitchenware extends Backend
 {
+
+	/**
+	 * Get all news archives and return them as array
+	 * @return array
+	 */
+	public function getKitchenwareCategory()
+	{
+		//if (!$this->User->isAdmin && !is_array($this->User->news))
+		//{
+		//	return array();
+		//}
+
+		$arrArchives = array();
+		$objArchives = $this->Database->execute("SELECT id, title FROM tl_kitchenware ORDER BY title");
+
+		while ($objArchives->next())
+		{
+			//if ($this->User->hasAccess($objArchives->id, 'news'))
+			//{
+				$arrArchives[$objArchives->id] = $objArchives->title;
+			//}
+		}
+
+		return $arrArchives;
+	}
 
 	/**
 	 * Get all product detail modules and return them as array
@@ -109,6 +151,15 @@ class tl_module_kitchenware extends Backend
 		}
 
 		return $arrModules;
+	}
+
+	/**
+	 * Return all set templates as array
+	 * @return array
+	 */
+	public function getSetTemplates()
+	{
+		return $this->getTemplateGroup('set_');
 	}
 
 }

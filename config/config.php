@@ -32,11 +32,9 @@ array_insert($GLOBALS['FE_MOD'], 2, array
 (
 	'kitchenware' => array
 	(
-		'kitchenware_menu'    => 'ModuleKitchenwareMenu',
 		'kitchenware_list'    => 'ModuleKitchenwareList',
 		'kitchenware_detail'  => 'ModuleKitchenwareDetail',
 		'kitchenware_related' => 'ModuleKitchenwareRelated',
-
 	)
 ));
 

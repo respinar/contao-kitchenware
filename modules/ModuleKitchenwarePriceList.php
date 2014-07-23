@@ -25,7 +25,7 @@ namespace Kitchenware;
  * @author     Hamid Abbaszadeh
  * @package    Devtools
  */
-class ModuleKitchenwarePriceList extends \Module
+class ModuleKitchenwarePriceList extends \ModuleKitchenware
 {
 
 	/**

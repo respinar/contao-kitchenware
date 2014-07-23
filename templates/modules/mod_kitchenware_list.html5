@@ -1,26 +1,12 @@
+<?php $this->extend('block_unsearchable'); ?>
 
-<div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+<?php $this->block('content'); ?>
 
-  <?php if ($this->headline): ?>
-    <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+  <?php if (empty($this->sets)): ?>
+    <p class="empty"><?php echo $this->empty; ?></p>
+  <?php else: ?>
+    <?php echo implode('', $this->sets); ?>
+    <?php echo $this->pagination; ?>
   <?php endif; ?>
 
-  <div class="sets">
-  <?php foreach($this->kitchenwarelist as $item) { ?>
-	<div class="<?php echo $this->itemClass; ?> set">
-		<a href="<?php echo $item[link]; ?>" title="<?php echo $item[title]; ?>">
-			<figure><?php echo $item[image]; ?></figure>
-		</a>
-		<?php if ($this->kitchenware_title)  {?>
-		<a href="<?php echo $item[link]; ?>" title="<?php echo $item[title]; ?>">
-			<?php echo $item[title]; ?>
-		</a>
-		<?php } ?>
-		<?php if ($this->kitchenware_price)  {?>
-			<p class="price">قیمت: <?php echo $item[price]; ?> ریال</p>
-		<?php } ?>
-	</div>
-  <?php } ?>
-  </div>
-
-</div>
+<?php $this->endblock(); ?>

@@ -30,7 +30,8 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 			'keys' => array
 			(
 				'id' => 'primary',
-				'pid' => 'index'
+				'pid' => 'index',
+				'alias' => 'index'
 			)
 		)
 	),
@@ -42,7 +43,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 		(
 			'mode'                    => 4,
 			'fields'                  => array('sorting'),
-			'headerFields'            => array('title'),
+			'headerFields'            => array('title','jumpTo','protected'),
 			'panelLayout'             => 'search,limit',
 			'child_record_callback'   => array('tl_kitchenware_set', 'generateItemRow')
 		),
@@ -115,7 +116,8 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},title,alias,model,date;{price_legend:hide},price,pieces,origin,warranty;{signs_legend},signs;{spec_legend},base,surface,lids,handle;{colors_legend},colors;{features_legend},features;{image_legend},singleSRC,multiSRC;{description_legend:hide},description;{publish_legend},published,featured'
+		'__selector__'                => array('addImage'),
+		'default'                     => '{title_legend},title,alias,model,date;{price_legend:hide},price,pieces,origin,warranty;{signs_legend},signs;{spec_legend},base,surface,lids,handle;{colors_legend},colors;{features_legend},features;{image_legend},addImage,singleSRC,multiSRC;{description_legend:hide},description;{publish_legend},published,featured,start,stop'
 	),
 
 	// Fields
@@ -127,7 +129,9 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 		),
 		'pid' => array
 		(
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+			'foreignKey'              => 'tl_kitchenware.title',
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'belongsTo', 'load'=>'eager')
 		),
 		'sorting' => array
 		(
@@ -277,6 +281,14 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 			'eval'                    => array(),
 			'sql'                     => "blob NULL",
 		),
+		'addImage' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['addImage'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
 		'singleSRC' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['singleSRC'],
@@ -315,6 +327,22 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 			'inputType'               => 'checkbox',
 			'eval'                    => array('doNotCopy'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'start' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['start'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'sql'                     => "varchar(10) NOT NULL default ''"
+		),
+		'stop' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['stop'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'sql'                     => "varchar(10) NOT NULL default ''"
 		),
 		'featured' => array
 		(
