@@ -111,7 +111,7 @@ abstract class ModuleKitchenware extends \Module
 		$objTemplate->more        = $this->generateLink($GLOBALS['TL_LANG']['MSC']['moredetail'], $objSet, $blnAddCategory, true);
 
 		$objTemplate->elements    = $this->parseElement($objSet);
-		
+
 		$objTemplate->category    = $objSet->getRelated('pid');
 
 		$objTemplate->count = $intCount; // see #5708
@@ -123,7 +123,7 @@ abstract class ModuleKitchenware extends \Module
 		$objTemplate->addImage = false;
 
 		// Add an image
-		if ($objSet->addImage && $objSet->singleSRC != '')
+		if ($objSet->singleSRC != '')
 		{
 			$objModel = \FilesModel::findByUuid($objSet->singleSRC);
 
@@ -290,12 +290,12 @@ abstract class ModuleKitchenware extends \Module
 	 */
 	protected function generateLink($strLink, $objSet, $blnAddCategory=false, $blnIsReadMore=false)
 	{
-		
+
 		return sprintf('<a href="%s" title="%s">%s%s</a>',
 						$this->generateSetUrl($objSet, $blnAddCategory),
 						specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $objSet->title), true),
 						$strLink,
-						($blnIsReadMore ? ' <span class="invisible">'.$objSet->title.'</span>' : ''));	
+						($blnIsReadMore ? ' <span class="invisible">'.$objSet->title.'</span>' : ''));
 
 	}
 
@@ -341,10 +341,10 @@ abstract class ModuleKitchenware extends \Module
 				'image'       => $strImage,
 			);
 		}
-		
+
 		return $arrElement;
 
 	}
 
-	
+
 }

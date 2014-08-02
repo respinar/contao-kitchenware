@@ -167,7 +167,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_element'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('maxlength'=>128,'tl_class'=>'w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
-		),				
+		),
 		'singleSRC' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_element']['singleSRC'],

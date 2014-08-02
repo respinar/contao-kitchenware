@@ -116,8 +116,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('addImage'),
-		'default'                     => '{title_legend},title,alias,model,date;{price_legend:hide},price,pieces,origin,warranty;{signs_legend},signs;{spec_legend},base,surface,lids,handle;{colors_legend},colors;{features_legend},features;{image_legend},addImage,singleSRC,multiSRC;{description_legend:hide},description;{publish_legend},published,featured,start,stop'
+		'default'                     => '{title_legend},title,alias,model,date;{price_legend:hide},price,pieces,origin,warranty;{signs_legend},signs;{spec_legend},base,surface,lids,handle;{colors_legend},colors;{features_legend},features;{image_legend},singleSRC;{description_legend:hide},description;{publish_legend},published,featured,start,stop'
 	),
 
 	// Fields
@@ -280,14 +279,6 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 			'inputType'               => 'listWizard',
 			'eval'                    => array(),
 			'sql'                     => "blob NULL",
-		),
-		'addImage' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['addImage'],
-			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true),
-			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'singleSRC' => array
 		(
