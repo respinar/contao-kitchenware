@@ -15,8 +15,8 @@
  * Add palettes to tl_module
  */
 
-$GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_list']      = '{title_legend},name,headline,type;{category_legend},kitchenware_categories;{config_legend},kitchenware_featured,kitchenware_detailModule,set_template;{meta_legend},kitchenware_title,kitchenware_price;{template_legend},numberOfItems,perPage,imgSize,setClass;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_detail']    = '{title_legend},name,headline,type;{category_legend},kitchenware_categories;{template_legend:hide},kitchenware_price,imgSize;{item_legend},itemImageSize,elementClass,set_template;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_list']      = '{title_legend},name,headline,type;{category_legend},kitchenware_categories;{config_legend},kitchenware_featured,kitchenware_detailModule;{meta_legend},set_template,kitchenware_price;{template_legend},numberOfItems,perPage,imgSize,setClass;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_detail']    = '{title_legend},name,headline,type;{category_legend},kitchenware_categories;{template_legend:hide},set_template,imgSize,kitchenware_price;{item_legend},colorImageSize,colorClass,elementImageSize,elementClass;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_related']   = '{title_legend},name,headline,type;{category_legend},kitchenware_categories;{template_legend:hide},imgSize,setClass,set_template;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 /**
@@ -27,7 +27,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['kitchenware_categories'] = array
 	'label'                => &$GLOBALS['TL_LANG']['tl_module']['kitchenware_category'],
 	'exclude'              => true,
 	'inputType'            => 'checkbox',
-	'options_callback'        => array('tl_module_kitchenware', 'getKitchenwareCategory'),	
+	'options_callback'        => array('tl_module_kitchenware', 'getKitchenwareCategory'),
 	'eval'                 => array('multiple'=>true,'mandatory'=>true),
     'sql'                  => "blob NULL"
 );
@@ -51,15 +51,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['kitchenware_price'] = array
 	'eval'                    => array('doNotCopy'=>true, 'tl_class'=>'w50'),
 	'sql'                     => "char(1) NOT NULL default ''"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['kitchenware_title'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['kitchenware_title'],
-	'exclude'                 => true,
-	'flag'                    => 1,
-	'inputType'               => 'checkbox',
-	'eval'                    => array('doNotCopy'=>true, 'tl_class'=>'w50'),
-	'sql'                     => "char(1) NOT NULL default ''"
-);
 $GLOBALS['TL_DCA']['tl_module']['fields']['kitchenware_detailModule'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['kitchenware_detailModule'],
@@ -72,7 +63,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['kitchenware_detailModule'] = array
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['setClass'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['itemClass'],
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['setClass'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
 	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
@@ -80,15 +71,15 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['setClass'] = array
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['elementClass'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['itemClass'],
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['elementClass'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
 	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
 	'sql'                     => "varchar(255) NOT NULL default ''"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['itemImageSize'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['elementImageSize'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['itemImageSize'],
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['elementImageSize'],
 	'exclude'                 => true,
 	'inputType'               => 'imageSize',
 	'options'                 => $GLOBALS['TL_CROP'],
@@ -96,7 +87,24 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['itemImageSize'] = array
 	'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
 	'sql'                     => "varchar(64) NOT NULL default ''"
 );
-
+$GLOBALS['TL_DCA']['tl_module']['fields']['colorClass'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['colorClass'],
+	'exclude'                 => true,
+	'inputType'               => 'text',
+	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
+	'sql'                     => "varchar(255) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['colorImageSize'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['colorImageSize'],
+	'exclude'                 => true,
+	'inputType'               => 'imageSize',
+	'options'                 => $GLOBALS['TL_CROP'],
+	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+	'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+	'sql'                     => "varchar(64) NOT NULL default ''"
+);
 $GLOBALS['TL_DCA']['tl_module']['fields']['set_template'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['set_template'],

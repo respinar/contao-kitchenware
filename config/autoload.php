@@ -29,6 +29,7 @@ ClassLoader::addClasses(array
 	'Kitchenware\KitchenwareModel'           => 'system/modules/kitchenware/models/KitchenwareModel.php',
 	'Kitchenware\KitchenwareSetModel'        => 'system/modules/kitchenware/models/KitchenwareSetModel.php',
 	'Kitchenware\KitchenwareElementModel'    => 'system/modules/kitchenware/models/KitchenwareElementModel.php',
+	'Kitchenware\KitchenwareColorModel'      => 'system/modules/kitchenware/models/KitchenwareColorModel.php',
 
 	// Modules
 	'Kitchenware\ModuleKitchenwarePriceList' => 'system/modules/kitchenware/modules/ModuleKitchenwarePriceList.php',

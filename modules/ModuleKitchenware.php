@@ -111,6 +111,7 @@ abstract class ModuleKitchenware extends \Module
 		$objTemplate->more        = $this->generateLink($GLOBALS['TL_LANG']['MSC']['moredetail'], $objSet, $blnAddCategory, true);
 
 		$objTemplate->elements    = $this->parseElement($objSet);
+		$objTemplate->colors      = $this->parseColor($objSet);
 
 		$objTemplate->category    = $objSet->getRelated('pid');
 
@@ -318,7 +319,7 @@ abstract class ModuleKitchenware extends \Module
 
 		$arrElement = array();
 
-		$size = deserialize($this->itemImageSize);
+		$size = deserialize($this->elementImageSize);
 
 		while($objElement->next())
 		{
@@ -338,6 +339,49 @@ abstract class ModuleKitchenware extends \Module
 				'dimensions'  => $objElement->dimensions,
 				'capacity'    => $objElement->capacity,
 				'description' => $objElement->description,
+				'image'       => $strImage,
+			);
+		}
+
+		return $arrElement;
+
+	}
+
+	/**
+	 * Generate a colors as array
+	 * @param string
+	 * @param object
+	 * @param boolean
+	 * @param boolean
+	 * @return string
+	 */
+	protected function parseColor($objSet)
+	{
+		$objElement = \KitchenwareColorModel::findPublishedByPid($objSet->id);
+
+		if ($objCategory == null)
+		{
+			return;
+		}
+
+		$arrElement = array();
+
+		$size = deserialize($this->colorImageSize);
+
+		while($objElement->next())
+		{
+			$strImage = '';
+			$objImage = \FilesModel::findByPk($objElement->singleSRC);
+
+			// Add photo image
+			if ($objImage !== null)
+			{
+			$strImage = \Image::getHtml(\Image::get($objImage->path, $size[0], $size[1], $size[2]),$objKitchenwareElement->title);
+			}
+
+			$arrElement[] = array
+			(
+				'title'       => $objElement->title,
 				'image'       => $strImage,
 			);
 		}

@@ -6,7 +6,7 @@
   <div class="meta">گارانتی: <?php echo $this->warranty; ?> ماه</div>
   <div class="description"><?php echo $this->description; ?></div>
 
-	
+
   <?php if ($this->addImage): ?>
     <figure class="image_container<?php echo $this->floatClass; ?>"<?php if ($this->margin): ?> style="<?php echo $this->margin; ?>"<?php endif; ?>>
 
@@ -27,8 +27,8 @@
     </figure>
   <?php endif; ?>
 
-  
-  
+
+
   <div class="spec">
     <h3>خصوصیات</h3>
     <p>جنس بدنه: <?php echo $this->base; ?>
@@ -47,6 +47,22 @@
       <?php } ?>
     </ul>
   </div>
+  <?php } ?>
+
+  <?php if ($this->colors) {?>
+  <div class="colors">
+	<h3>رنگ‌ها</h3>
+		<?php foreach($this->colors as $color) { ?>
+			<div class="color <?php echo $this->colorClass; ?>">
+				<figure><?php echo $color[image]; ?></figure>
+				<ul>
+					<?php if ($element[title]) { ?>
+					<li><?php echo $element[title]; ?></li>
+					<?php } ?>
+				</ul>
+			</div>
+		<?php } ?>
+	</div>
   <?php } ?>
 
   <?php if ($this->elements) {?>

@@ -18,7 +18,7 @@ array_insert($GLOBALS['BE_MOD']['content'], 1, array
 (
 	'kitchenware' => array
 	(
-		'tables' => array('tl_kitchenware', 'tl_kitchenware_set','tl_kitchenware_element'),
+		'tables' => array('tl_kitchenware', 'tl_kitchenware_set','tl_kitchenware_color','tl_kitchenware_element'),
 		'icon'   => 'system/modules/kitchenware/assets/icon.png'
 	)
 ));
