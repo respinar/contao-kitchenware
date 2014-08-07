@@ -116,7 +116,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},title,alias,model,date;{price_legend:hide},price,pieces,origin,warranty;{signs_legend},signs;{spec_legend},base,surface,lids,handle;{colors_legend},colors;{features_legend},features;{image_legend},singleSRC;{description_legend:hide},description;{publish_legend},published,featured,start,stop'
+		'default'                     => '{title_legend},title,alias,model,date;{meta_legend},keywords;{price_legend:hide},price,pieces,origin,warranty;{signs_legend},signs;{spec_legend},base,surface,lids,handle;{colors_legend},colors;{features_legend},features;{image_legend},singleSRC;{description_legend:hide},description;{publish_legend},published,featured,start,stop'
 	),
 
 	// Fields
@@ -169,6 +169,15 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'date', 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'keywords' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['keywords'],
+			'exclude'                 => true,
+			'inputType'               => 'textarea',
+			'search'                  => true,
+			'eval'                    => array('style'=>'height:60px', 'decodeEntities'=>true),
+			'sql'                     => "text NULL"
 		),
 		'origin' => array
 		(

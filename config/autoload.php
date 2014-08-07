@@ -26,8 +26,6 @@ ClassLoader::addNamespaces(array
 ClassLoader::addClasses(array
 (
 	// Models
-	'Kitchenware\KitchenwareRatingModel'     => 'system/modules/kitchenware/models/KitchenwareRatingModel.php',
-	'Kitchenware\KitchenwareTagModel'        => 'system/modules/kitchenware/models/KitchenwareTagModel.php',
 	'Kitchenware\KitchenwareModel'           => 'system/modules/kitchenware/models/KitchenwareModel.php',
 	'Kitchenware\KitchenwareSetModel'        => 'system/modules/kitchenware/models/KitchenwareSetModel.php',
 	'Kitchenware\KitchenwareElementModel'    => 'system/modules/kitchenware/models/KitchenwareElementModel.php',
