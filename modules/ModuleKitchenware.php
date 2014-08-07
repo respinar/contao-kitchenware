@@ -312,7 +312,7 @@ abstract class ModuleKitchenware extends \Module
 	{
 		$objElement = \KitchenwareElementModel::findPublishedByPid($objSet->id);
 
-		if ($objCategory == null)
+		if ($objElement == null)
 		{
 			return;
 		}
@@ -329,7 +329,7 @@ abstract class ModuleKitchenware extends \Module
 			// Add photo image
 			if ($objImage !== null)
 			{
-			$strImage = \Image::getHtml(\Image::get($objImage->path, $size[0], $size[1], $size[2]),$objKitchenwareElement->title);
+			$strImage = \Image::getHtml(\Image::get($objImage->path, $size[0], $size[1], $size[2]),$objElement->title);
 			}
 
 			$arrElement[] = array
@@ -357,36 +357,36 @@ abstract class ModuleKitchenware extends \Module
 	 */
 	protected function parseColor($objSet)
 	{
-		$objElement = \KitchenwareColorModel::findPublishedByPid($objSet->id);
+		$objColor = \KitchenwareColorModel::findPublishedByPid($objSet->id);
 
-		if ($objCategory == null)
+		if ($objColor == null)
 		{
 			return;
 		}
 
-		$arrElement = array();
+		$arrColor = array();
 
 		$size = deserialize($this->colorImageSize);
 
-		while($objElement->next())
+		while($objColor->next())
 		{
 			$strImage = '';
-			$objImage = \FilesModel::findByPk($objElement->singleSRC);
+			$objImage = \FilesModel::findByPk($objColor->singleSRC);
 
 			// Add photo image
 			if ($objImage !== null)
 			{
-			$strImage = \Image::getHtml(\Image::get($objImage->path, $size[0], $size[1], $size[2]),$objKitchenwareElement->title);
+			$strImage = \Image::getHtml(\Image::get($objImage->path, $size[0], $size[1], $size[2]),$objColor->title);
 			}
 
-			$arrElement[] = array
+			$arrColor[] = array
 			(
-				'title'       => $objElement->title,
+				'title'       => $objColor->title,
 				'image'       => $strImage,
 			);
 		}
 
-		return $arrElement;
+		return $arrColor;
 
 	}
 
