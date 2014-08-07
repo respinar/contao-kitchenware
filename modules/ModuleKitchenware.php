@@ -95,6 +95,7 @@ abstract class ModuleKitchenware extends \Module
 
 		$objTemplate->class = (($this->setClass != '') ? ' ' . $this->setClass : '') . $strClass;
 		$objTemplate->elementClass = $this->elementClass;
+		$objTemplate->colorClass   = $this->colorClass;
 
 		$objTemplate->title       = $objSet->title;
 		$objTemplate->code        = $objSet->code;
