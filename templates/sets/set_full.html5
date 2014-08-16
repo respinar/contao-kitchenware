@@ -35,7 +35,6 @@
     <br>پوشش سطح: <?php echo $this->surface; ?>
     <br>درب: <?php echo $this->lids; ?>
     <br>دسته‌ها: <?php echo $this->handle; ?>
-    <br>رنگ: <?php echo $this->colors; ?></p>
   </div>
 
   <?php if($this->features) { ?>

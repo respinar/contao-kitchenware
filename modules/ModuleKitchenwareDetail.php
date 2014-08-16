@@ -73,13 +73,19 @@ class ModuleKitchenwareDetail extends \ModuleKitchenware
 
 		global $objPage;
 
-		$this->Template->articles = '';
+		$this->Template->sets = '';
 		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 
 		$objKitchenwareSet = \KitchenwareSetModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->kitchenware_categories);
 
 		$arrKitchenwareSet = $this->parseSet($objKitchenwareSet);
+
+		$objPage->pageTitle   = strip_tags(strip_insert_tags($objKitchenwareSet->title));
+		$objPage->description = strip_tags(strip_insert_tags($objKitchenwareSet->description));
+		$GLOBALS['TL_KEYWORDS'] .= (($GLOBALS['TL_KEYWORDS'] != '') ? ', ' : '') . strip_tags(strip_insert_tags($objKitchenwareSet->keywords));
+		//$objPage->keywords    = 'hello';//strip_tags(strip_insert_tags($objKitchenwareSet->keywords));
+
 		$this->Template->sets = $arrKitchenwareSet;
 
 	}

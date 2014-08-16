@@ -104,7 +104,6 @@ abstract class ModuleKitchenware extends \Module
 		$objTemplate->lids        = $objSet->lids;
 		$objTemplate->handle      = $objSet->handle;
 		$objTemplate->surface     = $objSet->surface;
-		$objTemplate->colors      = $objSet->colres;
 		$objTemplate->features    = deserialize($objSet->features);
 		$objTemplate->description = $objSet->description;
 
