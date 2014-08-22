@@ -20,8 +20,7 @@
 
     </figure>
   <?php endif; ?>
-  
-  <div class="title"><?php echo $this->title; ?></div>
-  <?php echo $this->more; ?>
+
+  <div class="title"><?php echo $this->name; ?></div>
 
 </div>

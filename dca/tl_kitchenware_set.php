@@ -31,7 +31,8 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 			(
 				'id' => 'primary',
 				'pid' => 'index',
-				'alias' => 'index'
+				'alias' => 'index',
+				'title' => 'index'
 			)
 		)
 	),
@@ -151,9 +152,9 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['title'],
 			'exclude'                 => true,
 			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
+			'inputType'               => 'TranslationTextField',
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'alias' => array
 		(
@@ -492,7 +493,7 @@ class tl_kitchenware_set extends Backend
 			$strImage = \Image::getHtml(\Image::get($objImage->path, '60', '60', 'center_center'));
 		}
 
-		return '<div><div style="float:left; margin-right:10px;">'.$strImage.'</div>'. $arrRow['title'] . '</div>';
+		return '<div><div style="float:left; margin-right:10px;">'.$strImage.'</div>'. \TranslationFields::translateValue($arrRow['title']) . '</div>';
 	}
 
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)

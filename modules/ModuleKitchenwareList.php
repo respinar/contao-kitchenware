@@ -99,7 +99,7 @@ class ModuleKitchenwareList extends \ModuleKitchenware
 		{
 			$blnFeatured = null;
 		}
-		
+
 		$intTotal = \KitchenwareSetModel::countPublishedByPids($this->kitchenware_categories);
 
 		if ($intTotal < 1)
@@ -167,7 +167,7 @@ class ModuleKitchenwareList extends \ModuleKitchenware
 			$this->Template->sets = $this->parseSets($objSets);
 		}
 
-		$this->Template->gategories = $this->kitchenware_categories;
+		//$this->Template->gategories = $this->kitchenware_categories;
 
 	}
 }

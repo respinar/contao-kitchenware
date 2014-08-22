@@ -97,7 +97,7 @@ abstract class ModuleKitchenware extends \Module
 		$objTemplate->elementClass = $this->elementClass;
 		$objTemplate->colorClass   = $this->colorClass;
 
-		$objTemplate->title       = $objSet->title;
+		$objTemplate->name        = \TranslationFields::translateValue($objSet->title);
 		$objTemplate->code        = $objSet->code;
 		$objTemplate->warranty    = $objSet->warranty;
 		$objTemplate->base        = $objSet->base;
@@ -107,7 +107,7 @@ abstract class ModuleKitchenware extends \Module
 		$objTemplate->features    = deserialize($objSet->features);
 		$objTemplate->description = $objSet->description;
 
-		$objTemplate->link        = $this->generateSetUrl($objSet, $blnAddCategory);
+		$objTemplate->href        = $this->generateSetUrl($objSet, $blnAddCategory);
 		$objTemplate->more        = $this->generateLink($GLOBALS['TL_LANG']['MSC']['moredetail'], $objSet, $blnAddCategory, true);
 
 		$objTemplate->elements    = $this->parseElement($objSet);
@@ -152,7 +152,8 @@ abstract class ModuleKitchenware extends \Module
 				}
 
 				$arrSet['singleSRC'] = $objModel->path;
-				$this->addImageToTemplate($objTemplate, $arrSet);
+				$arrSet['href'] = $this->generateSetUrl($objSet, $blnAddCategory);
+ 				$this->addImageToTemplate($objTemplate, $arrSet);
 			}
 		}
 
@@ -294,9 +295,9 @@ abstract class ModuleKitchenware extends \Module
 
 		return sprintf('<a href="%s" title="%s">%s%s</a>',
 						$this->generateSetUrl($objSet, $blnAddCategory),
-						specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $objSet->title), true),
+						specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], \TranslationFields::translateValue($objSet->title)), true),
 						$strLink,
-						($blnIsReadMore ? ' <span class="invisible">'.$objSet->title.'</span>' : ''));
+						($blnIsReadMore ? ' <span class="invisible">'.\TranslationFields::translateValue($objSet->title).'</span>' : ''));
 
 	}
 
