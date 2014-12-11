@@ -123,7 +123,15 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},title,alias,model,date;{meta_legend},keywords;{price_legend:hide},price,pieces,origin,warranty;{signs_legend},isiri,irfdo;{spec_legend},base,surface,lids,handle;{features_legend},features;{image_legend},singleSRC;{description_legend:hide},description;{publish_legend},published,featured,start,stop'
+		'__selector__'                => array('addEnclosure','published'),
+		'default'                     => '{title_legend},title,alias,model,date;{meta_legend},keywords,featured;{price_legend:hide},price,pieces,origin,warranty;{signs_legend},isiri,irfdo;{spec_legend},base,surface,lids,handle;{features_legend},features;{image_legend},singleSRC;{description_legend:hide},description;{enclosure_legend:hide},addEnclosure;{publish_legend},published'
+	),
+
+	// Subpalettes
+	'subpalettes' => array
+	(
+		'addEnclosure'                => 'enclosure',
+		'published'                   => 'start,stop'
 	),
 
 	// Fields
@@ -152,9 +160,9 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['title'],
 			'exclude'                 => true,
 			'search'                  => true,
-			'inputType'               => 'TranslationTextField',
+			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'alias' => array
 		(
@@ -313,6 +321,22 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 			'eval'                    => array('rte'=>'tinyMCE'),
 			'sql'                     => "text NULL"
 		),
+		'addEnclosure' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['addEnclosure'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'enclosure' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_catalog_product']['enclosure'],
+			'exclude'                 => true,
+			'inputType'               => 'fileTree',
+			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'filesOnly'=>true, 'isDownloads'=>true, 'extensions'=>Config::get('allowedDownload'), 'mandatory'=>true),
+			'sql'                     => "blob NULL"
+		),
 		'published' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['published'],
@@ -320,7 +344,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 			'filter'                  => true,
 			'flag'                    => 1,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('doNotCopy'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('doNotCopy'=>true,'submitOnChange'=>true),
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'start' => array
@@ -493,7 +517,7 @@ class tl_kitchenware_set extends Backend
 			$strImage = \Image::getHtml(\Image::get($objImage->path, '60', '60', 'center_center'));
 		}
 
-		return '<div><div style="float:left; margin-right:10px;">'.$strImage.'</div>'. \TranslationFields::translateValue($arrRow['title']) . '</div>';
+		return '<div><div style="float:left; margin-right:10px;">'.$strImage.'</div>'. $arrRow['title'] . '</div>';
 	}
 
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)

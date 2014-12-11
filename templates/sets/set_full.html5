@@ -1,7 +1,7 @@
 
 <div class="layout_full block<?php echo $this->class; ?>">
 
-  <h2><?php echo $this->name; ?></h2>
+  <h2><?php echo $this->title; ?></h2>
 
   <div class="meta">گارانتی: <?php echo $this->warranty; ?> ماه</div>
   <div class="description"><?php echo $this->description; ?></div>
@@ -31,10 +31,13 @@
 
   <div class="spec">
     <h3>خصوصیات</h3>
-    <p>جنس بدنه: <?php echo $this->base; ?>
-    <br>پوشش سطح: <?php echo $this->surface; ?>
-    <br>درب: <?php echo $this->lids; ?>
-    <br>دسته‌ها: <?php echo $this->handle; ?>
+    <dl>
+		<dt>جنس بدنه</dt><dd><?php echo $this->base; ?></dd>
+		<dt>پوشش بدنه</dt><dd><?php echo $this->surface; ?></dd>
+		<dt>درب</dt><dd><?php echo $this->lids; ?></dd>
+		<dt>دسته‌ها</dt><dd><?php echo $this->handle; ?></dd>
+
+    </dl>
   </div>
 
   <?php if($this->features) { ?>

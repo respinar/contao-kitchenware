@@ -97,7 +97,7 @@ abstract class ModuleKitchenware extends \Module
 		$objTemplate->elementClass = $this->elementClass;
 		$objTemplate->colorClass   = $this->colorClass;
 
-		$objTemplate->name        = \TranslationFields::translateValue($objSet->title);
+		$objTemplate->title       = $objSet->title;
 		$objTemplate->code        = $objSet->code;
 		$objTemplate->warranty    = $objSet->warranty;
 		$objTemplate->base        = $objSet->base;
@@ -295,9 +295,9 @@ abstract class ModuleKitchenware extends \Module
 
 		return sprintf('<a href="%s" title="%s">%s%s</a>',
 						$this->generateSetUrl($objSet, $blnAddCategory),
-						specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], \TranslationFields::translateValue($objSet->title)), true),
+						specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $objSet->title), true),
 						$strLink,
-						($blnIsReadMore ? ' <span class="invisible">'.\TranslationFields::translateValue($objSet->title).'</span>' : ''));
+						($blnIsReadMore ? ' <span class="invisible">'.$objSet->title.'</span>' : ''));
 
 	}
 

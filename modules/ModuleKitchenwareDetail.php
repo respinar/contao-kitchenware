@@ -81,7 +81,7 @@ class ModuleKitchenwareDetail extends \ModuleKitchenware
 
 		$arrKitchenwareSet = $this->parseSet($objKitchenwareSet);
 
-		$objPage->pageTitle   = strip_tags(strip_insert_tags(\TranslationFields::translateValue($objKitchenwareSet->title)));
+		$objPage->pageTitle   = strip_tags(strip_insert_tags($objKitchenwareSet->title));
 		$objPage->description = strip_tags(strip_insert_tags($objKitchenwareSet->description));
 		$GLOBALS['TL_KEYWORDS'] .= (($GLOBALS['TL_KEYWORDS'] != '') ? ', ' : '') . strip_tags(strip_insert_tags($objKitchenwareSet->keywords));
 		//$objPage->keywords    = 'hello';//strip_tags(strip_insert_tags($objKitchenwareSet->keywords));
