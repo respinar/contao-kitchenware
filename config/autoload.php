@@ -25,21 +25,21 @@ ClassLoader::addNamespaces(array
  */
 ClassLoader::addClasses(array
 (
-	// Models
-	'Kitchenware\KitchenwareModel'           => 'system/modules/kitchenware/models/KitchenwareModel.php',
-	'Kitchenware\KitchenwareSetModel'        => 'system/modules/kitchenware/models/KitchenwareSetModel.php',
-	'Kitchenware\KitchenwareElementModel'    => 'system/modules/kitchenware/models/KitchenwareElementModel.php',
-	'Kitchenware\KitchenwareColorModel'      => 'system/modules/kitchenware/models/KitchenwareColorModel.php',
-
-	// Modules
-	'Kitchenware\ModuleKitchenwarePriceList' => 'system/modules/kitchenware/modules/ModuleKitchenwarePriceList.php',
-	'Kitchenware\ModuleKitchenwareRelated'   => 'system/modules/kitchenware/modules/ModuleKitchenwareRelated.php',
-	'Kitchenware\ModuleKitchenwareDetail'    => 'system/modules/kitchenware/modules/ModuleKitchenwareDetail.php',
-	'Kitchenware\ModuleKitchenwareList'      => 'system/modules/kitchenware/modules/ModuleKitchenwareList.php',
-	'Kitchenware\ModuleKitchenware'          => 'system/modules/kitchenware/modules/ModuleKitchenware.php',
-
 	// Classes
 	'Kitchenware\Kitchenware'                => 'system/modules/kitchenware/classes/Kitchenware.php',
+
+	// Models
+	'Kitchenware\KitchenwareSetModel'        => 'system/modules/kitchenware/models/KitchenwareSetModel.php',
+	'Kitchenware\KitchenwareColorModel'      => 'system/modules/kitchenware/models/KitchenwareColorModel.php',
+	'Kitchenware\KitchenwareElementModel'    => 'system/modules/kitchenware/models/KitchenwareElementModel.php',
+	'Kitchenware\KitchenwareModel'           => 'system/modules/kitchenware/models/KitchenwareModel.php',
+
+	// Modules
+	'Kitchenware\ModuleKitchenwareDetail'    => 'system/modules/kitchenware/modules/ModuleKitchenwareDetail.php',
+	'Kitchenware\ModuleKitchenware'          => 'system/modules/kitchenware/modules/ModuleKitchenware.php',
+	'Kitchenware\ModuleKitchenwareList'      => 'system/modules/kitchenware/modules/ModuleKitchenwareList.php',
+	'Kitchenware\ModuleKitchenwarePriceList' => 'system/modules/kitchenware/modules/ModuleKitchenwarePriceList.php',
+	'Kitchenware\ModuleKitchenwareRelated'   => 'system/modules/kitchenware/modules/ModuleKitchenwareRelated.php',
 ));
 
 
@@ -48,9 +48,9 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (
-	'mod_kitchenware_list'    => 'system/modules/kitchenware/templates/modules',
 	'mod_kitchenware_detail'  => 'system/modules/kitchenware/templates/modules',
+	'mod_kitchenware_list'    => 'system/modules/kitchenware/templates/modules',
 	'mod_kitchenware_related' => 'system/modules/kitchenware/templates/modules',
-	'set_full'                => 'system/modules/kitchenware/templates/sets',
 	'set_short'               => 'system/modules/kitchenware/templates/sets',
+	'set_full'                => 'system/modules/kitchenware/templates/sets',
 ));
