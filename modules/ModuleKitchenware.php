@@ -107,7 +107,7 @@ abstract class ModuleKitchenware extends \Module
 		$objTemplate->features    = deserialize($objSet->features);
 		$objTemplate->description = $objSet->description;
 
-		$objTemplate->href        = $this->generateSetUrl($objSet, $blnAddCategory);
+		$objTemplate->link        = $this->generateSetUrl($objSet, $blnAddCategory);
 		$objTemplate->more        = $this->generateLink($GLOBALS['TL_LANG']['MSC']['moredetail'], $objSet, $blnAddCategory, true);
 
 		$objTemplate->elements    = $this->parseElement($objSet);
@@ -152,8 +152,9 @@ abstract class ModuleKitchenware extends \Module
 				}
 
 				$arrSet['singleSRC'] = $objModel->path;
-				$arrSet['href'] = $this->generateSetUrl($objSet, $blnAddCategory);
- 				$this->addImageToTemplate($objTemplate, $arrSet);
+				$arrSet['fullsize'] = $this->fullsize;
+				$strLightboxId = 'lightbox[lb' . $this->id . ']';
+ 				$this->addImageToTemplate($objTemplate, $arrSet,null,$strLightboxId);
 			}
 		}
 
