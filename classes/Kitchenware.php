@@ -15,7 +15,7 @@
 /**
  * Namespace
  */
-namespace Kitchenware;
+namespace kitchenware;
 
 
 /**
@@ -152,11 +152,11 @@ class Kitchenware extends \Frontend
         							  ->limit(1)
         							  ->execute((int)$strItem, $strItem);
 
-        	// We found a news item!!
+        	// We found a product item!!
         	if ($objProduct->numRows)
         	{
         		$id = ($objProduct->master > 0) ? $objProduct->languageMain : $objProduct->id;
-        		$objItem = $this->Database->prepare("SELECT tl_kitchenware_set.id, tl_catalog_product.alias FROM tl_kitchenware_set LEFT OUTER JOIN tl_kitchenware ON tl_kitchenware_set.pid=tl_kitchenware.id WHERE tl_kitchenware.language=? AND (tl_kitchenware_set.id=? OR languageMain=?)")->execute($strLanguage, $id, $id);
+        		$objItem = $this->Database->prepare("SELECT tl_kitchenware_set.id, tl_kitchenware_set.alias FROM tl_kitchenware_set LEFT OUTER JOIN tl_kitchenware ON tl_kitchenware_set.pid=tl_kitchenware.id WHERE tl_kitchenware.language=? AND (tl_kitchenware_set.id=? OR languageMain=?)")->execute($strLanguage, $id, $id);
 
 				if ($objItem->numRows)
 				{

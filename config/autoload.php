@@ -16,7 +16,7 @@
  */
 ClassLoader::addNamespaces(array
 (
-	'Kitchenware',
+	'kitchenware',
 ));
 
 
@@ -26,20 +26,20 @@ ClassLoader::addNamespaces(array
 ClassLoader::addClasses(array
 (
 	// Classes
-	'Kitchenware\Kitchenware'                => 'system/modules/kitchenware/classes/Kitchenware.php',
+	'kitchenware\Kitchenware'                => 'system/modules/kitchenware/classes/Kitchenware.php',
 
 	// Models
-	'Kitchenware\KitchenwareSetModel'        => 'system/modules/kitchenware/models/KitchenwareSetModel.php',
-	'Kitchenware\KitchenwareColorModel'      => 'system/modules/kitchenware/models/KitchenwareColorModel.php',
-	'Kitchenware\KitchenwareElementModel'    => 'system/modules/kitchenware/models/KitchenwareElementModel.php',
-	'Kitchenware\KitchenwareModel'           => 'system/modules/kitchenware/models/KitchenwareModel.php',
+	'kitchenware\KitchenwareSetModel'        => 'system/modules/kitchenware/models/KitchenwareSetModel.php',
+	'kitchenware\KitchenwareColorModel'      => 'system/modules/kitchenware/models/KitchenwareColorModel.php',
+	'kitchenware\KitchenwareElementModel'    => 'system/modules/kitchenware/models/KitchenwareElementModel.php',
+	'kitchenware\KitchenwareModel'           => 'system/modules/kitchenware/models/KitchenwareModel.php',
 
 	// Modules
-	'Kitchenware\ModuleKitchenwareDetail'    => 'system/modules/kitchenware/modules/ModuleKitchenwareDetail.php',
-	'Kitchenware\ModuleKitchenware'          => 'system/modules/kitchenware/modules/ModuleKitchenware.php',
-	'Kitchenware\ModuleKitchenwareList'      => 'system/modules/kitchenware/modules/ModuleKitchenwareList.php',
-	'Kitchenware\ModuleKitchenwarePriceList' => 'system/modules/kitchenware/modules/ModuleKitchenwarePriceList.php',
-	'Kitchenware\ModuleKitchenwareRelated'   => 'system/modules/kitchenware/modules/ModuleKitchenwareRelated.php',
+	'kitchenware\ModuleKitchenwareDetail'    => 'system/modules/kitchenware/modules/ModuleKitchenwareDetail.php',
+	'kitchenware\ModuleKitchenware'          => 'system/modules/kitchenware/modules/ModuleKitchenware.php',
+	'kitchenware\ModuleKitchenwareList'      => 'system/modules/kitchenware/modules/ModuleKitchenwareList.php',
+	'kitchenware\ModuleKitchenwarePriceList' => 'system/modules/kitchenware/modules/ModuleKitchenwarePriceList.php',
+	'kitchenware\ModuleKitchenwareRelated'   => 'system/modules/kitchenware/modules/ModuleKitchenwareRelated.php',
 ));
 
 

@@ -15,7 +15,7 @@
 /**
  * Namespace
  */
-namespace Kitchenware;
+namespace kitchenware;
 
 /**
  * Class KitchenwareProductModel

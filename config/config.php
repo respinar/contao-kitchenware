@@ -46,7 +46,7 @@ $GLOBALS['TL_HOOKS']['getSearchablePages'][]     = array('Kitchenware', 'getSear
 /**
  * Hooks
  */
-$GLOBALS['TL_HOOKS']['translateUrlParameters'][] = array('kitchenware', 'translateUrlParameters');
+$GLOBALS['TL_HOOKS']['translateUrlParameters'][] = array('Kitchenware', 'translateUrlParameters');
 
 
 
