@@ -50,8 +50,8 @@ $GLOBALS['TL_DCA']['tl_kitchenware'] = array
 		),
 		'label' => array
 		(
-			'fields'                  => array('title'),
-			'format'                  => '%s',
+			'fields'                  => array('language','title'),
+			'format'                  => '[%s] %s',
 			'label_callback'          => array('tl_kitchenware', 'addSetCount')
 		),
 		'global_operations' => array
@@ -106,7 +106,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('protected'),
-		'default'                     => '{title_legend},title;{redirect_legend},jumpTo;{protected_legend:hide},protected;'
+		'default'                     => '{title_legend},title,language,master;{redirect_legend},jumpTo;{protected_legend:hide},protected;'
 	),
 
 	// Subpalettes
@@ -134,6 +134,25 @@ $GLOBALS['TL_DCA']['tl_kitchenware'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>128),
 			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
+		'language' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware']['language'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'filter'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>32, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
+		),
+		'master' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware']['master'],
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options_callback'        => array('tl_kitchenware', 'getCategories'),
+			'eval'                    => array('includeBlankOption'=>true, 'blankOptionLabel'=>&$GLOBALS['TL_LANG']['tl_kitchenware']['isMaster']),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'jumpTo' => array
 		(
@@ -343,5 +362,26 @@ class tl_kitchenware extends Backend {
 
         return $label;
     }
+
+
+    /**
+	 * Get an array of possible kitchenware categories
+	 *
+	 * @param	DataContainer
+	 * @return	array
+	 * @link	http://www.contao.org/callbacks.html#options_callback
+	 */
+	public function getCategories(DataContainer $dc)
+	{
+		$arrCategories = array();
+		$objCategories = $this->Database->prepare("SELECT * FROM tl_kitchenware WHERE language!=? AND id!=? AND master=0 ORDER BY title")->execute($dc->activeRecord->language, $dc->id);
+
+		while( $objCategories->next() )
+		{
+			$arrCategories[$objCategories->id] = sprintf($GLOBALS['TL_LANG']['tl_kitchenware']['isSlave'], $objCategories->title);
+		}
+
+		return $arrCategories;
+	}
 
 }

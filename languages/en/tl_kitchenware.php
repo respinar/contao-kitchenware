@@ -19,6 +19,15 @@ $GLOBALS['TL_LANG']['tl_kitchenware']['title']     = array('Category title', 'Pl
 $GLOBALS['TL_LANG']['tl_kitchenware']['jumpTo']    = array('Redirect page', 'Please choose the product detail page to which visitors will be redirected when clicking a product item.');
 $GLOBALS['TL_LANG']['tl_kitchenware']['protected'] = array('Protect archive', 'Show category items to certain member groups only.');
 $GLOBALS['TL_LANG']['tl_kitchenware']['groups']    = array('Allowed member groups', 'These groups will be able to see the product items in this category.');
+$GLOBALS['TL_LANG']['tl_kitchenware']['master']    = array('Master category', 'Please define the master category to allow language switching.');
+$GLOBALS['TL_LANG']['tl_kitchenware']['language']  = array('Language', 'Please enter the language according to the RFC3066 format (e.g. en, en-us or en-cockney).');
+
+
+/**
+ * References
+ */
+$GLOBALS['TL_LANG']['tl_kitchenware']['isMaster']  = 'This is a master category';
+$GLOBALS['TL_LANG']['tl_kitchenware']['isSlave']   = 'Master category is "%s"';
 
 
 /**

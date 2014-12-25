@@ -16,7 +16,7 @@
  */
 
 $GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_list']      = '{title_legend},name,headline,type;{category_legend},kitchenware_categories;{config_legend},kitchenware_featured,kitchenware_detailModule;{meta_legend},set_template,kitchenware_price;{template_legend},numberOfItems,perPage,imgSize,setClass;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_detail']    = '{title_legend},name,headline,type;{category_legend},kitchenware_categories;{template_legend:hide},set_template,imgSize,kitchenware_price,fullsize;{item_legend},colorImageSize,colorClass,elementImageSize,elementClass;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_detail']    = '{title_legend},name,headline,type;{category_legend},kitchenware_categories;{template_legend:hide},set_template,imgSize,fullsize;{item_legend},colorImageSize,colorClass,elementImageSize,elementClass;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_related']   = '{title_legend},name,headline,type;{category_legend},kitchenware_categories;{template_legend:hide},imgSize,setClass,set_template;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 /**

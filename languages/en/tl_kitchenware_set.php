@@ -39,10 +39,7 @@ $GLOBALS['TL_LANG']['tl_kitchenware_set']['published']   = array('Publish set', 
 $GLOBALS['TL_LANG']['tl_kitchenware_set']['featured']    = array('Feature set', 'Show the set item in a featured set list.');
 $GLOBALS['TL_LANG']['tl_kitchenware_set']['start']       = array('Show from', 'Show the set item in a featured set list.');
 $GLOBALS['TL_LANG']['tl_kitchenware_set']['stop']        = array('Show until', 'Show the set item in a featured set list.');
-
-
-
-
+$GLOBALS['TL_LANG']['tl_kitchenware_set']['languageMain']= array('Master product', 'Choose the product in the master category equaling this product.');
 
 /**
  * Legends
@@ -58,7 +55,6 @@ $GLOBALS['TL_LANG']['tl_kitchenware_set']['description_legend'] = 'Description';
 $GLOBALS['TL_LANG']['tl_kitchenware_set']['enclosure_legend']   = 'Enclosures';
 $GLOBALS['TL_LANG']['tl_kitchenware_set']['publish_legend']     = 'Publish settings';
 
-
 /**
  * Buttons
  */
@@ -69,3 +65,9 @@ $GLOBALS['TL_LANG']['tl_kitchenware_set']['editheader'] = array('Edit Set', 'Edi
 $GLOBALS['TL_LANG']['tl_kitchenware_set']['cut']        = array('Move Set', 'Move product ID %s');
 $GLOBALS['TL_LANG']['tl_kitchenware_set']['copy']       = array('Duplicate Set', 'Duplicate set ID %s');
 $GLOBALS['TL_LANG']['tl_kitchenware_set']['delete']     = array('Delete Set', 'Delete set ID %s');
+
+/**
+ * References
+ */
+$GLOBALS['TL_LANG']['tl_kitchenware_set']['sameDay']	= 'Same day';
+$GLOBALS['TL_LANG']['tl_kitchenware_set']['otherDay']	= 'Other days';

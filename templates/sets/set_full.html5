@@ -4,8 +4,6 @@
   <h2><?php echo $this->title; ?></h2>
 
   <div class="meta">گارانتی: <?php echo $this->warranty; ?> ماه</div>
-  <div class="description"><?php echo $this->description; ?></div>
-
 
   <figure class="image_container<?php echo $this->floatClass; ?>"<?php if ($this->margin): ?> style="<?php echo $this->margin; ?>"<?php endif; ?>>
 
@@ -25,7 +23,7 @@
 
   </figure>
 
-
+  <div class="description"><?php echo $this->description; ?></div>
 
   <div class="spec">
     <h3>خصوصیات</h3>

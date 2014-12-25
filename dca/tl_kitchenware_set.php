@@ -25,6 +25,10 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 		'ptable'                      => 'tl_kitchenware',
 		'ctable'                      => array('tl_kitchenware_element'),
 		'enableVersioning'            => true,
+		'onload_callback'             => array
+		(
+			array('tl_kitchenware_set', 'showSelectbox'),
+		),
 		'sql' => array
 		(
 			'keys' => array
@@ -124,7 +128,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addEnclosure','kind','published'),
-		'default'                     => '{title_legend},title,alias,model,date,kind,featured;{meta_legend},keywords;{price_legend:hide},price,warranty,isiri,irfdo;{features_legend},features;{image_legend},singleSRC;{description_legend:hide},description;{enclosure_legend:hide},addEnclosure;{publish_legend},published'
+		'default'                     => '{title_legend},title,alias,model;{meta_legend},date,featured,keywords;{price_legend:hide},price,warranty,isiri,irfdo;{features_legend},features;{image_legend},singleSRC;{description_legend:hide},description;{enclosure_legend:hide},addEnclosure;{publish_legend},published'
 	),
 
 	// Subpalettes
@@ -163,8 +167,16 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
 			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
+		'languageMain' => array(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['languageMain'],
+			'exclude'                 => false,
+			'inputType'               => 'select',
+			'options_callback'        => array('tl_kitchenware_set', 'getMasterCategory'),
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'alias' => array
 		(
@@ -652,6 +664,67 @@ class tl_kitchenware_set extends Backend
 
 		$this->createNewVersion('tl_kitchenware_set', $intId);
 
+	}
+
+	/**
+	 * Get records from the master category
+	 *
+	 * @param	DataContainer
+	 * @return	array
+	 * @link	http://www.contao.org/callbacks.html#options_callback
+	 */
+	public function getMasterCategory(DataContainer $dc)
+	{
+		$sameDay = $GLOBALS['TL_LANG']['tl_kitchenware_set']['sameDay'];
+		$otherDay = $GLOBALS['TL_LANG']['tl_kitchenware_set']['otherDay'];
+
+		$arrItems = array($sameDay => array(), $otherDay => array());
+		$objItems = $this->Database->prepare("SELECT * FROM tl_kitchenware_set WHERE pid=(SELECT tl_kitchenware.master FROM tl_kitchenware LEFT OUTER JOIN tl_kitchenware_set ON tl_kitchenware_set.pid=tl_kitchenware.id WHERE tl_kitchenware_set.id=?) ORDER BY date DESC")->execute($dc->id);
+
+		$dayBegin = strtotime('0:00', $dc->activeRecord->date);
+
+		while( $objItems->next() )
+		{
+			if (strtotime('0:00', $objItems->date) == $dayBegin)
+			{
+				$arrItems[$sameDay][$objItems->id] = $objItems->title . ' (' . $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objItems->time) . ')';
+			}
+			else
+			{
+				$arrItems[$otherDay][$objItems->id] = $objItems->title . ' (' . $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objItems->time) . ')';
+			}
+		}
+
+		return $arrItems;
+	}
+
+
+	/**
+	 * Show the select menu only on slave archives
+	 *
+	 * @param	DataContainer
+	 * @return	void
+	 * @link	http://www.contao.org/callbacks.html#onload_callback
+	 */
+	public function showSelectbox(DataContainer $dc)
+	{
+		if($this->Input->get('act') == "edit")
+		{
+			$objCategory = $this->Database->prepare("SELECT tl_kitchenware.* FROM tl_kitchenware LEFT OUTER JOIN tl_kitchenware_set ON tl_kitchenware_set.pid=tl_kitchenware.id WHERE tl_kitchenware_set.id=?")
+										 ->limit(1)
+										 ->execute($dc->id);
+
+			if($objCategory->numRows && $objCategory->master > 0)
+			{
+				$GLOBALS['TL_DCA']['tl_kitchenware_set']['palettes']['default'] = preg_replace('@([,|;])(alias[,|;])@','$1languageMain,$2', $GLOBALS['TL_DCA']['tl_kitchenware_set']['palettes']['default']);
+				$GLOBALS['TL_DCA']['tl_kitchenware_set']['fields']['title']['eval']['tl_class'] = 'w50';
+				$GLOBALS['TL_DCA']['tl_kitchenware_set']['fields']['alias']['eval']['tl_class'] = 'clr w50';
+			}
+		}
+		else if($this->Input->get('act') == "editAll")
+		{
+			$GLOBALS['TL_DCA']['tl_kitchenware_set']['palettes']['regular'] = preg_replace('@([,|;]{1}language)([,|;]{1})@','$1,languageMain$2', $GLOBALS['TL_DCA']['tl_kitchenware_set']['palettes']['regular']);
+		}
 	}
 
 }
