@@ -13,16 +13,16 @@
 
 
 /**
- * Table tl_kitchenware_color
+ * Table tl_kitchenware_type
  */
-$GLOBALS['TL_DCA']['tl_kitchenware_color'] = array
+$GLOBALS['TL_DCA']['tl_kitchenware_type'] = array
 (
 
 	// Config
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
-		'ptable'                      => 'tl_kitchenware_set',
+		'ptable'                      => 'tl_kitchenware_product',
 		'enableVersioning'            => true,
 		'sql' => array
 		(
@@ -43,7 +43,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_color'] = array
 			'fields'                  => array('sorting'),
 			'headerFields'            => array('title'),
 			'panelLayout'             => 'search,limit',
-			'child_record_callback'   => array('tl_kitchenware_color', 'generateItemRow')
+			'child_record_callback'   => array('tl_kitchenware_type', 'generateItemRow')
 		),
 		'global_operations' => array
 		(
@@ -59,39 +59,39 @@ $GLOBALS['TL_DCA']['tl_kitchenware_color'] = array
 		(
 			'edit' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_color']['edit'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_type']['edit'],
 				'href'                => 'act=edit',
 				'icon'                => 'edit.gif'
 			),
 			'copy' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_color']['copy'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_type']['copy'],
 				'href'                => 'act=paste&amp;mode=copy',
 				'icon'                => 'copy.gif'
 			),
 			'cut' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_color']['cut'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_type']['cut'],
 				'href'                => 'act=paste&amp;mode=cut',
 				'icon'                => 'cut.gif'
 			),
 			'delete' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_color']['delete'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_type']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
 				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"'
 			),
 			'toggle' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_color']['toggle'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_type']['toggle'],
 				'icon'                => 'visible.gif',
 				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
-				'button_callback'     => array('tl_kitchenware_color', 'toggleIcon')
+				'button_callback'     => array('tl_kitchenware_type', 'toggleIcon')
 			),
 			'show' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_color']['show'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_type']['show'],
 				'href'                => 'act=show',
 				'icon'                => 'show.gif'
 			)
@@ -125,7 +125,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_color'] = array
 		),
 		'title' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_color']['title'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_type']['title'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -134,7 +134,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_color'] = array
 		),
 		'singleSRC' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_color']['singleSRC'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_type']['singleSRC'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes']),
@@ -142,7 +142,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_color'] = array
 		),
 		'description' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_color']['description'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_type']['description'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
@@ -151,7 +151,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_color'] = array
 		),
 		'published' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_color']['published'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_type']['published'],
 			'exclude'                 => true,
 			'filter'                  => true,
 			'flag'                    => 1,
@@ -165,7 +165,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_color'] = array
 /**
  * Provide miscellaneous methods that are used by the data configuration array
  */
-class tl_kitchenware_color extends Backend
+class tl_kitchenware_type extends Backend
 {
 
 	/**
@@ -228,9 +228,9 @@ class tl_kitchenware_color extends Backend
 		$this->createInitialVersion('tl_kitchenware_product', $intId);
 
 		// Trigger the save_callback
-		if (is_array($GLOBALS['TL_DCA']['tl_kitchenware_color']['fields']['published']['save_callback']))
+		if (is_array($GLOBALS['TL_DCA']['tl_kitchenware_type']['fields']['published']['save_callback']))
 		{
-			foreach ($GLOBALS['TL_DCA']['tl_kitchenware_color']['fields']['published']['save_callback'] as $callback)
+			foreach ($GLOBALS['TL_DCA']['tl_kitchenware_type']['fields']['published']['save_callback'] as $callback)
 			{
 				$this->import($callback[0]);
 				$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
@@ -238,7 +238,7 @@ class tl_kitchenware_color extends Backend
 		}
 
 		// Update the database
-		$this->Database->prepare("UPDATE tl_kitchenware_color SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
+		$this->Database->prepare("UPDATE tl_kitchenware_type SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
 					   ->execute($intId);
 
 		$this->createNewVersion('tl_kitchenware_product', $intId);

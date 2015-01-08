@@ -22,16 +22,16 @@ namespace kitchenware;
  *
  * @copyright  2014
  * @author     Hamid Abbaszadeh
- * @package    Devtools
+ * @package    kitchenware
  */
-class KitchenwareSetModel extends \Model
+class KitchenwareProductModel extends \Model
 {
 
 	/**
 	 * Name of the table
 	 * @var string
 	 */
-	protected static $strTable = 'tl_kitchenware_set';
+	protected static $strTable = 'tl_kitchenware_product';
 
 	/**
 	 * Find published news items by their parent ID and ID or alias

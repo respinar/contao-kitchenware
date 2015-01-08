@@ -13,21 +13,21 @@
 
 
 /**
- * Table tl_kitchenware_set
+ * Table tl_kitchenware_product
  */
-$GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
+$GLOBALS['TL_DCA']['tl_kitchenware_product'] = array
 (
 
 	// Config
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
-		'ptable'                      => 'tl_kitchenware',
+		'ptable'                      => 'tl_kitchenware_category',
 		'ctable'                      => array('tl_kitchenware_element'),
 		'enableVersioning'            => true,
 		'onload_callback'             => array
 		(
-			array('tl_kitchenware_set', 'showSelectbox'),
+			array('tl_kitchenware_product', 'showSelectbox'),
 		),
 		'sql' => array
 		(
@@ -50,7 +50,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 			'fields'                  => array('sorting'),
 			'headerFields'            => array('title','jumpTo','protected'),
 			'panelLayout'             => 'search,limit',
-			'child_record_callback'   => array('tl_kitchenware_set', 'generateItemRow')
+			'child_record_callback'   => array('tl_kitchenware_product', 'generateItemRow')
 		),
 		'global_operations' => array
 		(
@@ -66,58 +66,58 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 		(
 			'edit' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['edit'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['edit'],
 				'href'                => 'act=edit',
 				'icon'                => 'edit.gif'
 			),
 			'color' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['color'],
-				'href'                => 'table=tl_kitchenware_color',
+				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['color'],
+				'href'                => 'table=tl_kitchenware_type',
 				'icon'                => 'system/modules/kitchenware/assets/color.png'
 			),
 			'elements' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['elements'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['elements'],
 				'href'                => 'table=tl_kitchenware_element',
 				'icon'                => 'system/modules/kitchenware/assets/element.png'
 			),
 			'copy' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['copy'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['copy'],
 				'href'                => 'act=paste&amp;mode=copy',
 				'icon'                => 'copy.gif'
 			),
 			'cut' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['cut'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['cut'],
 				'href'                => 'act=paste&amp;mode=cut',
 				'icon'                => 'cut.gif'
 			),
 			'delete' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['delete'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
 				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"'
 			),
 			'toggle' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['toggle'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['toggle'],
 				'icon'                => 'visible.gif',
 				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
-				'button_callback'     => array('tl_kitchenware_set', 'toggleIcon')
+				'button_callback'     => array('tl_kitchenware_product', 'toggleIcon')
 			),
 			'feature' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['feature'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['feature'],
 				'icon'                => 'featured.gif',
 				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleFeature(this,%s)"',
-				'button_callback'     => array('tl_kitchenware_set', 'iconFeature')
+				'button_callback'     => array('tl_kitchenware_product', 'iconFeature')
 			),
 			'show' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['show'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['show'],
 				'href'                => 'act=show',
 				'icon'                => 'show.gif'
 			)
@@ -163,7 +163,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 		),
 		'title' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['title'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['title'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -171,16 +171,16 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'languageMain' => array(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['languageMain'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['languageMain'],
 			'exclude'                 => false,
 			'inputType'               => 'select',
-			'options_callback'        => array('tl_kitchenware_set', 'getMasterCategory'),
+			'options_callback'        => array('tl_kitchenware_product', 'getMasterCategory'),
 			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'alias' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['alias'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['alias'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -189,7 +189,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 		),
 		'date' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['date'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['date'],
 			'default'                 => time(),
 			'exclude'                 => true,
 			'filter'                  => true,
@@ -201,7 +201,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 		),
 		'keywords' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['keywords'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['keywords'],
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
 			'search'                  => true,
@@ -210,7 +210,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 		),
 		'origin' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['origin'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['origin'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -219,7 +219,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 		),
 		'model' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['model'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['model'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -228,19 +228,19 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 		),
 		'kind' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['kind'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['kind'],
 			'default'                 => 'kind_set',
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'select',
 			'options'                 => array('kind_set', 'kind_single'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_kitchenware_set'],
+			'reference'               => &$GLOBALS['TL_LANG']['tl_kitchenware_product'],
 			'eval'                    => array('submitOnChange'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(36) NOT NULL default ''"
 		),
 		'price' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['price'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['price'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -249,7 +249,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 		),
 		'pieces' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['pieces'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['pieces'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -258,7 +258,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 		),
 		'irfdo' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['irfdo'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['irfdo'],
 			'exclude'                 => true,
 			'filter'                  => true,
 			'flag'                    => 1,
@@ -268,7 +268,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 		),
 		'isiri' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['isiri'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['isiri'],
 			'exclude'                 => true,
 			'filter'                  => true,
 			'flag'                    => 1,
@@ -278,7 +278,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 		),
 		'warranty' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['warranty'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['warranty'],
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'text',
@@ -287,7 +287,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 		),
 		'base' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['base'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['base'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -296,7 +296,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 		),
 		'lids' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['lids'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['lids'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -305,7 +305,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 		),
 		'handle' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['handle'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['handle'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -314,7 +314,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 		),
 		'surface' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['surface'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['surface'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -323,7 +323,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 		),
 		'features' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['features'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['features'],
 			'exclude'                 => true,
 			'sorting'                 => true,
 			'inputType'               => 'listWizard',
@@ -332,7 +332,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 		),
 		'singleSRC' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['singleSRC'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['singleSRC'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('fieldType'=>'radio','mandatory'=>true, 'files'=>true, 'filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes']),
@@ -340,7 +340,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 		),
 		'description' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['description'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['description'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
@@ -349,7 +349,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 		),
 		'addEnclosure' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['addEnclosure'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['addEnclosure'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('submitOnChange'=>true),
@@ -357,7 +357,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 		),
 		'enclosure' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['enclosure'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['enclosure'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'filesOnly'=>true, 'isDownloads'=>true, 'extensions'=>Config::get('allowedDownload'), 'mandatory'=>true),
@@ -365,7 +365,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 		),
 		'published' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['published'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['published'],
 			'exclude'                 => true,
 			'filter'                  => true,
 			'flag'                    => 1,
@@ -375,7 +375,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 		),
 		'start' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['start'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['start'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
@@ -383,7 +383,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 		),
 		'stop' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['stop'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['stop'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
@@ -391,7 +391,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 		),
 		'featured' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_set']['featured'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['featured'],
 			'exclude'                 => true,
 			'filter'                  => true,
 			'flag'                    => 1,
@@ -406,7 +406,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_set'] = array
 /**
  * Provide miscellaneous methods that are used by the data configuration array
  */
-class tl_kitchenware_set extends Backend
+class tl_kitchenware_product extends Backend
 {
 
     /**
@@ -461,7 +461,7 @@ class tl_kitchenware_set extends Backend
 			case 'copy':
 				if (!in_array(Input::get('pid'), $root))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' Kitchenware item ID "'.$id.'" to Kitchenware archive ID "'.Input::get('pid').'"', __METHOD__, TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' Kitchenware product ID "'.$id.'" to Kitchenware category ID "'.Input::get('pid').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				// NO BREAK STATEMENT HERE
@@ -471,19 +471,19 @@ class tl_kitchenware_set extends Backend
 			case 'delete':
 			case 'toggle':
 			case 'feature':
-				$objArchive = $this->Database->prepare("SELECT pid FROM tl_kitchenware WHERE id=?")
+				$objArchive = $this->Database->prepare("SELECT pid FROM tl_kitchenware_category WHERE id=?")
 											 ->limit(1)
 											 ->execute($id);
 
 				if ($objArchive->numRows < 1)
 				{
-					$this->log('Invalid Kitchenware item ID "'.$id.'"', __METHOD__, TL_ERROR);
+					$this->log('Invalid Kitchenware category ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
 				if (!in_array($objArchive->pid, $root))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' Kitchenware item ID "'.$id.'" of Kitchenware archive ID "'.$objArchive->pid.'"', __METHOD__, TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' Kitchenware product ID "'.$id.'" of Kitchenware category ID "'.$objArchive->pid.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -496,16 +496,16 @@ class tl_kitchenware_set extends Backend
 			case 'copyAll':
 				if (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access Kitchenware archive ID "'.$id.'"', __METHOD__, TL_ERROR);
+					$this->log('Not enough permissions to access Kitchenware category ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
-				$objArchive = $this->Database->prepare("SELECT id FROM tl_kitchenware_set WHERE pid=?")
+				$objArchive = $this->Database->prepare("SELECT id FROM tl_kitchenware_product WHERE pid=?")
 											 ->execute($id);
 
 				if ($objArchive->numRows < 1)
 				{
-					$this->log('Invalid Kitchenware archive ID "'.$id.'"', __METHOD__, TL_ERROR);
+					$this->log('Invalid Kitchenware category ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
@@ -522,7 +522,7 @@ class tl_kitchenware_set extends Backend
 				}
 				elseif (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access Kitchenware archive ID ' . $id, __METHOD__, TL_ERROR);
+					$this->log('Not enough permissions to access Kitchenware category ID ' . $id, __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -586,12 +586,12 @@ class tl_kitchenware_set extends Backend
 		//	$this->redirect('contao/main.php?act=error');
 		//}
 
-		$this->createInitialVersion('tl_kitchenware_set', $intId);
+		$this->createInitialVersion('tl_kitchenware_product', $intId);
 
 		// Trigger the save_callback
-		if (is_array($GLOBALS['TL_DCA']['tl_kitchenware_set']['fields']['published']['save_callback']))
+		if (is_array($GLOBALS['TL_DCA']['tl_kitchenware_product']['fields']['published']['save_callback']))
 		{
-			foreach ($GLOBALS['TL_DCA']['tl_kitchenware_set']['fields']['published']['save_callback'] as $callback)
+			foreach ($GLOBALS['TL_DCA']['tl_kitchenware_product']['fields']['published']['save_callback'] as $callback)
 			{
 				$this->import($callback[0]);
 				$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
@@ -599,10 +599,10 @@ class tl_kitchenware_set extends Backend
 		}
 
 		// Update the database
-		$this->Database->prepare("UPDATE tl_kitchenware_set SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
+		$this->Database->prepare("UPDATE tl_kitchenware_product SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
 					   ->execute($intId);
 
-		$this->createNewVersion('tl_kitchenware_set', $intId);
+		$this->createNewVersion('tl_kitchenware_product', $intId);
 
 	}
 
@@ -646,12 +646,12 @@ class tl_kitchenware_set extends Backend
 		//	$this->redirect('contao/main.php?act=error');
 		//}
 
-		$this->createInitialVersion('tl_kitchenware_set', $intId);
+		$this->createInitialVersion('tl_kitchenware_product', $intId);
 
 		// Trigger the save_callback
-		if (is_array($GLOBALS['TL_DCA']['tl_kitchenware_set']['fields']['featured']['save_callback']))
+		if (is_array($GLOBALS['TL_DCA']['tl_kitchenware_product']['fields']['featured']['save_callback']))
 		{
-			foreach ($GLOBALS['TL_DCA']['tl_kitchenware_set']['fields']['featured']['save_callback'] as $callback)
+			foreach ($GLOBALS['TL_DCA']['tl_kitchenware_product']['fields']['featured']['save_callback'] as $callback)
 			{
 				$this->import($callback[0]);
 				$blnFeature = $this->$callback[0]->$callback[1]($blnFeature, $this);
@@ -659,10 +659,10 @@ class tl_kitchenware_set extends Backend
 		}
 
 		// Update the database
-		$this->Database->prepare("UPDATE tl_kitchenware_set SET tstamp=". time() .", featured='" . ($blnFeature ? 1 : '') . "' WHERE id=?")
+		$this->Database->prepare("UPDATE tl_kitchenware_product SET tstamp=". time() .", featured='" . ($blnFeature ? 1 : '') . "' WHERE id=?")
 					   ->execute($intId);
 
-		$this->createNewVersion('tl_kitchenware_set', $intId);
+		$this->createNewVersion('tl_kitchenware_product', $intId);
 
 	}
 
@@ -675,11 +675,11 @@ class tl_kitchenware_set extends Backend
 	 */
 	public function getMasterCategory(DataContainer $dc)
 	{
-		$sameDay = $GLOBALS['TL_LANG']['tl_kitchenware_set']['sameDay'];
-		$otherDay = $GLOBALS['TL_LANG']['tl_kitchenware_set']['otherDay'];
+		$sameDay = $GLOBALS['TL_LANG']['tl_kitchenware_product']['sameDay'];
+		$otherDay = $GLOBALS['TL_LANG']['tl_kitchenware_product']['otherDay'];
 
 		$arrItems = array($sameDay => array(), $otherDay => array());
-		$objItems = $this->Database->prepare("SELECT * FROM tl_kitchenware_set WHERE pid=(SELECT tl_kitchenware.master FROM tl_kitchenware LEFT OUTER JOIN tl_kitchenware_set ON tl_kitchenware_set.pid=tl_kitchenware.id WHERE tl_kitchenware_set.id=?) ORDER BY date DESC")->execute($dc->id);
+		$objItems = $this->Database->prepare("SELECT * FROM tl_kitchenware_product WHERE pid=(SELECT tl_kitchenware.master FROM tl_kitchenware LEFT OUTER JOIN tl_kitchenware_product ON tl_kitchenware_product.pid=tl_kitchenware.id WHERE tl_kitchenware_product.id=?) ORDER BY date DESC")->execute($dc->id);
 
 		$dayBegin = strtotime('0:00', $dc->activeRecord->date);
 
@@ -710,20 +710,20 @@ class tl_kitchenware_set extends Backend
 	{
 		if($this->Input->get('act') == "edit")
 		{
-			$objCategory = $this->Database->prepare("SELECT tl_kitchenware.* FROM tl_kitchenware LEFT OUTER JOIN tl_kitchenware_set ON tl_kitchenware_set.pid=tl_kitchenware.id WHERE tl_kitchenware_set.id=?")
+			$objCategory = $this->Database->prepare("SELECT tl_kitchenware_category.* FROM tl_kitchenware_category LEFT OUTER JOIN tl_kitchenware_product ON tl_kitchenware_product.pid=tl_kitchenware_category.id WHERE tl_kitchenware_product.id=?")
 										 ->limit(1)
 										 ->execute($dc->id);
 
 			if($objCategory->numRows && $objCategory->master > 0)
 			{
-				$GLOBALS['TL_DCA']['tl_kitchenware_set']['palettes']['default'] = preg_replace('@([,|;])(alias[,|;])@','$1languageMain,$2', $GLOBALS['TL_DCA']['tl_kitchenware_set']['palettes']['default']);
-				$GLOBALS['TL_DCA']['tl_kitchenware_set']['fields']['title']['eval']['tl_class'] = 'w50';
-				$GLOBALS['TL_DCA']['tl_kitchenware_set']['fields']['alias']['eval']['tl_class'] = 'clr w50';
+				$GLOBALS['TL_DCA']['tl_kitchenware_product']['palettes']['default'] = preg_replace('@([,|;])(alias[,|;])@','$1languageMain,$2', $GLOBALS['TL_DCA']['tl_kitchenware_product']['palettes']['default']);
+				$GLOBALS['TL_DCA']['tl_kitchenware_product']['fields']['title']['eval']['tl_class'] = 'w50';
+				$GLOBALS['TL_DCA']['tl_kitchenware_product']['fields']['alias']['eval']['tl_class'] = 'clr w50';
 			}
 		}
 		else if($this->Input->get('act') == "editAll")
 		{
-			$GLOBALS['TL_DCA']['tl_kitchenware_set']['palettes']['regular'] = preg_replace('@([,|;]{1}language)([,|;]{1})@','$1,languageMain$2', $GLOBALS['TL_DCA']['tl_kitchenware_set']['palettes']['regular']);
+			$GLOBALS['TL_DCA']['tl_kitchenware_product']['palettes']['regular'] = preg_replace('@([,|;]{1}language)([,|;]{1})@','$1,languageMain$2', $GLOBALS['TL_DCA']['tl_kitchenware_product']['palettes']['regular']);
 		}
 	}
 

@@ -3,8 +3,8 @@
 <?php $this->block('content'); ?>
 
 
-  <?php echo $this->sets; ?>
-  
+  <?php echo $this->product; ?>
+
   <!-- indexer::stop -->
   <p class="back"><a href="<?php echo $this->referer; ?>" title="<?php echo $this->back; ?>"><?php echo $this->back; ?></a></p>
   <!-- indexer::continue -->

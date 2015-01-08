@@ -44,7 +44,7 @@ class ModuleKitchenwareList extends \ModuleKitchenware
 		{
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['customers_detail'][0]) . ' ###';
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['mod_kitchenware_list'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
@@ -100,7 +100,7 @@ class ModuleKitchenwareList extends \ModuleKitchenware
 			$blnFeatured = null;
 		}
 
-		$intTotal = \KitchenwareSetModel::countPublishedByPids($this->kitchenware_categories);
+		$intTotal = \KitchenwareProductModel::countPublishedByPids($this->kitchenware_categories);
 
 		if ($intTotal < 1)
 		{
@@ -154,17 +154,17 @@ class ModuleKitchenwareList extends \ModuleKitchenware
 		// Get the items
 		if (isset($limit))
 		{
-			$objSets = \KitchenwareSetModel::findPublishedByPids($this->kitchenware_categories, $blnFeatured, $limit, $offset);
+			$objProducts = \KitchenwareProductModel::findPublishedByPids($this->kitchenware_categories, $blnFeatured, $limit, $offset);
 		}
 		else
 		{
-			$objSets = \KitchenwareSetModel::findPublishedByPids($this->kitchenware_categories, $blnFeatured, 0, $offset);
+			$objProducts = \KitchenwareProductModel::findPublishedByPids($this->kitchenware_categories, $blnFeatured, 0, $offset);
 		}
 
 		// Add the Sets
-		if ($objSets !== null)
+		if ($objProducts !== null)
 		{
-			$this->Template->sets = $this->parseSets($objSets);
+			$this->Template->products = $this->parseProducts($objProducts);
 		}
 
 		//$this->Template->gategories = $this->kitchenware_categories;

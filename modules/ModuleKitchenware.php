@@ -86,51 +86,51 @@ abstract class ModuleKitchenware extends \Module
 	 * @param integer
 	 * @return string
 	 */
-	protected function parseSet($objSet, $blnAddCategory=false, $strClass='', $intCount=0)
+	protected function parseProduct($objProduct, $blnAddCategory=false, $strClass='', $intCount=0)
 	{
 		global $objPage;
 
 		$objTemplate = new \FrontendTemplate($this->set_template);
-		$objTemplate->setData($objSet->row());
+		$objTemplate->setData($objProduct->row());
 
 		$objTemplate->class = (($this->setClass != '') ? ' ' . $this->setClass : '') . $strClass;
 		$objTemplate->elementClass = $this->elementClass;
 		$objTemplate->colorClass   = $this->colorClass;
 
-		$objTemplate->title       = $objSet->title;
-		$objTemplate->code        = $objSet->code;
-		$objTemplate->warranty    = $objSet->warranty;
-		$objTemplate->base        = $objSet->base;
-		$objTemplate->lids        = $objSet->lids;
-		$objTemplate->handle      = $objSet->handle;
-		$objTemplate->surface     = $objSet->surface;
-		$objTemplate->features    = deserialize($objSet->features);
-		$objTemplate->description = $objSet->description;
+		$objTemplate->title       = $objProduct->title;
+		$objTemplate->code        = $objProduct->code;
+		$objTemplate->warranty    = $objProduct->warranty;
+		$objTemplate->base        = $objProduct->base;
+		$objTemplate->lids        = $objProduct->lids;
+		$objTemplate->handle      = $objProduct->handle;
+		$objTemplate->surface     = $objProduct->surface;
+		$objTemplate->features    = deserialize($objProduct->features);
+		$objTemplate->description = $objProduct->description;
 
-		$objTemplate->link        = $this->generateSetUrl($objSet, $blnAddCategory);
-		$objTemplate->more        = $this->generateLink($GLOBALS['TL_LANG']['MSC']['moredetail'], $objSet, $blnAddCategory, true);
+		$objTemplate->link        = $this->generateProductUrl($objProduct, $blnAddCategory);
+		$objTemplate->more        = $this->generateLink($GLOBALS['TL_LANG']['MSC']['moredetail'], $objProduct, $blnAddCategory, true);
 
-		$objTemplate->elements    = $this->parseElement($objSet);
-		$objTemplate->colors      = $this->parseColor($objSet);
+		$objTemplate->elements    = $this->parseElement($objProduct);
+		$objTemplate->colors      = $this->parseColor($objProduct);
 
-		$objTemplate->category    = $objSet->getRelated('pid');
+		$objTemplate->category    = $objProduct->getRelated('pid');
 
 		$objTemplate->count = $intCount; // see #5708
 		$objTemplate->text = '';
 
-		$objTemplate->date = \Date::parse($objPage->datimFormat, $objSet->date);
-		$objTemplate->datetime = date('Y-m-d\TH:i:sP', $objSet->date);
+		$objTemplate->date = \Date::parse($objPage->datimFormat, $objProduct->date);
+		$objTemplate->datetime = date('Y-m-d\TH:i:sP', $objProduct->date);
 
 		$objTemplate->addImage = false;
 
 		// Add an image
-		if ($objSet->singleSRC != '')
+		if ($objProduct->singleSRC != '')
 		{
-			$objModel = \FilesModel::findByUuid($objSet->singleSRC);
+			$objModel = \FilesModel::findByUuid($objProduct->singleSRC);
 
 			if ($objModel === null)
 			{
-				if (!\Validator::isUuid($objSet->singleSRC))
+				if (!\Validator::isUuid($objProduct->singleSRC))
 				{
 					$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
 				}
@@ -138,7 +138,7 @@ abstract class ModuleKitchenware extends \Module
 			elseif (is_file(TL_ROOT . '/' . $objModel->path))
 			{
 				// Do not override the field now that we have a model registry (see #6303)
-				$arrSet = $objSet->row();
+				$arrProduct = $objProduct->row();
 
 				// Override the default image size
 				if ($this->imgSize != '')
@@ -147,14 +147,14 @@ abstract class ModuleKitchenware extends \Module
 
 					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
 					{
-						$arrSet['size'] = $this->imgSize;
+						$arrProduct['size'] = $this->imgSize;
 					}
 				}
 
-				$arrSet['singleSRC'] = $objModel->path;
-				$arrSet['fullsize'] = $this->fullsize;
+				$arrProduct['singleSRC'] = $objModel->path;
+				$arrProduct['fullsize'] = $this->fullsize;
 				$strLightboxId = 'lightbox[lb' . $this->id . ']';
- 				$this->addImageToTemplate($objTemplate, $arrSet,null,$strLightboxId);
+ 				$this->addImageToTemplate($objTemplate, $arrProduct,null,$strLightboxId);
 			}
 		}
 
@@ -168,9 +168,9 @@ abstract class ModuleKitchenware extends \Module
 	 * @param boolean
 	 * @return array
 	 */
-	protected function parseSets($objSets, $blnAddCategory=false)
+	protected function parseProducts($objProducts, $blnAddCategory=false)
 	{
-		$limit = $objSets->count();
+		$limit = $objProducts->count();
 
 		if ($limit < 1)
 		{
@@ -178,14 +178,14 @@ abstract class ModuleKitchenware extends \Module
 		}
 
 		$count = 0;
-		$arrSets = array();
+		$arrProducts = array();
 
-		while ($objSets->next())
+		while ($objProducts->next())
 		{
-			$arrSets[] = $this->parseSet($objSets, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % 2) == 0) ? ' odd' : ' even'), $count);
+			$arrProducts[] = $this->parseProduct($objProducts, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % 2) == 0) ? ' odd' : ' even'), $count);
 		}
 
-		return $arrSets;
+		return $arrProducts;
 	}
 
 
@@ -194,7 +194,7 @@ abstract class ModuleKitchenware extends \Module
 	 * @param object
 	 * @return array
 	 */
-	protected function getMetaFields($objSet)
+	protected function getMetaFields($objProduct)
 	{
 		$meta = deserialize($this->news_metaFields);
 
@@ -211,11 +211,11 @@ abstract class ModuleKitchenware extends \Module
 			switch ($field)
 			{
 				case 'date':
-					$return['date'] = \Date::parse($objPage->datimFormat, $objSet->date);
+					$return['date'] = \Date::parse($objPage->datimFormat, $objProduct->date);
 					break;
 
 				case 'author':
-					if (($objAuthor = $objSet->getRelated('author')) !== null)
+					if (($objAuthor = $objProduct->getRelated('author')) !== null)
 					{
 						if ($objAuthor->google != '')
 						{
@@ -229,11 +229,11 @@ abstract class ModuleKitchenware extends \Module
 					break;
 
 				case 'comments':
-					if ($objSet->noComments || $objSet->source != 'default')
+					if ($objProduct->noComments || $objProduct->source != 'default')
 					{
 						break;
 					}
-					$intTotal = \CommentsModel::countPublishedBySourceAndParent('tl_news', $objSet->id);
+					$intTotal = \CommentsModel::countPublishedBySourceAndParent('tl_news', $objProduct->id);
 					$return['ccount'] = $intTotal;
 					$return['comments'] = sprintf($GLOBALS['TL_LANG']['MSC']['commentCount'], $intTotal);
 					break;
@@ -250,7 +250,7 @@ abstract class ModuleKitchenware extends \Module
 	 * @param boolean
 	 * @return string
 	 */
-	protected function generateSetUrl($objItem, $blnAddCategory=false)
+	protected function generateProductUrl($objItem, $blnAddCategory=false)
 	{
 		$strCacheKey = 'id_' . $objItem->id;
 
@@ -291,14 +291,14 @@ abstract class ModuleKitchenware extends \Module
 	 * @param boolean
 	 * @return string
 	 */
-	protected function generateLink($strLink, $objSet, $blnAddCategory=false, $blnIsReadMore=false)
+	protected function generateLink($strLink, $objProduct, $blnAddCategory=false, $blnIsReadMore=false)
 	{
 
 		return sprintf('<a href="%s" title="%s">%s%s</a>',
-						$this->generateSetUrl($objSet, $blnAddCategory),
-						specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $objSet->title), true),
+						$this->generateProductUrl($objProduct, $blnAddCategory),
+						specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $objProduct->title), true),
 						$strLink,
-						($blnIsReadMore ? ' <span class="invisible">'.$objSet->title.'</span>' : ''));
+						($blnIsReadMore ? ' <span class="invisible">'.$objProduct->title.'</span>' : ''));
 
 	}
 
@@ -310,9 +310,9 @@ abstract class ModuleKitchenware extends \Module
 	 * @param boolean
 	 * @return string
 	 */
-	protected function parseElement($objSet)
+	protected function parseElement($objProduct)
 	{
-		$objElement = \KitchenwareElementModel::findPublishedByPid($objSet->id);
+		$objElement = \KitchenwareElementModel::findPublishedByPid($objProduct->id);
 
 		if ($objElement == null)
 		{
@@ -357,9 +357,9 @@ abstract class ModuleKitchenware extends \Module
 	 * @param boolean
 	 * @return string
 	 */
-	protected function parseColor($objSet)
+	protected function parseType($objProduct)
 	{
-		$objColor = \KitchenwareColorModel::findPublishedByPid($objSet->id);
+		$objColor = \KitchenwareTypeModel::findPublishedByPid($objProduct->id);
 
 		if ($objColor == null)
 		{

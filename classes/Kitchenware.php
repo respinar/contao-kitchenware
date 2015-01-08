@@ -48,7 +48,7 @@ class Kitchenware extends \Frontend
 		$arrProcessed = array();
 
 		// Get all news archives
-		$objCategory = \KitchenwareModel::findByProtected('');
+		$objCategory = \KitchenwareCategoryModel::findByProtected('');
 
 		// Walk through each archive
 		if ($objCategory !== null)
@@ -100,13 +100,13 @@ class Kitchenware extends \Frontend
 				$strUrl = $arrProcessed[$objCategory->jumpTo];
 
 				// Get the items
-				$objSet = \KitchenwareSetModel::findPublishedByPid($objCategory->id);
+				$objProduct = \KitchenwareProductModel::findPublishedByPid($objCategory->id);
 
-				if ($objSet !== null)
+				if ($objProduct !== null)
 				{
-					while ($objSet->next())
+					while ($objProduct->next())
 					{
-						$arrPages[] = $this->getLink($objSet, $strUrl);
+						$arrPages[] = $this->getLink($objProduct, $strUrl);
 					}
 				}
 			}
@@ -148,7 +148,7 @@ class Kitchenware extends \Frontend
 
         if ($strItem != '')
         {
-        	$objProduct = $this->Database->prepare("SELECT tl_kitchenware_set.*, tl_kitchenware.master FROM tl_kitchenware_set LEFT OUTER JOIN tl_kitchenware ON tl_kitchenware_set.pid=tl_kitchenware.id WHERE tl_kitchenware_set.id=? OR tl_kitchenware_set.alias=?")
+        	$objProduct = $this->Database->prepare("SELECT tl_kitchenware_product.*, tl_kitchenware_category.master FROM tl_kitchenware_product LEFT OUTER JOIN tl_kitchenware_category ON tl_kitchenware_product.pid=tl_kitchenware_category.id WHERE tl_kitchenware_product.id=? OR tl_kitchenware_product.alias=?")
         							  ->limit(1)
         							  ->execute((int)$strItem, $strItem);
 
@@ -156,7 +156,7 @@ class Kitchenware extends \Frontend
         	if ($objProduct->numRows)
         	{
         		$id = ($objProduct->master > 0) ? $objProduct->languageMain : $objProduct->id;
-        		$objItem = $this->Database->prepare("SELECT tl_kitchenware_set.id, tl_kitchenware_set.alias FROM tl_kitchenware_set LEFT OUTER JOIN tl_kitchenware ON tl_kitchenware_set.pid=tl_kitchenware.id WHERE tl_kitchenware.language=? AND (tl_kitchenware_set.id=? OR languageMain=?)")->execute($strLanguage, $id, $id);
+        		$objItem = $this->Database->prepare("SELECT tl_kitchenware_product.id, tl_kitchenware_product.alias FROM tl_kitchenware_product LEFT OUTER JOIN tl_kitchenware_category ON tl_kitchenware_product.pid=tl_kitchenware_category.id WHERE tl_kitchenware_category.language=? AND (tl_kitchenware_product.id=? OR languageMain=?)")->execute($strLanguage, $id, $id);
 
 				if ($objItem->numRows)
 				{

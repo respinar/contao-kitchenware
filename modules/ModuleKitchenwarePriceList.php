@@ -44,7 +44,7 @@ class ModuleKitchenwarePriceList extends \ModuleKitchenware
 		{
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['kitchenware_pricelist'][0]) . ' ###';
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['mod_kitchenware_pricelist'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
@@ -62,55 +62,7 @@ class ModuleKitchenwarePriceList extends \ModuleKitchenware
 	 */
 	protected function compile()
 	{
-		$objKitchenware = $this->Database->prepare("SELECT * FROM tl_kitchenware WHERE id=?")->execute($this->kitchenware);
 
-		$objKitchenwareSet = $this->Database->prepare("SELECT * FROM tl_kitchenware_set WHERE published=1 AND pid=? ORDER BY sorting")->execute($this->kitchenware);
-
-		// Return if no products were found
-		if (!$objKitchenwareSet->numRows)
-		{
-			$this->Template = new \FrontendTemplate('mod_kitchwenware_set_empty');
-			$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyKichenwareSet'];
-			return;
-		}
-
-		$strLink = '';
-
-		// Generate a jumpTo link
-		if ($objKitchenware->jumpTo > 0)
-		{
-			$objJump = \PageModel::findByPk($objKitchenware->jumpTo);
-
-			if ($objJump !== null)
-			{
-				$strLink = $this->generateFrontendUrl($objJump->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'));
-			}
-		}
-
-		$arrKitchenwareList = array();
-
-		while ($objKitchenwareSet->next())
-		{
-
-			$strImage = '';
-			$objImage = \FilesModel::findByPk($objKitchenwareSet->image);
-
-			// Add photo image
-			if ($objImage !== null)
-			{
-				$strImage = \Image::getHtml(\Image::get($objImage->path, '300', '300', 'center_center'));
-			}
-
-			$arrKitchenwareList[] = array
-			(
-				'title' => $objKitchenwareSet->title,
-				'model' => $objKitchenwareSet->model,
-				'image' => $strImage,
-				'link'  => strlen($strLink) ? sprintf($strLink, $objKitchenwareSet->alias) : ''
-			);
-		}
-
-		$this->Template->kitchenwarelist = $arrKitchenwareList;
 
 	}
 }

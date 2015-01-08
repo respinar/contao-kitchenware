@@ -44,7 +44,7 @@ class ModuleKitchenwareDetail extends \ModuleKitchenware
 		{
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['kitchenware_detail'][0]) . ' ###';
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['mod_kitchenware_detail'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
@@ -73,20 +73,19 @@ class ModuleKitchenwareDetail extends \ModuleKitchenware
 
 		global $objPage;
 
-		$this->Template->sets = '';
+		$this->Template->product = '';
 		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 
-		$objKitchenwareSet = \KitchenwareSetModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->kitchenware_categories);
+		$objKitchenwareProduct = \KitchenwareProductModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->kitchenware_categories);
 
-		$arrKitchenwareSet = $this->parseSet($objKitchenwareSet);
+		$arrKitchenwareProduct = $this->parseSet($objKitchenwareProduct);
 
-		$objPage->pageTitle   = strip_tags(strip_insert_tags($objKitchenwareSet->title));
-		$objPage->description = strip_tags(strip_insert_tags($objKitchenwareSet->description));
-		$GLOBALS['TL_KEYWORDS'] .= (($GLOBALS['TL_KEYWORDS'] != '') ? ', ' : '') . strip_tags(strip_insert_tags($objKitchenwareSet->keywords));
-		//$objPage->keywords    = 'hello';//strip_tags(strip_insert_tags($objKitchenwareSet->keywords));
+		$objPage->pageTitle   = strip_tags(strip_insert_tags($objKitchenwareProduct->title));
+		$objPage->description = strip_tags(strip_insert_tags($objKitchenwareProduct->description));
+		$GLOBALS['TL_KEYWORDS'] .= (($GLOBALS['TL_KEYWORDS'] != '') ? ', ' : '') . strip_tags(strip_insert_tags($objKitchenwareProduct->keywords));
 
-		$this->Template->sets = $arrKitchenwareSet;
+		$this->Template->product = $arrKitchenwareProduct;
 
 	}
 }

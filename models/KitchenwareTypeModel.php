@@ -18,20 +18,20 @@
 namespace kitchenware;
 
 /**
- * Class KitchenwareColorModel
+ * Class KitchenwareTypeModel
  *
  * @copyright  2014
  * @author     Hamid Abbaszadeh
- * @package    Devtools
+ * @package    kitchenware
  */
-class KitchenwareColorModel extends \Model
+class KitchenwareTypeModel extends \Model
 {
 
 	/**
 	 * Name of the table
 	 * @var string
 	 */
-	protected static $strTable = 'tl_kitchenware_color';
+	protected static $strTable = 'tl_kitchenware_type';
 
 
 	/**
