@@ -48,7 +48,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_product'] = array
 		(
 			'mode'                    => 4,
 			'fields'                  => array('sorting'),
-			'headerFields'            => array('title','jumpTo','protected'),
+			'headerFields'            => array('title','language','jumpTo','protected'),
 			'panelLayout'             => 'search,limit',
 			'child_record_callback'   => array('tl_kitchenware_product', 'generateItemRow')
 		),
@@ -128,7 +128,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_product'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addEnclosure','kind','published'),
-		'default'                     => '{title_legend},title,alias,model;{meta_legend},date,featured,keywords;{price_legend:hide},price,warranty,isiri,irfdo;{features_legend},features;{image_legend},singleSRC;{description_legend:hide},description;{enclosure_legend:hide},addEnclosure;{publish_legend},published'
+		'default'                     => '{title_legend},title,alias,model;{image_legend},singleSRC;{meta_legend},featured,date;{metal_legend:hide},keywords;{price_legend:hide},price,warranty,isiri,irfdo;{features_legend},features;{description_legend:hide},description;{enclosure_legend:hide},addEnclosure;{publish_legend},published'
 	),
 
 	// Subpalettes
@@ -149,7 +149,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_product'] = array
 		),
 		'pid' => array
 		(
-			'foreignKey'              => 'tl_kitchenware.title',
+			'foreignKey'              => 'tl_kitchenware_category.title',
 			'sql'                     => "int(10) unsigned NOT NULL default '0'",
 			'relation'                => array('type'=>'belongsTo', 'load'=>'eager')
 		),
@@ -187,6 +187,15 @@ $GLOBALS['TL_DCA']['tl_kitchenware_product'] = array
 			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alias','unique'=>true,'maxlength'=>128, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
+		'model' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['model'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
 		'date' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['date'],
@@ -211,15 +220,6 @@ $GLOBALS['TL_DCA']['tl_kitchenware_product'] = array
 		'origin' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['origin'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
-		),
-		'model' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['model'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',

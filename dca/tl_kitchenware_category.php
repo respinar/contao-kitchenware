@@ -186,7 +186,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_category'] = array
 );
 
 
-class tl_kitchenware extends Backend {
+class tl_kitchenware_category extends Backend {
 
     /**
 	 * Import the back end user object
@@ -245,7 +245,7 @@ class tl_kitchenware extends Backend {
 						// Add permissions on user level
 						if ($this->User->inherit == 'custom' || !$this->User->groups[0])
 						{
-							$objUser = $this->Database->prepare("SELECT kitchenware_category, setp FROM tl_user WHERE id=?")
+							$objUser = $this->Database->prepare("SELECT kitchenware, setp FROM tl_user WHERE id=?")
 													   ->limit(1)
 													   ->execute($this->User->id);
 
@@ -256,7 +256,7 @@ class tl_kitchenware extends Backend {
 								$arrKitchenware = deserialize($objUser->kitchenware);
 								$arrKitchenware[] = Input::get('id');
 
-								$this->Database->prepare("UPDATE tl_user SET kitchenware_category=? WHERE id=?")
+								$this->Database->prepare("UPDATE tl_user SET kitchenware=? WHERE id=?")
 											   ->execute(serialize($arrKitchenware), $this->User->id);
 							}
 						}
@@ -264,7 +264,7 @@ class tl_kitchenware extends Backend {
 						// Add permissions on group level
 						elseif ($this->User->groups[0] > 0)
 						{
-							$objGroup = $this->Database->prepare("SELECT kitchenware_category, setp FROM tl_user_group WHERE id=?")
+							$objGroup = $this->Database->prepare("SELECT kitchenware, setp FROM tl_user_group WHERE id=?")
 													   ->limit(1)
 													   ->execute($this->User->groups[0]);
 
@@ -275,7 +275,7 @@ class tl_kitchenware extends Backend {
 								$arrKitchenware = deserialize($objGroup->kitchenware);
 								$arrKitchenware[] = Input::get('id');
 
-								$this->Database->prepare("UPDATE tl_user_group SET kitchenware_category=? WHERE id=?")
+								$this->Database->prepare("UPDATE tl_user_group SET kitchenware=? WHERE id=?")
 											   ->execute(serialize($arrKitchenware), $this->User->groups[0]);
 							}
 						}

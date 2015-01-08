@@ -130,7 +130,7 @@ class tl_module_kitchenware extends Backend
 		//}
 
 		$arrArchives = array();
-		$objArchives = $this->Database->execute("SELECT id, title FROM tl_kitchenware ORDER BY title");
+		$objArchives = $this->Database->execute("SELECT id, title FROM tl_kitchenware_category ORDER BY title");
 
 		while ($objArchives->next())
 		{
@@ -166,7 +166,7 @@ class tl_module_kitchenware extends Backend
 	 */
 	public function getSetTemplates()
 	{
-		return $this->getTemplateGroup('set_');
+		return $this->getTemplateGroup('product_');
 	}
 
 }

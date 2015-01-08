@@ -48,7 +48,7 @@ abstract class ModuleKitchenware extends \Module
 		}
 
 		$this->import('FrontendUser', 'User');
-		$objCategory = \KitchenwareModel::findMultipleByIds($arrCategories);
+		$objCategory = \KitchenwareCategoryModel::findMultipleByIds($arrCategories);
 		$arrCategories = array();
 
 		if ($objCategory !== null)
@@ -97,21 +97,10 @@ abstract class ModuleKitchenware extends \Module
 		$objTemplate->elementClass = $this->elementClass;
 		$objTemplate->colorClass   = $this->colorClass;
 
-		$objTemplate->title       = $objProduct->title;
-		$objTemplate->code        = $objProduct->code;
-		$objTemplate->warranty    = $objProduct->warranty;
-		$objTemplate->base        = $objProduct->base;
-		$objTemplate->lids        = $objProduct->lids;
-		$objTemplate->handle      = $objProduct->handle;
-		$objTemplate->surface     = $objProduct->surface;
 		$objTemplate->features    = deserialize($objProduct->features);
-		$objTemplate->description = $objProduct->description;
 
 		$objTemplate->link        = $this->generateProductUrl($objProduct, $blnAddCategory);
 		$objTemplate->more        = $this->generateLink($GLOBALS['TL_LANG']['MSC']['moredetail'], $objProduct, $blnAddCategory, true);
-
-		$objTemplate->elements    = $this->parseElement($objProduct);
-		$objTemplate->colors      = $this->parseColor($objProduct);
 
 		$objTemplate->category    = $objProduct->getRelated('pid');
 
