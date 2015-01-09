@@ -16,17 +16,29 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_module']['kitchenware_categories']   = array('Kitchenware categories', 'Please select one or more kitchenware categories.');
-$GLOBALS['TL_LANG']['tl_module']['kitchenware_featured']     = array('Featured set', 'Here you can choose how featured items are handled.');
-$GLOBALS['TL_LANG']['tl_module']['kitchenware_price']        = array('Featured set', 'Here you can choose how featured items are handled.');
-
-$GLOBALS['TL_LANG']['tl_module']['kitchenware_detailModule'] = array('Set detail module', 'Automatically switch to the set module if an item has been selected.');
+$GLOBALS['TL_LANG']['tl_module']['kitchenware_featured']     = array('Featured products', 'Here you can choose how featured items are handled.');
+$GLOBALS['TL_LANG']['tl_module']['kitchenware_sortBy']       = array('Sort By', 'Here you can choose how featured items are handled.');
+$GLOBALS['TL_LANG']['tl_module']['kitchenware_detailModule'] = array('product detail module', 'Automatically switch to the set module if an item has been selected.');
 $GLOBALS['TL_LANG']['tl_module']['kitchenware_metaFields']   = array('Meta fields', 'Here you can select the meta fields.');
-$GLOBALS['TL_LANG']['tl_module']['set_template']             = array('Set template', 'Here you can select the set template.');
-$GLOBALS['TL_LANG']['tl_module']['setClass']                 = array('Set CSS class', 'Here you can set one or more classes for products.');
-$GLOBALS['TL_LANG']['tl_module']['elementClass']             = array('Element CSS class', 'Here you can set one or more classes for types.');
-$GLOBALS['TL_LANG']['tl_module']['elementImageSize']         = array('Element image width and height', 'Here you can set the image dimensions and the resize mode.');
-$GLOBALS['TL_LANG']['tl_module']['colorClass']               = array('Color CSS class', 'Here you can set one or more classes for types.');
-$GLOBALS['TL_LANG']['tl_module']['colorImageSize']           = array('Color image width and height', 'Here you can set the image dimensions and the resize mode.');
+
+$GLOBALS['TL_LANG']['tl_module']['product_template']         = array('Product template', 'Here you can select the set template.');
+$GLOBALS['TL_LANG']['tl_module']['product_Class']            = array('Product CSS class', 'Here you can set one or more classes for products.');
+$GLOBALS['TL_LANG']['tl_module']['product_perRow']           = array('Product per row', 'Here you can set one or more classes for products.');
+
+$GLOBALS['TL_LANG']['tl_module']['element_Class']             = array('Element CSS class', 'Here you can set one or more classes for types.');
+$GLOBALS['TL_LANG']['tl_module']['element_imgSize']           = array('Element image width and height', 'Here you can set the image dimensions and the resize mode.');
+
+$GLOBALS['TL_LANG']['tl_module']['type_Class']                = array('Type CSS class', 'Here you can set one or more classes for types.');
+$GLOBALS['TL_LANG']['tl_module']['type_imgSize']              = array('Type image width and height', 'Here you can set the image dimensions and the resize mode.');
+$GLOBALS['TL_LANG']['tl_module']['type_perRow']               = array('Type per row', 'Here you can set one or more classes for products.');
+$GLOBALS['TL_LANG']['tl_module']['type_template']             = array('Type template', 'Here you can set one or more classes for products.');
+
+
+$GLOBALS['TL_LANG']['tl_module']['related_Class']             = array('Related product CSS class', 'Here you can set one or more classes for types.');
+$GLOBALS['TL_LANG']['tl_module']['related_imgSize']           = array('Related product image width and height', 'Here you can set the image dimensions and the resize mode.');
+$GLOBALS['TL_LANG']['tl_module']['related_perRow']            = array('Related product per row', 'Here you can set one or more classes for products.');
+$GLOBALS['TL_LANG']['tl_module']['related_template']          = array('Related product template', 'Here you can set one or more classes for products.');
+
 
 
 /**

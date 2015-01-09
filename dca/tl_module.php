@@ -38,7 +38,7 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_detail']    = '{title_l
  */
 $GLOBALS['TL_DCA']['tl_module']['fields']['kitchenware_categories'] = array
 (
-	'label'                => &$GLOBALS['TL_LANG']['tl_module']['kitchenware_category'],
+	'label'                => &$GLOBALS['TL_LANG']['tl_module']['kitchenware_categories'],
 	'exclude'              => true,
 	'inputType'            => 'checkbox',
 	'options_callback'        => array('tl_module_kitchenware', 'getKitchenwareCategory'),
@@ -264,13 +264,13 @@ class tl_module_kitchenware extends Backend
 		//}
 
 		$arrArchives = array();
-		$objArchives = $this->Database->execute("SELECT id, title FROM tl_kitchenware_category ORDER BY title");
+		$objArchives = $this->Database->execute("SELECT * FROM tl_kitchenware_category ORDER BY title");
 
 		while ($objArchives->next())
 		{
 			//if ($this->User->hasAccess($objArchives->id, 'news'))
 			//{
-				$arrArchives[$objArchives->id] = $objArchives->title;
+				$arrArchives[$objArchives->id] = $objArchives->title . ' [' . $objArchives->language . ']';
 			//}
 		}
 
