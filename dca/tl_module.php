@@ -15,8 +15,23 @@
  * Add palettes to tl_module
  */
 
-$GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_list']      = '{title_legend},name,headline,type;{category_legend},kitchenware_categories;{config_legend},kitchenware_featured,kitchenware_detailModule;{meta_legend},set_template,kitchenware_price;{template_legend},numberOfItems,perPage,imgSize,setClass;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_detail']    = '{title_legend},name,headline,type;{category_legend},kitchenware_categories;{template_legend:hide},set_template,imgSize,fullsize;{item_legend},colorImageSize,colorClass,elementImageSize,elementClass;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_list']      = '{title_legend},name,headline,type;
+                                                                        {category_legend},kitchenware_categories;
+                                                                        {template_legend},kitchenware_detailModule,customTpl,kitchenware_featured;
+                                                                        {config_legend},kitchenware_metaFields;
+                                                                        {kitchenware_legend},kitchenware_sortBy,numberOfItems,perPage,skipFirst;
+                                                                        {product_legend},product_template,product_perRow,product_Class,imgSize;
+                                                                        {protected_legend:hide},protected;
+                                                                        {expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_detail']    = '{title_legend},name,headline,type;
+                                                                        {category_legend},kitchenware_categories;
+                                                                        {config_legend},kitchenware_metaFields;
+                                                                        {product_legend},product_template,imgSize,fullsize;
+                                                                        {type_legend},type_show,type_template,type_perRow,type_imgSize,type_Class;
+                                                                        {element_legend},element_imgSize,element_Class;
+                                                                        {related_legend},related_show,related_template,related_perRow,related_Class,related_imgSize;
+                                                                        {protected_legend:hide},protected;
+                                                                        {expert_legend:hide},guests,cssID,space';
 
 /**
  * Add fields to tl_module
@@ -41,14 +56,16 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['kitchenware_featured'] = array
 	'eval'                    => array('tl_class'=>'w50'),
 	'sql'                     => "varchar(20) NOT NULL default ''"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['kitchenware_price'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['kitchenware_metaFields'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['kitchenware_price'],
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['kitchenware_metaFields'],
+	'default'                 => array('date'),
 	'exclude'                 => true,
-	'flag'                    => 1,
 	'inputType'               => 'checkbox',
-	'eval'                    => array('doNotCopy'=>true, 'tl_class'=>'w50'),
-	'sql'                     => "char(1) NOT NULL default ''"
+	'options'                 => array('date','price','rating'),
+	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+	'eval'                    => array('multiple'=>true),
+	'sql'                     => "varchar(255) NOT NULL default ''"
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['kitchenware_detailModule'] = array
 (
@@ -60,60 +77,177 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['kitchenware_detailModule'] = array
 	'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
 	'sql'                     => "int(10) unsigned NOT NULL default '0'"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['setClass'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['kitchenware_sortBy'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['setClass'],
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['kitchenware_sortBy'],
+	'default'                 => 'custom',
+	'exclude'                 => true,
+	'inputType'               => 'select',
+	'options'                 => array('custom','title_asc', 'title_desc', 'date_asc', 'date_desc'),
+	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "varchar(16) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_Class'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['product_Class'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
 	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
 	'sql'                     => "varchar(255) NOT NULL default ''"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['elementClass'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_template'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['elementClass'],
-	'exclude'                 => true,
-	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
-	'sql'                     => "varchar(255) NOT NULL default ''"
-);
-$GLOBALS['TL_DCA']['tl_module']['fields']['elementImageSize'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['elementImageSize'],
-	'exclude'                 => true,
-	'inputType'               => 'imageSize',
-	'options'                 => $GLOBALS['TL_CROP'],
-	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-	'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
-	'sql'                     => "varchar(64) NOT NULL default ''"
-);
-$GLOBALS['TL_DCA']['tl_module']['fields']['colorClass'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['colorClass'],
-	'exclude'                 => true,
-	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
-	'sql'                     => "varchar(255) NOT NULL default ''"
-);
-$GLOBALS['TL_DCA']['tl_module']['fields']['colorImageSize'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['colorImageSize'],
-	'exclude'                 => true,
-	'inputType'               => 'imageSize',
-	'options'                 => $GLOBALS['TL_CROP'],
-	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-	'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
-	'sql'                     => "varchar(64) NOT NULL default ''"
-);
-$GLOBALS['TL_DCA']['tl_module']['fields']['set_template'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['set_template'],
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['product_template'],
 	'default'                 => 'set_full',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options_callback'        => array('tl_module_kitchenware', 'getSetTemplates'),
+	'options_callback'        => array('tl_module_kitchenware', 'getProductTemplates'),
 	'eval'                    => array('tl_class'=>'w50'),
-	'sql'                     => "varchar(32) NOT NULL default ''"
+	'sql'                     => "varchar(64) NOT NULL default ''"
 );
+$GLOBALS['TL_DCA']['tl_module']['fields']['product_perRow'] = array
+(
+	'label'                => &$GLOBALS['TL_LANG']['tl_module']['product_perRow'],
+	'default'              => '4',
+	'exclude'              => true,
+	'inputType'            => 'select',
+	'options'              => array('1','2','3','4','6','12'),
+	'eval'                 => array('tl_class'=>'w50'),
+    'sql'                  => "varchar(64) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['element_show'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['element_show'],
+	'exclude'                 => true,
+	'inputType'               => 'checkbox',
+	'eval'                    => array(),
+	'sql'                     => "char(1) NOT NULL default ''"
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['element_template'] = array
+(
+	'label'                => &$GLOBALS['TL_LANG']['tl_module']['element_template'],
+	'default'              => 'product_element',
+	'exclude'              => true,
+	'inputType'            => 'select',
+	'options_callback'     => array('tl_module_catalog', 'getProductTemplates'),
+	'eval'                 => array('tl_class'=>'w50'),
+    'sql'                  => "varchar(64) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['element_Class'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['element_Class'],
+	'exclude'                 => true,
+	'inputType'               => 'text',
+	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
+	'sql'                     => "varchar(255) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['element_imgSize'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['element_imgSize'],
+	'exclude'                 => true,
+	'inputType'               => 'imageSize',
+	'options'                 => $GLOBALS['TL_CROP'],
+	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+	'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+	'sql'                     => "varchar(64) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['type_show'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['type_show'],
+	'exclude'                 => true,
+	'inputType'               => 'checkbox',
+	'eval'                    => array(),
+	'sql'                     => "char(1) NOT NULL default ''"
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['type_template'] = array
+(
+	'label'                => &$GLOBALS['TL_LANG']['tl_module']['type_template'],
+	'default'              => 'product_type',
+	'exclude'              => true,
+	'inputType'            => 'select',
+	'options_callback'     => array('tl_module_catalog', 'getProductTemplates'),
+	'eval'                 => array('tl_class'=>'w50'),
+    'sql'                  => "varchar(64) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['type_Class'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['type_Class'],
+	'exclude'                 => true,
+	'inputType'               => 'text',
+	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
+	'sql'                     => "varchar(255) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['type_imgSize'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['type_imgSize'],
+	'exclude'                 => true,
+	'inputType'               => 'imageSize',
+	'options'                 => System::getImageSizes(),
+	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+	'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+	'sql'                     => "varchar(64) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['type_perRow'] = array
+(
+	'label'                => &$GLOBALS['TL_LANG']['tl_module']['type_perRow'],
+	'default'              => '4',
+	'exclude'              => true,
+	'inputType'            => 'select',
+	'options'              => array('1','2','3','4','6','12'),
+	'eval'                 => array('tl_class'=>'w50'),
+    'sql'                  => "varchar(64) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['related_show'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['related_show'],
+	'exclude'                 => true,
+	'inputType'               => 'checkbox',
+	'eval'                    => array(),
+	'sql'                     => "char(1) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['related_template'] = array
+(
+	'label'                => &$GLOBALS['TL_LANG']['tl_module']['related_template'],
+	'default'              => 'product_related',
+	'exclude'              => true,
+	'inputType'            => 'select',
+	'options_callback'     => array('tl_module_catalog', 'getProductTemplates'),
+	'eval'                 => array('tl_class'=>'w50'),
+    'sql'                  => "varchar(64) NOT NULL default ''"
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['related_Class'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['related_Class'],
+	'exclude'                 => true,
+	'inputType'               => 'text',
+	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
+	'sql'                     => "varchar(255) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['related_perRow'] = array
+(
+	'label'                => &$GLOBALS['TL_LANG']['tl_module']['related_perRow'],
+	'default'              => '4',
+	'exclude'              => true,
+	'inputType'            => 'select',
+	'options'              => array('1','2','3','4','6','12'),
+	'eval'                 => array('tl_class'=>'w50'),
+    'sql'                  => "varchar(64) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['related_imgSize'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['related_imgSize'],
+	'exclude'                 => true,
+	'inputType'               => 'imageSize',
+	'options'                 => System::getImageSizes(),
+	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+	'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+	'sql'                     => "varchar(64) NOT NULL default ''"
+);
+
 
 class tl_module_kitchenware extends Backend
 {
@@ -164,7 +298,7 @@ class tl_module_kitchenware extends Backend
 	 * Return all set templates as array
 	 * @return array
 	 */
-	public function getSetTemplates()
+	public function getProductTemplates()
 	{
 		return $this->getTemplateGroup('product_');
 	}

@@ -79,7 +79,7 @@ class ModuleKitchenwareDetail extends \ModuleKitchenware
 
 		$objKitchenwareProduct = \KitchenwareProductModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->kitchenware_categories);
 
-		$arrKitchenwareProduct = $this->parseSet($objKitchenwareProduct);
+		$arrKitchenwareProduct = $this->parseProduct($objKitchenwareProduct);
 
 		$objPage->pageTitle   = strip_tags(strip_insert_tags($objKitchenwareProduct->title));
 		$objPage->description = strip_tags(strip_insert_tags($objKitchenwareProduct->description));

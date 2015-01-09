@@ -90,22 +90,22 @@ abstract class ModuleKitchenware extends \Module
 	{
 		global $objPage;
 
-		$objTemplate = new \FrontendTemplate($this->set_template);
+		$objTemplate = new \FrontendTemplate($this->product_template);
 		$objTemplate->setData($objProduct->row());
 
-		$objTemplate->class = (($this->setClass != '') ? ' ' . $this->setClass : '') . $strClass;
-		$objTemplate->elementClass = $this->elementClass;
-		$objTemplate->colorClass   = $this->colorClass;
+		$objTemplate->class = (($this->product_Class != '') ? ' ' . $this->product_Class : '') . $strClass;
+
+		if (time() - $objProduct->date < 2592000) {
+			$objTemplate->new_product = true;
+		}
 
 		$objTemplate->features    = deserialize($objProduct->features);
 
 		$objTemplate->link        = $this->generateProductUrl($objProduct, $blnAddCategory);
-		$objTemplate->more        = $this->generateLink($GLOBALS['TL_LANG']['MSC']['moredetail'], $objProduct, $blnAddCategory, true);
 
 		$objTemplate->category    = $objProduct->getRelated('pid');
 
 		$objTemplate->count = $intCount; // see #5708
-		$objTemplate->text = '';
 
 		$objTemplate->date = \Date::parse($objPage->datimFormat, $objProduct->date);
 		$objTemplate->datetime = date('Y-m-d\TH:i:sP', $objProduct->date);
@@ -171,7 +171,7 @@ abstract class ModuleKitchenware extends \Module
 
 		while ($objProducts->next())
 		{
-			$arrProducts[] = $this->parseProduct($objProducts, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % 2) == 0) ? ' odd' : ' even'), $count);
+			$arrProducts[] = $this->parseProduct($objProducts, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->product_perRow) == 0) ? ' last_col' : '') . ((($count % $this->product_perRow) == 1) ? ' first_col' : ''), $count);
 		}
 
 		return $arrProducts;
@@ -346,38 +346,49 @@ abstract class ModuleKitchenware extends \Module
 	 * @param boolean
 	 * @return string
 	 */
+	protected function parseTypes($objProducts)
+	{
+
+	}
+
+	/**
+	 * Generate a colors as array
+	 * @param string
+	 * @param object
+	 * @param boolean
+	 * @param boolean
+	 * @return string
+	 */
 	protected function parseType($objProduct)
 	{
-		$objColor = \KitchenwareTypeModel::findPublishedByPid($objProduct->id);
 
-		if ($objColor == null)
-		{
-			return;
-		}
 
-		$arrColor = array();
+	}
 
-		$size = deserialize($this->colorImageSize);
+	/**
+	 * Generate a colors as array
+	 * @param string
+	 * @param object
+	 * @param boolean
+	 * @param boolean
+	 * @return string
+	 */
+	protected function parseRelateds($objProducts)
+	{
 
-		while($objColor->next())
-		{
-			$strImage = '';
-			$objImage = \FilesModel::findByPk($objColor->singleSRC);
+	}
 
-			// Add photo image
-			if ($objImage !== null)
-			{
-			$strImage = \Image::getHtml(\Image::get($objImage->path, $size[0], $size[1], $size[2]),$objColor->title);
-			}
+	/**
+	 * Generate a colors as array
+	 * @param string
+	 * @param object
+	 * @param boolean
+	 * @param boolean
+	 * @return string
+	 */
+	protected function parseRelated($objProduct)
+	{
 
-			$arrColor[] = array
-			(
-				'title'       => $objColor->title,
-				'image'       => $strImage,
-			);
-		}
-
-		return $arrColor;
 
 	}
 

@@ -21,6 +21,9 @@
         <figcaption class="caption" style="width:<?php echo $this->arrSize[0]; ?>px"><?php echo $this->caption; ?></figcaption>
       <?php endif; ?>
 
+      <?php if ($this->featured): ?><div class="featured"></div><?php endif; ?>
+      <?php if ($this->new_product): ?><div class="new"></div><?php endif; ?>
+
   </figure>
 
   <div class="description"><?php echo $this->description; ?></div>
@@ -46,45 +49,5 @@
     </ul>
   </div>
   <?php } ?>
-
-  <?php if ($this->elements) {?>
-  <div class="elements">
-	<h3>محتوی</h3>
-		<?php foreach($this->elements as $element) { ?>
-			<div class="element <?php echo $this->elementClass; ?>">
-				<figure><?php echo $element[image]; ?></figure>
-				<?php if ($element[title]) { ?>
-					<span><?php echo $element[title]; ?></span>
-				<?php } ?>
-				<ul>
-					<?php if ($element[dimensions]) { ?>
-					<li>ابعاد: <?php echo $element[dimensions]; ?></li>
-					<?php } ?>
-					<?php if ($element[capacity]) { ?>
-					<li>ظرفیت: <?php echo $element[capacity]; ?></li>
-					<?php } ?>
-					<?php if ($element[description]) { ?>
-					<li><?php echo $element[description]; ?></li>
-					<?php } ?>
-				</ul>
-			</div>
-		<?php } ?>
-	</div>
-  <?php } ?>
-
-  <?php if ($this->colors) {?>
-  <div class="colors">
-	<h3>رنگ‌ها</h3>
-		<?php foreach($this->colors as $color) { ?>
-			<div class="color <?php echo $this->colorClass; ?>">
-				<figure><?php echo $color[image]; ?></figure>
-				<?php if ($color[title]) { ?>
-				<span><?php echo $color[title]; ?></span>
-				<?php } ?>
-			</div>
-		<?php } ?>
-	</div>
-  <?php } ?>
-
 
 </div>
