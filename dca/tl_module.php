@@ -131,7 +131,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['element_template'] = array
 	'default'              => 'product_element',
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'options_callback'     => array('tl_module_catalog', 'getProductTemplates'),
+	'options_callback'     => array('tl_module_kitchenware', 'getProductTemplates'),
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
@@ -168,7 +168,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['type_template'] = array
 	'default'              => 'product_type',
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'options_callback'     => array('tl_module_catalog', 'getProductTemplates'),
+	'options_callback'     => array('tl_module_kitchenware', 'getProductTemplates'),
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
@@ -214,7 +214,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['related_template'] = array
 	'default'              => 'product_related',
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'options_callback'     => array('tl_module_catalog', 'getProductTemplates'),
+	'options_callback'     => array('tl_module_kitchenware', 'getProductTemplates'),
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
