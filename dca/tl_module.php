@@ -27,8 +27,8 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_detail']    = '{title_l
                                                                         {category_legend},kitchenware_categories;
                                                                         {config_legend},kitchenware_metaFields;
                                                                         {product_legend},product_template,imgSize,fullsize;
-                                                                        {type_legend},type_show,type_template,type_perRow,type_imgSize,type_Class;
-                                                                        {element_legend},element_imgSize,element_Class;
+                                                                        {type_legend},type_show,type_template,type_perRow,type_Class,type_imgSize;
+                                                                        {element_legend},element_show,element_template,element_perRow,element_Class,element_imgSize;
                                                                         {related_legend},related_show,related_template,related_perRow,related_Class,related_imgSize;
                                                                         {protected_legend:hide},protected;
                                                                         {expert_legend:hide},guests,cssID,space';
@@ -124,7 +124,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['element_show'] = array
 	'eval'                    => array(),
 	'sql'                     => "char(1) NOT NULL default ''"
 );
-
 $GLOBALS['TL_DCA']['tl_module']['fields']['element_template'] = array
 (
 	'label'                => &$GLOBALS['TL_LANG']['tl_module']['element_template'],
@@ -132,6 +131,16 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['element_template'] = array
 	'exclude'              => true,
 	'inputType'            => 'select',
 	'options_callback'     => array('tl_module_kitchenware', 'getProductTemplates'),
+	'eval'                 => array('tl_class'=>'w50'),
+    'sql'                  => "varchar(64) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['element_perRow'] = array
+(
+	'label'                => &$GLOBALS['TL_LANG']['tl_module']['element_perRow'],
+	'default'              => '4',
+	'exclude'              => true,
+	'inputType'            => 'select',
+	'options'              => array('1','2','3','4','6','12'),
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
@@ -148,7 +157,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['element_imgSize'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['element_imgSize'],
 	'exclude'                 => true,
 	'inputType'               => 'imageSize',
-	'options'                 => $GLOBALS['TL_CROP'],
+	'options'                 => System::getImageSizes(),
 	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
 	'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
 	'sql'                     => "varchar(64) NOT NULL default ''"
@@ -218,7 +227,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['related_template'] = array
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
-
 $GLOBALS['TL_DCA']['tl_module']['fields']['related_Class'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['related_Class'],
