@@ -8,7 +8,7 @@
  * @package   Kitchenware
  * @author    Hamid Abbaszadeh
  * @license   GNU/LGPL
- * @copyright 2014
+ * @copyright 2015
  */
 
 /**
