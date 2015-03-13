@@ -22,7 +22,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_element'] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
-		'ptable'                      => 'tl_kitchenware_set',
+		'ptable'                      => 'tl_kitchenware_product',
 		'enableVersioning'            => true,
 		'sql' => array
 		(

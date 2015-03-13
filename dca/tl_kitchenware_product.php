@@ -23,7 +23,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_product'] = array
 	(
 		'dataContainer'               => 'Table',
 		'ptable'                      => 'tl_kitchenware_category',
-		'ctable'                      => array('tl_kitchenware_element'),
+		'ctable'                      => array('tl_kitchenware_element','tl_kitchenware_type'),
 		'enableVersioning'            => true,
 		'onload_callback'             => array
 		(
@@ -679,7 +679,7 @@ class tl_kitchenware_product extends Backend
 		$otherDay = $GLOBALS['TL_LANG']['tl_kitchenware_product']['otherDay'];
 
 		$arrItems = array($sameDay => array(), $otherDay => array());
-		$objItems = $this->Database->prepare("SELECT * FROM tl_kitchenware_product WHERE pid=(SELECT tl_kitchenware.master FROM tl_kitchenware LEFT OUTER JOIN tl_kitchenware_product ON tl_kitchenware_product.pid=tl_kitchenware.id WHERE tl_kitchenware_product.id=?) ORDER BY date DESC")->execute($dc->id);
+		$objItems = $this->Database->prepare("SELECT * FROM tl_kitchenware_product WHERE pid=(SELECT tl_kitchenware_category.master FROM tl_kitchenware_category LEFT OUTER JOIN tl_kitchenware_product ON tl_kitchenware_product.pid=tl_kitchenware_category.id WHERE tl_kitchenware_product.id=?) ORDER BY date DESC")->execute($dc->id);
 
 		$dayBegin = strtotime('0:00', $dc->activeRecord->date);
 

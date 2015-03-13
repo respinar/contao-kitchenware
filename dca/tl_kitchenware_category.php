@@ -13,7 +13,7 @@
 
 
 /**
- * Table tl_kitchenware
+ * Table tl_kitchenware_category
  */
 $GLOBALS['TL_DCA']['tl_kitchenware_category'] = array
 (
