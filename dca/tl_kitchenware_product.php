@@ -635,34 +635,43 @@ class tl_kitchenware_product extends Backend
 	public function toggleFeature($intId, $blnFeature)
 	{
 		// Check permissions to edit
-		$this->Input->setGet('id', $intId);
-		$this->Input->setGet('act', 'featured');
+		Input::setGet('id', $intId);
+		Input::setGet('act', 'feature');
 		//$this->checkPermission();
 
-		// Check permissions to publish
-		//if (!$this->User->isAdmin && !$this->User->hasAccess('tl_news::published', 'alexf'))
+		// Check permissions to feature
+		//if (!$this->User->hasAccess('tl_news::featured', 'alexf'))
 		//{
-		//	$this->log('Not enough permissions to publish/unpublish news item ID "'.$intId.'"', 'tl_news toggleVisibility', TL_ERROR);
+		//	$this->log('Not enough permissions to feature/unfeature news item ID "'.$intId.'"', __METHOD__, TL_ERROR);
 		//	$this->redirect('contao/main.php?act=error');
 		//}
 
-		$this->createInitialVersion('tl_kitchenware_product', $intId);
+		$objVersions = new Versions('tl_kitchenware_product', $intId);
+		$objVersions->initialize();
 
 		// Trigger the save_callback
-		if (is_array($GLOBALS['TL_DCA']['tl_kitchenware_product']['fields']['featured']['save_callback']))
+		if (is_array($GLOBALS['TL_DCA']['tl_news']['fields']['featured']['save_callback']))
 		{
-			foreach ($GLOBALS['TL_DCA']['tl_kitchenware_product']['fields']['featured']['save_callback'] as $callback)
+			foreach ($GLOBALS['TL_DCA']['tl_news']['fields']['featured']['save_callback'] as $callback)
 			{
-				$this->import($callback[0]);
-				$blnFeature = $this->$callback[0]->$callback[1]($blnFeature, $this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$blnVisible = $callback($blnVisible, $this);
+				}
 			}
 		}
 
 		// Update the database
-		$this->Database->prepare("UPDATE tl_kitchenware_product SET tstamp=". time() .", featured='" . ($blnFeature ? 1 : '') . "' WHERE id=?")
+		$this->Database->prepare("UPDATE tl_kitchenware_product SET tstamp=". time() .", featured='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
 					   ->execute($intId);
 
-		$this->createNewVersion('tl_kitchenware_product', $intId);
+		$objVersions->create();
+		$this->log('A new version of record "tl_kitchenware_product.id='.$intId.'" has been created'.$this->getParentEntries('tl_kitchenware_product', $intId), __METHOD__, TL_GENERAL);
 
 	}
 
