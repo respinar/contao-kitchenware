@@ -137,7 +137,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_type'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_type']['singleSRC'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes']),
+			'eval'                    => array('mandatory'=>true, 'fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes']),
 			'sql'                     => "binary(16) NULL"
 		),
 		'description' => array
@@ -246,4 +246,3 @@ class tl_kitchenware_type extends Backend
 	}
 
 }
-
