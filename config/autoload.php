@@ -30,7 +30,7 @@ ClassLoader::addClasses(array
 	'kitchenware\KitchenwareCategoryModel'   => 'system/modules/kitchenware/models/KitchenwareCategoryModel.php',
 	'kitchenware\KitchenwareProductModel'    => 'system/modules/kitchenware/models/KitchenwareProductModel.php',
 	'kitchenware\KitchenwareTypeModel'       => 'system/modules/kitchenware/models/KitchenwareTypeModel.php',
-	'kitchenware\KitchenwareElementModel'    => 'system/modules/kitchenware/models/KitchenwareElementModel.php',
+	'kitchenware\KitchenwarePieceModel'      => 'system/modules/kitchenware/models/KitchenwarePieceModel.php',
 
 	// Modules
 	'kitchenware\ModuleKitchenware'          => 'system/modules/kitchenware/modules/ModuleKitchenware.php',

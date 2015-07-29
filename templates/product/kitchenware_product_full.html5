@@ -1,12 +1,12 @@
 
-<div class="product_full block<?= $this->class; ?>">
+<div class="product_full block<?= $this->class ?>">
 
-  <h2><?= $this->title; ?></h2>
+  <h2><?= $this->title ?></h2>
 
-  <figure class="image_container<?= $this->floatClass; ?>"<?php if ($this->margin): ?> style="<?= $this->margin; ?>"<?php endif; ?>>
+  <figure class="image_container<?= $this->floatClass ?>"<?php if ($this->margin): ?> style="<?= $this->margin ?>"<?php endif; ?>>
 
       <?php if ($this->href): ?>
-        <a href="<?= $this->href; ?>"<?= $this->attributes; ?> title="<?= $this->alt; ?>">
+        <a href="<?= $this->href ?>"<?= $this->attributes; ?> title="<?= $this->alt ?>">
       <?php endif; ?>
 
       <?php $this->insert('picture_default', $this->picture); ?>
@@ -16,7 +16,7 @@
       <?php endif; ?>
 
       <?php if ($this->caption): ?>
-        <figcaption class="caption" style="width:<?= $this->arrSize[0]; ?>px"><?= $this->caption; ?></figcaption>
+        <figcaption class="caption" style="width:<?= $this->arrSize[0] ?>px"><?= $this->caption ?></figcaption>
       <?php endif; ?>
 
       <div class="tag_container">
@@ -26,16 +26,16 @@
 
   </figure>
 
-  <div class="warranty"><?= $this->warranty; ?></div>
+  <div class="warranty"><?= $this->warranty ?></div>
 
-  <div class="description"><?= $this->description; ?></div>
+  <div class="description"><?= $this->description ?></div>
 
   <?php if($this->features) { ?>
   <div class="features">
-    <h3>ویژگی‌ها</h3>
+    <h3><?= $this->txt_features ?></h3>
     <ul>
       <?php foreach($this->features as $feature) { ?>
-        <li><?= $feature; ?></li>
+        <li><?= $feature ?></li>
       <?php } ?>
     </ul>
   </div>

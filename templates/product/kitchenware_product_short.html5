@@ -1,10 +1,10 @@
 
-<div class="product_short block<?= $this->class; ?>">
+<div class="product_short block<?= $this->class ?>">
 
-  <figure class="image_container<?= $this->floatClass; ?>"<?php if ($this->margin): ?> style="<?= $this->margin; ?>"<?php endif; ?>>
+  <figure class="image_container<?= $this->floatClass ?>"<?php if ($this->margin): ?> style="<?= $this->margin ?>"<?php endif; ?>>
 
       <?php if ($this->link): ?>
-        <a href="<?= $this->link; ?>"<?= $this->attributes; ?> title="<?= $this->alt; ?>">
+        <a href="<?= $this->link ?>"<?= $this->attributes ?> title="<?= $this->alt ?>">
       <?php endif; ?>
 
       <?php $this->insert('picture_default', $this->picture); ?>
@@ -14,7 +14,7 @@
       <?php endif; ?>
 
       <?php if ($this->caption): ?>
-        <figcaption class="caption" style="width:<?= $this->arrSize[0]; ?>px"><?= $this->caption; ?></figcaption>
+        <figcaption class="caption" style="width:<?= $this->arrSize[0] ?>px"><?= $this->caption ?></figcaption>
       <?php endif; ?>
 
       <div class="tag_container">
@@ -24,6 +24,6 @@
 
   </figure>
 
-  <div class="title"><a href="<?= $this->link; ?>"><?= $this->title; ?></a></div>
+  <div class="title"><a href="<?= $this->link ?>"><?= $this->title ?></a></div>
 
 </div>

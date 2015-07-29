@@ -18,20 +18,20 @@
 namespace kitchenware;
 
 /**
- * Class KitchenwareElementModel
+ * Class KitchenwarePieceModel
  *
  * @copyright  2014
  * @author     Hamid Abbaszadeh
  * @package    Devtools
  */
-class KitchenwareElementModel extends \Model
+class KitchenwarePieceModel extends \Model
 {
 
 	/**
 	 * Name of the table
 	 * @var string
 	 */
-	protected static $strTable = 'tl_kitchenware_element';
+	protected static $strTable = 'tk_kitchenware_piece';
 
 
 	/**

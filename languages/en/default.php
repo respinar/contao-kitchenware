@@ -15,4 +15,5 @@
 /**
  * Miscellaneous
  */
-$GLOBALS['TL_LANG']['MSC']['moredetail'] = 'More Detail';
+$GLOBALS['TL_LANG']['MSC']['moredetail']   = 'More Detail';
+$GLOBALS['TL_LANG']['MSC']['txt_features'] = 'Features';

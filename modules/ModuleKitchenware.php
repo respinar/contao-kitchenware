@@ -105,6 +105,8 @@ abstract class ModuleKitchenware extends \Module
 
 		$objTemplate->category    = $objProduct->getRelated('pid');
 
+		$objTemplate->txt_features = $GLOBALS['TL_LANG']['MSC']['txt_features'];
+
 		$objTemplate->count = $intCount; // see #5708
 
 		$objTemplate->date = \Date::parse($objPage->datimFormat, $objProduct->date);
@@ -292,49 +294,49 @@ abstract class ModuleKitchenware extends \Module
 	}
 
 	/**
-	 * Generate a elements as array
+	 * Generate a pieces as array
 	 * @param string
 	 * @param object
 	 * @param boolean
 	 * @param boolean
 	 * @return string
 	 */
-	protected function parseElement($objProduct)
+	protected function parsePiece($objProduct)
 	{
-		$objElement = \KitchenwareElementModel::findPublishedByPid($objProduct->id);
+		$objPiece = \KitchenwarePieceModel::findPublishedByPid($objProduct->id);
 
-		if ($objElement == null)
+		if ($objPiece == null)
 		{
 			return;
 		}
 
-		$arrElement = array();
+		$arrPiece = array();
 
-		$size = deserialize($this->elementImageSize);
+		$size = deserialize($this->pieceImageSize);
 
-		while($objElement->next())
+		while($objPiece->next())
 		{
 			$strImage = '';
-			$objImage = \FilesModel::findByPk($objElement->singleSRC);
+			$objImage = \FilesModel::findByPk($objPiece->singleSRC);
 
 			// Add photo image
 			if ($objImage !== null)
 			{
-			$strImage = \Image::getHtml(\Image::get($objImage->path, $size[0], $size[1], $size[2]),$objElement->title);
+			$strImage = \Image::getHtml(\Image::get($objImage->path, $size[0], $size[1], $size[2]),$objPiece->title);
 			}
 
-			$arrElement[] = array
+			$arrPiece[] = array
 			(
-				'title'       => $objElement->title,
-				'model'       => $objElement->model,
-				'dimensions'  => $objElement->dimensions,
-				'capacity'    => $objElement->capacity,
-				'description' => $objElement->description,
+				'title'       => $objPiece->title,
+				'model'       => $objPiece->model,
+				'dimensions'  => $objPiece->dimensions,
+				'capacity'    => $objPiece->capacity,
+				'description' => $objPiece->description,
 				'image'       => $strImage,
 			);
 		}
 
-		return $arrElement;
+		return $arrPiece;
 
 	}
 

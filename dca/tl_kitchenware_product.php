@@ -23,7 +23,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_product'] = array
 	(
 		'dataContainer'               => 'Table',
 		'ptable'                      => 'tl_kitchenware_category',
-		'ctable'                      => array('tl_kitchenware_element','tl_kitchenware_type'),
+		'ctable'                      => array('tk_kitchenware_piece','tl_kitchenware_type'),
 		'enableVersioning'            => true,
 		'onload_callback'             => array
 		(
@@ -79,7 +79,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_product'] = array
 			'elements' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['elements'],
-				'href'                => 'table=tl_kitchenware_element',
+				'href'                => 'table=tk_kitchenware_piece',
 				'icon'                => 'system/modules/kitchenware/assets/element.png'
 			),
 			'copy' => array

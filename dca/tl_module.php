@@ -28,7 +28,7 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_detail']    = '{title_l
                                                                         {config_legend},kitchenware_metaFields;
                                                                         {product_legend},product_template,imgSize,fullsize;
                                                                         {type_legend},type_show,type_template,type_perRow,type_Class,type_imgSize;
-                                                                        {element_legend},element_show,element_template,element_perRow,element_Class,element_imgSize;
+                                                                        {piece_legend},piece_show,piece_template,piece_perRow,piece_Class,piece_imgSize;
                                                                         {related_legend},related_show,related_template,related_perRow,related_Class,related_imgSize;
                                                                         {protected_legend:hide},protected;
                                                                         {expert_legend:hide},guests,cssID,space';
@@ -116,27 +116,27 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_perRow'] = array
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['element_show'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['piece_show'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['element_show'],
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['piece_show'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
 	'eval'                    => array(),
 	'sql'                     => "char(1) NOT NULL default ''"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['element_template'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['piece_template'] = array
 (
-	'label'                => &$GLOBALS['TL_LANG']['tl_module']['element_template'],
-	'default'              => 'product_element',
+	'label'                => &$GLOBALS['TL_LANG']['tl_module']['piece_template'],
+	'default'              => 'product_piece',
 	'exclude'              => true,
 	'inputType'            => 'select',
 	'options_callback'     => array('tl_module_kitchenware', 'getProductTemplates'),
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['element_perRow'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['piece_perRow'] = array
 (
-	'label'                => &$GLOBALS['TL_LANG']['tl_module']['element_perRow'],
+	'label'                => &$GLOBALS['TL_LANG']['tl_module']['piece_perRow'],
 	'default'              => '4',
 	'exclude'              => true,
 	'inputType'            => 'select',
@@ -144,17 +144,17 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['element_perRow'] = array
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['element_Class'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['piece_Class'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['element_Class'],
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['piece_Class'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
 	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
 	'sql'                     => "varchar(255) NOT NULL default ''"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['element_imgSize'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['piece_imgSize'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['element_imgSize'],
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['piece_imgSize'],
 	'exclude'                 => true,
 	'inputType'               => 'imageSize',
 	'options'                 => System::getImageSizes(),
