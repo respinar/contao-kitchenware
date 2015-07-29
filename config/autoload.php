@@ -27,14 +27,14 @@ ClassLoader::addClasses(array
 	'kitchenware\Kitchenware'                => 'system/modules/kitchenware/classes/Kitchenware.php',
 
 	// Models
-	'kitchenware\KitchenwareElementModel'    => 'system/modules/kitchenware/models/KitchenwareElementModel.php',
-	'kitchenware\KitchenwareTypeModel'       => 'system/modules/kitchenware/models/KitchenwareTypeModel.php',
-	'kitchenware\KitchenwareProductModel'    => 'system/modules/kitchenware/models/KitchenwareProductModel.php',
 	'kitchenware\KitchenwareCategoryModel'   => 'system/modules/kitchenware/models/KitchenwareCategoryModel.php',
+	'kitchenware\KitchenwareProductModel'    => 'system/modules/kitchenware/models/KitchenwareProductModel.php',
+	'kitchenware\KitchenwareTypeModel'       => 'system/modules/kitchenware/models/KitchenwareTypeModel.php',
+	'kitchenware\KitchenwareElementModel'    => 'system/modules/kitchenware/models/KitchenwareElementModel.php',
 
 	// Modules
-	'kitchenware\ModuleKitchenwareDetail'    => 'system/modules/kitchenware/modules/ModuleKitchenwareDetail.php',
 	'kitchenware\ModuleKitchenware'          => 'system/modules/kitchenware/modules/ModuleKitchenware.php',
+	'kitchenware\ModuleKitchenwareDetail'    => 'system/modules/kitchenware/modules/ModuleKitchenwareDetail.php',
 	'kitchenware\ModuleKitchenwareList'      => 'system/modules/kitchenware/modules/ModuleKitchenwareList.php',
 	'kitchenware\ModuleKitchenwarePriceList' => 'system/modules/kitchenware/modules/ModuleKitchenwarePriceList.php',
 ));
@@ -45,8 +45,8 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (
-	'mod_kitchenware_detail' => 'system/modules/kitchenware/templates/modules',
-	'mod_kitchenware_list'   => 'system/modules/kitchenware/templates/modules',
-	'product_full'           => 'system/modules/kitchenware/templates/product',
-	'product_short'          => 'system/modules/kitchenware/templates/product',
+	'mod_kitchenware_detail'    => 'system/modules/kitchenware/templates/modules',
+	'mod_kitchenware_list'      => 'system/modules/kitchenware/templates/modules',
+	'kitchenware_product_full'  => 'system/modules/kitchenware/templates/product',
+	'kitchenware_product_short' => 'system/modules/kitchenware/templates/product',
 ));

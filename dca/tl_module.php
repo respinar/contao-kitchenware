@@ -16,15 +16,15 @@
  */
 
 $GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_list']      = '{title_legend},name,headline,type;
-                                                                        {category_legend},kitchenware_categories;
+                                                                        {kitchenware_legend},kitchenware_categories;
                                                                         {template_legend},kitchenware_detailModule,customTpl,kitchenware_featured;
                                                                         {config_legend},kitchenware_metaFields;
                                                                         {kitchenware_legend},kitchenware_sortBy,numberOfItems,perPage,skipFirst;
-                                                                        {product_legend},product_template,product_perRow,product_Class,imgSize;
+                                                                        {product_legend},product_template,imgSize,product_perRow,product_Class;
                                                                         {protected_legend:hide},protected;
                                                                         {expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_detail']    = '{title_legend},name,headline,type;
-                                                                        {category_legend},kitchenware_categories;
+                                                                        {kitcehenware_legend},kitchenware_categories;
                                                                         {config_legend},kitchenware_metaFields;
                                                                         {product_legend},product_template,imgSize,fullsize;
                                                                         {type_legend},type_show,type_template,type_perRow,type_Class,type_imgSize;
@@ -308,8 +308,7 @@ class tl_module_kitchenware extends Backend
 	 */
 	public function getProductTemplates()
 	{
-		return $this->getTemplateGroup('product_');
+		return $this->getTemplateGroup('kitchenware_product_');
 	}
 
 }
-

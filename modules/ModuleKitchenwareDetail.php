@@ -83,7 +83,6 @@ class ModuleKitchenwareDetail extends \ModuleKitchenware
 
 		$objPage->pageTitle   = strip_tags(strip_insert_tags($objKitchenwareProduct->title));
 		$objPage->description = strip_tags(strip_insert_tags($objKitchenwareProduct->description));
-		$GLOBALS['TL_KEYWORDS'] .= (($GLOBALS['TL_KEYWORDS'] != '') ? ', ' : '') . strip_tags(strip_insert_tags($objKitchenwareProduct->keywords));
 
 		$this->Template->product = $arrKitchenwareProduct;
 

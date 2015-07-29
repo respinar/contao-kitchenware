@@ -128,7 +128,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_product'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addEnclosure','kind','published'),
-		'default'                     => '{title_legend},title,alias,model;{image_legend},singleSRC;{meta_legend},featured,date;{metal_legend:hide},keywords;{price_legend:hide},price,warranty,isiri,irfdo;{features_legend},features;{description_legend:hide},description;{enclosure_legend:hide},addEnclosure;{publish_legend},published'
+		'default'                     => '{title_legend},title,alias,model,date,featured;{image_legend},singleSRC;{certificate_legend},isiri,irfdo;{warranty_legend},warranty;{features_legend},features;{description_legend:hide},description;{enclosure_legend:hide},addEnclosure;{publish_legend},published'
 	),
 
 	// Subpalettes
@@ -208,15 +208,6 @@ $GLOBALS['TL_DCA']['tl_kitchenware_product'] = array
 			'eval'                    => array('rgxp'=>'date', 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
-		'keywords' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['keywords'],
-			'exclude'                 => true,
-			'inputType'               => 'textarea',
-			'search'                  => true,
-			'eval'                    => array('style'=>'height:60px', 'decodeEntities'=>true),
-			'sql'                     => "text NULL"
-		),
 		'origin' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['origin'],
@@ -284,42 +275,6 @@ $GLOBALS['TL_DCA']['tl_kitchenware_product'] = array
 			'inputType'               => 'text',
 			'eval'                    => array( 'tl_class'=>'w50'),
 			'sql'                     => "char(2) NOT NULL default ''"
-		),
-		'base' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['base'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('tl_class'=>'w50'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
-		),
-		'lids' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['lids'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('tl_class'=>'w50'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
-		),
-		'handle' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['handle'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('tl_class'=>'w50'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
-		),
-		'surface' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['surface'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'features' => array
 		(

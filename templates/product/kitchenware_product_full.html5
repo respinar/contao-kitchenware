@@ -3,8 +3,6 @@
 
   <h2><?php echo $this->title; ?></h2>
 
-  <div class="meta">گارانتی: <?php echo $this->warranty; ?> ماه</div>
-
   <figure class="image_container<?php echo $this->floatClass; ?>"<?php if ($this->margin): ?> style="<?php echo $this->margin; ?>"<?php endif; ?>>
 
       <?php if ($this->href): ?>
@@ -21,23 +19,16 @@
         <figcaption class="caption" style="width:<?php echo $this->arrSize[0]; ?>px"><?php echo $this->caption; ?></figcaption>
       <?php endif; ?>
 
-      <?php if ($this->featured): ?><div class="featured"></div><?php endif; ?>
-      <?php if ($this->new_product): ?><div class="new"></div><?php endif; ?>
+      <div class="tag_container">
+          <?php if ($this->featured): ?><div class="featured"></div><?php endif; ?>
+          <?php if ($this->new_product): ?><div class="new"></div><?php endif; ?>
+      </div>
 
   </figure>
 
+  <div class="meta">گارانتی: <?php echo $this->warranty; ?> ماه</div>
+
   <div class="description"><?php echo $this->description; ?></div>
-
-  <div class="spec">
-    <h3>خصوصیات</h3>
-    <dl>
-		<dt>جنس بدنه</dt><dd><?php echo $this->base; ?></dd>
-		<dt>پوشش بدنه</dt><dd><?php echo $this->surface; ?></dd>
-		<dt>درب</dt><dd><?php echo $this->lids; ?></dd>
-		<dt>دسته‌ها</dt><dd><?php echo $this->handle; ?></dd>
-
-    </dl>
-  </div>
 
   <?php if($this->features) { ?>
   <div class="features">
