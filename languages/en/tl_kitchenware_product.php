@@ -19,17 +19,15 @@ $GLOBALS['TL_LANG']['tl_kitchenware_product']['title']       = array('Product ti
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['alias']       = array('Product alias', 'please enter the product alias.');
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['origin']      = array('Origin country', 'Please eneter the origin country');
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['model']       = array('Model or code', 'Please enter model or code of this product.');
+$GLOBALS['TL_LANG']['tl_kitchenware_product']['date']        = array('Date', 'Please enter the date.');
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['price']       = array('Price', 'Pleae enter the price.');
+$GLOBALS['TL_LANG']['tl_kitchenware_product']['package']     = array('Package', 'Select if this product is a package.');
+$GLOBALS['TL_LANG']['tl_kitchenware_product']['pieces']      = array('Pieces', 'Pleae enter the pieces.');
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['isiri']       = array('ISIRI', 'Institute of Standards and Industrial Research of Iran');
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['irfdo']       = array('IRFDO', 'Iran Food and Drug Organisation');
-$GLOBALS['TL_LANG']['tl_kitchenware_product']['warranty']    = array('Warranty', 'Please eneter duration of warranty');
-$GLOBALS['TL_LANG']['tl_kitchenware_product']['base']        = array('Base', 'Please enter base type.');
-$GLOBALS['TL_LANG']['tl_kitchenware_product']['surface']     = array('Surface', 'Please eneter the suface type');
-$GLOBALS['TL_LANG']['tl_kitchenware_product']['lids']        = array('Lids', 'Please eneter lids type.');
-$GLOBALS['TL_LANG']['tl_kitchenware_product']['handle']      = array('Handle', 'Please eneter the handle type.');
-$GLOBALS['TL_LANG']['tl_kitchenware_product']['colors']      = array('Colors', 'Please enter the color type.');
+$GLOBALS['TL_LANG']['tl_kitchenware_product']['warranty']    = array('Warranty', 'Please eneter the warranty');
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['features']    = array('Features', 'Please eneter the product features.');
-$GLOBALS['TL_LANG']['tl_kitchenware_product']['singleSRC']   = array('Source file', 'Please select an image.');
+$GLOBALS['TL_LANG']['tl_kitchenware_product']['singleSRC']   = array('Product image', 'Please select an image.');
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['addEnclosure']= array('Add enclosures', 'Add one or more downloadable files to the news item.');
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['enclosure']   = array('Enclosure', 'Please choose the files you want to attach.');
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['description'] = array('Description', 'Please enter description.');
@@ -44,22 +42,23 @@ $GLOBALS['TL_LANG']['tl_kitchenware_product']['languageMain']= array('Master pro
  */
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['title_legend']       = 'Title';
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['price_legend']       = 'Price';
-$GLOBALS['TL_LANG']['tl_kitchenware_product']['meta_legend']        = 'Meta';
-$GLOBALS['TL_LANG']['tl_kitchenware_product']['signs_legend']       = 'Signs';
-$GLOBALS['TL_LANG']['tl_kitchenware_product']['spec_legend']        = 'Spesification';
+$GLOBALS['TL_LANG']['tl_kitchenware_product']['package_legend']     = 'Package';
+$GLOBALS['TL_LANG']['tl_kitchenware_product']['certificate_legend'] = 'Certificates';
+$GLOBALS['TL_LANG']['tl_kitchenware_product']['warranty_legend']    = 'Warranty';
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['features_legend']    = 'Features';
-$GLOBALS['TL_LANG']['tl_kitchenware_product']['image_legend']       = 'Image producttings';
+$GLOBALS['TL_LANG']['tl_kitchenware_product']['image_legend']       = 'Product image';
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['description_legend'] = 'Description';
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['enclosure_legend']   = 'Enclosures';
-$GLOBALS['TL_LANG']['tl_kitchenware_product']['publish_legend']     = 'Publish producttings';
+$GLOBALS['TL_LANG']['tl_kitchenware_product']['publish_legend']     = 'Publish settings';
 
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_kitchenware_product']['new']        = array('New Product', 'Create a new product');
+$GLOBALS['TL_LANG']['tl_kitchenware_product']['new']        = array('Add product', 'Add a new product');
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['show']       = array('Product details', 'Show the details of product ID %s');
-$GLOBALS['TL_LANG']['tl_kitchenware_product']['edit']       = array('Edit Product elements', 'Edit elemnets of product ID %s');
-$GLOBALS['TL_LANG']['tl_kitchenware_product']['editheader'] = array('Edit Product', 'Edit details of product ID %s');
+$GLOBALS['TL_LANG']['tl_kitchenware_product']['edit']       = array('Edit Product', 'Edit details of product ID %s');
+$GLOBALS['TL_LANG']['tl_kitchenware_product']['elements']   = array('Edit Product elements', 'Edit elements of product ID %s');
+$GLOBALS['TL_LANG']['tl_kitchenware_product']['types']      = array('Edit Product types', 'Edit types of product ID %s');
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['cut']        = array('Move Product', 'Move product ID %s');
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['copy']       = array('Duplicate Product', 'Duplicate product ID %s');
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['delete']     = array('Delete Product', 'Delete product ID %s');
