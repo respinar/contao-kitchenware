@@ -27,6 +27,12 @@
         "contao": {
             "sources": {
                 "": "system/modules/kitchenware"
+            },
+            "transifex": {
+                "project": "contao-staff",
+                "prefix": "master-",
+                "languages_cto": "languages",
+                "languages_tx": ".tx"
             }
         }
     }
