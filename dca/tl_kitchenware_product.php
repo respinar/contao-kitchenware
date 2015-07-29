@@ -23,7 +23,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_product'] = array
 	(
 		'dataContainer'               => 'Table',
 		'ptable'                      => 'tl_kitchenware_category',
-		'ctable'                      => array('tk_kitchenware_piece','tl_kitchenware_type'),
+		'ctable'                      => array('tl_kitchenware_piece','tl_kitchenware_type'),
 		'enableVersioning'            => true,
 		'onload_callback'             => array
 		(
@@ -79,7 +79,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_product'] = array
 			'elements' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['elements'],
-				'href'                => 'table=tk_kitchenware_piece',
+				'href'                => 'table=tl_kitchenware_piece',
 				'icon'                => 'system/modules/kitchenware/assets/element.png'
 			),
 			'copy' => array
@@ -128,7 +128,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_product'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addEnclosure','package','published'),
-		'default'                     => '{title_legend},title,alias,model,date,featured;{image_legend},singleSRC;{package_legend},package;{certificate_legend},isiri,irfdo;{warranty_legend},warranty;{features_legend},features;{description_legend:hide},description;{enclosure_legend:hide},addEnclosure;{publish_legend},published'
+		'default'                     => '{title_legend},title,alias,model,date,featured;{image_legend},singleSRC;{package_legend},package;{certificate_legend},isiri,irifdo;{warranty_legend},warranty;{features_legend},features;{description_legend:hide},description;{enclosure_legend:hide},addEnclosure;{publish_legend},published'
 	),
 
 	// Subpalettes
@@ -244,9 +244,9 @@ $GLOBALS['TL_DCA']['tl_kitchenware_product'] = array
 			'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
-		'irfdo' => array
+		'irifdo' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['irfdo'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['irifdo'],
 			'exclude'                 => true,
 			'filter'                  => true,
 			'flag'                    => 1,

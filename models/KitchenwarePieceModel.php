@@ -31,7 +31,7 @@ class KitchenwarePieceModel extends \Model
 	 * Name of the table
 	 * @var string
 	 */
-	protected static $strTable = 'tk_kitchenware_piece';
+	protected static $strTable = 'tl_kitchenware_piece';
 
 
 	/**

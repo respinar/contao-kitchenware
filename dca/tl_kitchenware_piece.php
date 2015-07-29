@@ -13,9 +13,9 @@
 
 
 /**
- * Table tk_kitchenware_piece
+ * Table tl_kitchenware_piece
  */
-$GLOBALS['TL_DCA']['tk_kitchenware_piece'] = array
+$GLOBALS['TL_DCA']['tl_kitchenware_piece'] = array
 (
 
 	// Config
@@ -43,7 +43,7 @@ $GLOBALS['TL_DCA']['tk_kitchenware_piece'] = array
 			'fields'                  => array('sorting'),
 			'headerFields'            => array('title'),
 			'panelLayout'             => 'search,limit',
-			'child_record_callback'   => array('tk_kitchenware_piece', 'generateItemRow')
+			'child_record_callback'   => array('tl_kitchenware_piece', 'generateItemRow')
 		),
 		'global_operations' => array
 		(
@@ -59,39 +59,39 @@ $GLOBALS['TL_DCA']['tk_kitchenware_piece'] = array
 		(
 			'edit' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tk_kitchenware_piece']['edit'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_piece']['edit'],
 				'href'                => 'act=edit',
 				'icon'                => 'edit.gif'
 			),
 			'copy' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tk_kitchenware_piece']['copy'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_piece']['copy'],
 				'href'                => 'act=paste&amp;mode=copy',
 				'icon'                => 'copy.gif'
 			),
 			'cut' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tk_kitchenware_piece']['cut'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_piece']['cut'],
 				'href'                => 'act=paste&amp;mode=cut',
 				'icon'                => 'cut.gif'
 			),
 			'delete' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tk_kitchenware_piece']['delete'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_piece']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
 				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"'
 			),
 			'toggle' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tk_kitchenware_piece']['toggle'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_piece']['toggle'],
 				'icon'                => 'visible.gif',
 				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
-				'button_callback'     => array('tk_kitchenware_piece', 'toggleIcon')
+				'button_callback'     => array('tl_kitchenware_piece', 'toggleIcon')
 			),
 			'show' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tk_kitchenware_piece']['show'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_piece']['show'],
 				'href'                => 'act=show',
 				'icon'                => 'show.gif'
 			)
@@ -125,7 +125,7 @@ $GLOBALS['TL_DCA']['tk_kitchenware_piece'] = array
 		),
 		'title' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tk_kitchenware_piece']['title'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_piece']['title'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -134,7 +134,7 @@ $GLOBALS['TL_DCA']['tk_kitchenware_piece'] = array
 		),
 		'dimensions' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tk_kitchenware_piece']['dimensions'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_piece']['dimensions'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -143,7 +143,7 @@ $GLOBALS['TL_DCA']['tk_kitchenware_piece'] = array
 		),
 		'capacity' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tk_kitchenware_piece']['capacity'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_piece']['capacity'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -152,7 +152,7 @@ $GLOBALS['TL_DCA']['tk_kitchenware_piece'] = array
 		),
 		'material' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tk_kitchenware_piece']['material'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_piece']['material'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -161,15 +161,15 @@ $GLOBALS['TL_DCA']['tk_kitchenware_piece'] = array
 		),
 		'singleSRC' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tk_kitchenware_piece']['singleSRC'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_piece']['singleSRC'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes']),
+			'eval'                    => array('mandatory'=>true,'fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes']),
 			'sql'                     => "binary(16) NULL"
 		),
 		'description' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tk_kitchenware_piece']['description'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_piece']['description'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
@@ -178,7 +178,7 @@ $GLOBALS['TL_DCA']['tk_kitchenware_piece'] = array
 		),
 		'published' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tk_kitchenware_piece']['published'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_piece']['published'],
 			'exclude'                 => true,
 			'filter'                  => true,
 			'flag'                    => 1,
@@ -192,7 +192,7 @@ $GLOBALS['TL_DCA']['tk_kitchenware_piece'] = array
 /**
  * Provide miscellaneous methods that are used by the data configuration array
  */
-class tk_kitchenware_piece extends Backend
+class tl_kitchenware_piece extends Backend
 {
 
 	/**
@@ -255,9 +255,9 @@ class tk_kitchenware_piece extends Backend
 		$this->createInitialVersion('tl_kitchenware_product', $intId);
 
 		// Trigger the save_callback
-		if (is_array($GLOBALS['TL_DCA']['tk_kitchenware_piece']['fields']['published']['save_callback']))
+		if (is_array($GLOBALS['TL_DCA']['tl_kitchenware_piece']['fields']['published']['save_callback']))
 		{
-			foreach ($GLOBALS['TL_DCA']['tk_kitchenware_piece']['fields']['published']['save_callback'] as $callback)
+			foreach ($GLOBALS['TL_DCA']['tl_kitchenware_piece']['fields']['published']['save_callback'] as $callback)
 			{
 				$this->import($callback[0]);
 				$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
@@ -265,7 +265,7 @@ class tk_kitchenware_piece extends Backend
 		}
 
 		// Update the database
-		$this->Database->prepare("UPDATE tk_kitchenware_piece SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
+		$this->Database->prepare("UPDATE tl_kitchenware_piece SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
 					   ->execute($intId);
 
 		$this->createNewVersion('tl_kitchenware_product', $intId);
