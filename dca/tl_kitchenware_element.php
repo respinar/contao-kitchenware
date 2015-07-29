@@ -101,7 +101,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_element'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},title,model,price;{image_legend},singleSRC;{meta_legend},dimensions,capacity;{description_legend:hide},description;{publish_legend},published'
+		'default'                     => '{title_legend},title;{image_legend},singleSRC;{specs_legend},dimensions,capacity,material;{description_legend:hide},description;{publish_legend},published'
 	),
 
 	// Fields
@@ -132,15 +132,6 @@ $GLOBALS['TL_DCA']['tl_kitchenware_element'] = array
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>128,'tl_class'=>'w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
-		'model' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_element']['model'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
-		),
 		'dimensions' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_element']['dimensions'],
@@ -159,9 +150,9 @@ $GLOBALS['TL_DCA']['tl_kitchenware_element'] = array
 			'eval'                    => array('maxlength'=>128,'tl_class'=>'w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
-		'price' => array
+		'material' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_element']['price'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_element']['material'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -282,4 +273,3 @@ class tl_kitchenware_element extends Backend
 	}
 
 }
-
