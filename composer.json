@@ -29,7 +29,7 @@
                 "": "system/modules/kitchenware"
             },
             "transifex": {
-                "project": "contao-staff",
+                "project": "contao-kitchenware",
                 "prefix": "master-",
                 "languages_cto": "languages",
                 "languages_tx": ".tx"
