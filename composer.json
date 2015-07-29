@@ -1,9 +1,9 @@
 {
-    "name": "respinar/kitchenware",
+    "name": "respinar/contao-kitchenware",
     "description":"Kitchenware catalog list module for Contao",
     "keywords":["contao", "kitchenware","catalog"],
     "type": "contao-module",
-    "homepage":"https://github.com/respinar/kitchenware",
+    "homepage":"https://github.com/respinar/contao-kitchenware",
     "license":"LGPL-3.0+",
     "authors":[
         {
@@ -14,11 +14,11 @@
         }
     ],
     "support":{
-        "issues":"https://github.com/respinar/kitchenware/issues"
+        "issues":"https://github.com/respinar/contao-kitchenware/issues"
     },
     "require": {
         "php":">=5.3.2",
-        "contao/core": ">=3.2,<4-dev"
+        "contao/core": ">=3.5,<4-dev"
     },
     "autoload": {
         "classmap": [""]
@@ -26,7 +26,7 @@
     "extra": {
         "contao": {
             "sources": {
-                "": "system/modules/kitchenware"
+                "": "system/modules/contao-kitchenware"
             }
         }
     }
