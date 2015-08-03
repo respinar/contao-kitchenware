@@ -8,9 +8,8 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2015-07-29T23:42:16+04:30
+ * last-updated: 2015-07-29T23:42:49+04:30
  */
-
 
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['addEnclosure']['0']  = 'افزودن پیوست‌ها';
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['alias']['0']         = 'اسم مستعار کالا';
@@ -50,6 +49,9 @@ $GLOBALS['TL_LANG']['tl_kitchenware_product']['price']['0']         = 'قیمت'
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['price_legend']       = 'قیمت';
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['publish_legend']     = 'تنظیمات انتشار';
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['published']['0']     = 'انتشار کالا';
+$GLOBALS['TL_LANG']['tl_kitchenware_product']['related']['0']       = 'کالاهای مرتبط';
+$GLOBALS['TL_LANG']['tl_kitchenware_product']['related']['1']       = 'لطفا کالاهای مرتبط را انتخاب نمایید.';
+$GLOBALS['TL_LANG']['tl_kitchenware_product']['related_legend']     = 'کالاهای مرتبط';
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['sameDay']            = 'همان روز';
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['show']['0']          = 'جزئیات کالا';
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['show']['1']          = 'نمایش جزئیات کالای شناسه‌ی  %s';

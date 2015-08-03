@@ -28,6 +28,7 @@ $GLOBALS['TL_LANG']['tl_kitchenware_product']['irifdo']      = array('IRIFDO', '
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['warranty']    = array('Warranty', 'Please eneter the warranty');
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['features']    = array('Features', 'Please eneter the product features.');
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['singleSRC']   = array('Product image', 'Please select an image.');
+$GLOBALS['TL_LANG']['tl_kitchenware_product']['related']     = array('Related products', 'Please select related products.');
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['addEnclosure']= array('Add enclosures', 'Add one or more downloadable files to the news item.');
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['enclosure']   = array('Enclosure', 'Please choose the files you want to attach.');
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['description'] = array('Description', 'Please enter description.');
@@ -48,6 +49,7 @@ $GLOBALS['TL_LANG']['tl_kitchenware_product']['warranty_legend']    = 'Warranty'
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['features_legend']    = 'Features';
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['image_legend']       = 'Image';
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['description_legend'] = 'Description';
+$GLOBALS['TL_LANG']['tl_kitchenware_product']['related_legend']     = 'Related products';
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['enclosure_legend']   = 'Enclosures';
 $GLOBALS['TL_LANG']['tl_kitchenware_product']['publish_legend']     = 'Publish settings';
 

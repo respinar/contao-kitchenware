@@ -228,7 +228,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['related_template'] = array
 	'default'              => 'product_related',
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'options_callback'     => array('tl_module_kitchenware', 'getProductTemplates'),
+	'options_callback'     => array('tl_module_kitchenware', 'getRelatedTemplates'),
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
@@ -333,5 +333,15 @@ class tl_module_kitchenware extends Backend
 	{
 		return $this->getTemplateGroup('kitchenware_type');
 	}
+
+    /**
+	 * Return all set templates as array
+	 * @return array
+	 */
+	public function getRelatedTemplates()
+	{
+		return $this->getTemplateGroup('kitchenware_related');
+	}
+
 
 }

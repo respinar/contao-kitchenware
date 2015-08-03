@@ -5,14 +5,19 @@
 
   <?= $this->product; ?>
 
-  <?php if($this->type_show): ?>
+  <?php if($this->type_show && $this->types): ?>
       <h3><?= $this->txt_types ?></h3>
       <div class="types"><?= implode('', $this->types); ?></div>
   <?php endif; ?>
 
-  <?php if($this->piece_show): ?>
+  <?php if($this->piece_show && $this->pieces): ?>
       <h3><?= $this->txt_pieces ?></h3>
       <div class="pieces"><?= implode('', $this->pieces); ?></div>
+  <?php endif; ?>
+
+  <?php if($this->related_show && $this->relateds): ?>
+      <h3><?= $this->txt_relateds ?></h3>
+      <div class="relateds"><?= implode('', $this->relateds); ?></div>
   <?php endif; ?>
 
   <!-- indexer::stop -->

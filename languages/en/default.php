@@ -8,7 +8,7 @@
  * @package   Kitchenware
  * @author    Hamid Abbaszadeh
  * @license   GNU/LGPL
- * @copyright 2014
+ * @copyright 2014-2015
  */
 
 
@@ -17,5 +17,6 @@
  */
 $GLOBALS['TL_LANG']['MSC']['moredetail']   = 'More Detail';
 $GLOBALS['TL_LANG']['MSC']['txt_features'] = 'Features';
-$GLOBALS['TL_LANG']['MSC']['txt_types']    = 'Types';
-$GLOBALS['TL_LANG']['MSC']['txt_pieces']   = 'Pieces';
+$GLOBALS['TL_LANG']['MSC']['txt_types']    = 'Types of product';
+$GLOBALS['TL_LANG']['MSC']['txt_pieces']   = 'Pieces of set';
+$GLOBALS['TL_LANG']['MSC']['txt_relateds'] = 'Related products';

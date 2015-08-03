@@ -75,10 +75,11 @@ class ModuleKitchenwareDetail extends \ModuleKitchenware
 
 		$this->Template->product = '';
 		$this->Template->referer = 'javascript:history.go(-1)';
-		$this->Template->back =     $GLOBALS['TL_LANG']['MSC']['goBack'];
+		$this->Template->back    = $GLOBALS['TL_LANG']['MSC']['goBack'];
 
-		$this->Template->txt_types  = $GLOBALS['TL_LANG']['MSC']['types'];
-		$this->Template->txt_pieces = $GLOBALS['TL_LANG']['MSC']['pieces'];
+		$this->Template->txt_types    = $GLOBALS['TL_LANG']['MSC']['txt_types'];
+		$this->Template->txt_pieces   = $GLOBALS['TL_LANG']['MSC']['txt_pieces'];
+		$this->Template->txt_relateds = $GLOBALS['TL_LANG']['MSC']['txt_relateds'];
 
 
 		// Generate products
@@ -111,6 +112,19 @@ class ModuleKitchenwareDetail extends \ModuleKitchenware
 			if ($objKitchenwareTypes !== null)
 			{
 				$this->Template->types = $this->parseTypes($objKitchenwareTypes);
+			}
+		}
+
+		// Generate relateds
+		if ($this->related_show and $objKitchenwareProduct->related)
+		{
+			$this->relateds = deserialize($objKitchenwareProduct->related);
+
+			$objKitchenwareRelateds = \KitchenwareProductModel::findPublishedByIds($this->relateds);
+
+			if ($objKitchenwareRelateds !== null)
+			{
+				$this->Template->relateds = $this->parseRelateds($objKitchenwareRelateds);
 			}
 		}
 

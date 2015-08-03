@@ -51,4 +51,5 @@ TemplateLoader::addFiles(array
 	'kitchenware_product_short' => 'system/modules/kitchenware/templates/product',
 	'kitchenware_type'          => 'system/modules/kitchenware/templates/type',
 	'kitchenware_piece'         => 'system/modules/kitchenware/templates/piece',
+	'kitchenware_related'       => 'system/modules/kitchenware/templates/related'
 ));

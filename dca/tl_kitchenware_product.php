@@ -128,7 +128,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_product'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addEnclosure','package','published'),
-		'default'                     => '{title_legend},title,alias,model,date,featured;{image_legend},singleSRC;{package_legend},package;{certificate_legend},isiri,irifdo;{warranty_legend},warranty;{features_legend},features;{description_legend:hide},description;{enclosure_legend:hide},addEnclosure;{publish_legend},published'
+		'default'                     => '{title_legend},title,alias,model,date,featured;{image_legend},singleSRC;{package_legend},package;{certificate_legend},isiri,irifdo;{warranty_legend},warranty;{features_legend},features;{description_legend:hide},description;{related_legend},related;{enclosure_legend:hide},addEnclosure;{publish_legend},published'
 	),
 
 	// Subpalettes
@@ -298,6 +298,14 @@ $GLOBALS['TL_DCA']['tl_kitchenware_product'] = array
 			'inputType'               => 'textarea',
 			'eval'                    => array('rte'=>'tinyMCE'),
 			'sql'                     => "text NULL"
+		),
+		'related' => array(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['related'],
+			'exclude'                 => false,
+			'inputType'               => 'checkbox',
+			'options_callback'        => array('tl_kitchenware_product', 'getProducts'),
+			'eval'                    => array('includeBlankOption'=>true,'multiple'=>true),
+			'sql'                     => "blob NULL"
 		),
 		'addEnclosure' => array
 		(
@@ -498,6 +506,7 @@ class tl_kitchenware_product extends Backend
 		return '<div><div style="float:left; margin-right:10px;">'.$strImage.'</div>'. $arrRow['title'] . '</div>';
 	}
 
+
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
 		if (strlen($this->Input->get('tid')))
@@ -521,7 +530,6 @@ class tl_kitchenware_product extends Backend
 
 		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
 	}
-
 
 
 	public function toggleVisibility($intId, $blnVisible)
@@ -581,7 +589,6 @@ class tl_kitchenware_product extends Backend
 
 		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
 	}
-
 
 
 	public function toggleFeature($intId, $blnFeature)
@@ -659,7 +666,6 @@ class tl_kitchenware_product extends Backend
 		return $arrItems;
 	}
 
-
 	/**
 	 * Show the select menu only on slave archives
 	 *
@@ -686,6 +692,29 @@ class tl_kitchenware_product extends Backend
 		{
 			$GLOBALS['TL_DCA']['tl_kitchenware_product']['palettes']['regular'] = preg_replace('@([,|;]{1}language)([,|;]{1})@','$1,languageMain$2', $GLOBALS['TL_DCA']['tl_kitchenware_product']['palettes']['regular']);
 		}
+	}
+
+
+	/**
+	 * Get records from the master category
+	 *
+	 * @param	DataContainer
+	 * @return	array
+	 * @link	http://www.contao.org/callbacks.html#options_callback
+	 */
+	public function getProducts(DataContainer $dc)
+	{
+
+		$objItems = $this->Database->prepare("SELECT * FROM tl_kitchenware_product WHERE pid=? ORDER BY date DESC")->execute($dc->activeRecord->pid);
+
+		while( $objItems->next() )
+		{
+			if ($objItems->id !== $dc->activeRecord->id) {
+				$arrItems[$objItems->id] = $objItems->title . ' [' . $objItems->model . ']' ;
+			}
+		}
+
+		return $arrItems;
 	}
 
 }

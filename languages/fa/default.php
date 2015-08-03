@@ -8,10 +8,12 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2015-07-29T23:42:13+04:30
+ * last-updated: 2015-07-29T23:42:49+04:30
  */
-
 
 $GLOBALS['TL_LANG']['MSC']['moredetail']   = 'جزئیات بیشتر';
 $GLOBALS['TL_LANG']['MSC']['txt_features'] = 'ویژگی‌ها';
+$GLOBALS['TL_LANG']['MSC']['txt_pieces']   = 'تکه‌های سرویس';
+$GLOBALS['TL_LANG']['MSC']['txt_relateds'] = 'کالاهای مرتبط';
+$GLOBALS['TL_LANG']['MSC']['txt_types']    = 'نوع‌های کالا';
 

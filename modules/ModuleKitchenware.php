@@ -474,30 +474,104 @@ abstract class ModuleKitchenware extends \Module
 	}
 
 	/**
-	 * Generate a colors as array
-	 * @param string
+	 * Parse an item and return it as string
 	 * @param object
 	 * @param boolean
-	 * @param boolean
+	 * @param string
+	 * @param integer
 	 * @return string
 	 */
-	protected function parseRelateds($objProducts)
+	protected function parseRelated($objRelated, $blnAddCategory=false, $strClass='', $intCount=0)
 	{
+		global $objPage;
 
+		$objTemplate = new \FrontendTemplate($this->related_template);
+		$objTemplate->setData($objRelated->row());
+
+		$objTemplate->class = (($this->related_Class != '') ? ' ' . $this->related_Class : '') . $strClass;
+
+		if (time() - $objProduct->date < 2592000) {
+			$objTemplate->new_product = true;
+		}
+
+		$objTemplate->features    = deserialize($objProduct->features);
+
+		$objTemplate->link        = $this->generateProductUrl($objRelated, $blnAddCategory);
+
+		$objTemplate->category    = $objRelated->getRelated('pid');
+
+		$objTemplate->txt_features = $GLOBALS['TL_LANG']['MSC']['txt_features'];
+
+		$objTemplate->count = $intCount; // see #5708
+
+		$objTemplate->date = \Date::parse($objPage->datimFormat, $objRelated->date);
+		$objTemplate->datetime = date('Y-m-d\TH:i:sP', $objRelated->date);
+
+		$objTemplate->addImage = false;
+
+		// Add an image
+		if ($objRelated->singleSRC != '')
+		{
+			$objModel = \FilesModel::findByUuid($objRelated->singleSRC);
+
+			if ($objModel === null)
+			{
+				if (!\Validator::isUuid($objRelated->singleSRC))
+				{
+					$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+				}
+			}
+			elseif (is_file(TL_ROOT . '/' . $objModel->path))
+			{
+				// Do not override the field now that we have a model registry (see #6303)
+				$arrRelated = $objRelated->row();
+
+				// Override the default image size
+				if ($this->related_imgSize != '')
+				{
+					$size = deserialize($this->related_imgSize);
+
+					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
+					{
+						$arrRelated['size'] = $this->related_imgSize;
+					}
+				}
+
+				$arrRelated['singleSRC'] = $objModel->path;
+				$arrRelated['fullsize'] = $this->fullsize;
+				$strLightboxId = 'lightbox[lb' . $this->id . ']';
+ 				$this->addImageToTemplate($objTemplate, $arrRelated,null,$strLightboxId);
+			}
+		}
+
+		return $objTemplate->parse();
 	}
 
+
 	/**
-	 * Generate a colors as array
-	 * @param string
+	 * Parse one or more items and return them as array
 	 * @param object
 	 * @param boolean
-	 * @param boolean
-	 * @return string
+	 * @return array
 	 */
-	protected function parseRelated($objProduct)
+	protected function parseRelateds($objRelateds, $blnAddCategory=false)
 	{
+		$limit = $objRelateds->count();
 
+		if ($limit < 1)
+		{
+			return array();
+		}
 
+		$count = 0;
+		$arrRelateds = array();
+
+		while ($objRelateds->next())
+		{
+			$arrRelateds[] = $this->parseRelated($objRelateds, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->related_perRow) == 0) ? ' last_col' : '') . ((($count % $this->related_perRow) == 1) ? ' first_col' : ''), $count);
+		}
+
+		return $arrRelateds;
 	}
 
 
