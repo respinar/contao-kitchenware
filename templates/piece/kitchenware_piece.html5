@@ -1,0 +1,24 @@
+
+<div class="piece block<?= $this->class ?>">
+
+  <figure class="image_container<?= $this->floatClass ?>"<?php if ($this->margin): ?> style="<?= $this->margin ?>"<?php endif; ?>>
+
+      <?php if ($this->link): ?>
+        <a href="<?= $this->link ?>"<?= $this->attributes ?> title="<?= $this->alt ?>">
+      <?php endif; ?>
+
+      <?php $this->insert('picture_default', $this->picture); ?>
+
+      <?php if ($this->link): ?>
+        </a>
+      <?php endif; ?>
+
+      <?php if ($this->caption): ?>
+        <figcaption class="caption" style="width:<?= $this->arrSize[0] ?>px"><?= $this->caption ?></figcaption>
+      <?php endif; ?>
+
+  </figure>
+
+  <div class="title"><?= $this->title ?></div>
+
+</div>
