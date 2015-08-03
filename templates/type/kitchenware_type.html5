@@ -3,13 +3,13 @@
 
   <figure class="image_container<?= $this->floatClass ?>"<?php if ($this->margin): ?> style="<?= $this->margin ?>"<?php endif; ?>>
 
-      <?php if ($this->link): ?>
-        <a href="<?= $this->link ?>"<?= $this->attributes ?> title="<?= $this->alt ?>">
+      <?php if ($this->href): ?>
+        <a href="<?= $this->href ?>"<?= $this->attributes; ?> title="<?= $this->alt ?>">
       <?php endif; ?>
 
       <?php $this->insert('picture_default', $this->picture); ?>
 
-      <?php if ($this->link): ?>
+      <?php if ($this->href): ?>
         </a>
       <?php endif; ?>
 

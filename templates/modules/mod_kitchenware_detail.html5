@@ -6,18 +6,24 @@
   <?= $this->product; ?>
 
   <?php if($this->type_show && $this->types): ?>
-      <h3><?= $this->txt_types ?></h3>
-      <div class="types"><?= implode('', $this->types); ?></div>
+      <div class="types">
+          <h3><?= $this->txt_types ?></h3>
+          <?= implode('', $this->types); ?>
+      </div>
   <?php endif; ?>
 
   <?php if($this->piece_show && $this->pieces): ?>
-      <h3><?= $this->txt_pieces ?></h3>
-      <div class="pieces"><?= implode('', $this->pieces); ?></div>
+      <div class="pieces">
+          <h3><?= $this->txt_pieces ?></h3>
+          <?= implode('', $this->pieces); ?>
+      </div>
   <?php endif; ?>
 
   <?php if($this->related_show && $this->relateds): ?>
-      <h3><?= $this->txt_relateds ?></h3>
-      <div class="relateds"><?= implode('', $this->relateds); ?></div>
+      <div class="relateds">
+          <h3><?= $this->txt_relateds ?></h3>
+          <?= implode('', $this->relateds); ?>
+      </div>
   <?php endif; ?>
 
   <!-- indexer::stop -->

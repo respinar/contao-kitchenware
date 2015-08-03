@@ -1,8 +1,6 @@
 
 <div class="product_full block<?= $this->class ?>">
 
-  <h2><?= $this->title ?></h2>
-
   <figure class="image_container<?= $this->floatClass ?>"<?php if ($this->margin): ?> style="<?= $this->margin ?>"<?php endif; ?>>
 
       <?php if ($this->href): ?>
@@ -26,11 +24,13 @@
 
   </figure>
 
+  <h2><?= $this->title ?></h2>
+
   <div class="warranty"><?= $this->warranty ?></div>
 
   <div class="description"><?= $this->description ?></div>
 
-  <?php if($this->features) { ?>
+  <?php if($this->features): ?>
   <div class="features">
     <h3><?= $this->txt_features ?></h3>
     <ul>
@@ -39,6 +39,6 @@
       <?php } ?>
     </ul>
   </div>
-  <?php } ?>
+  <?php endif; ?>
 
 </div>

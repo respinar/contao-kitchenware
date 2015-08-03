@@ -327,7 +327,7 @@ abstract class ModuleKitchenware extends \Module
 	 * @param boolean
 	 * @return string
 	 */
-	protected function parsePiece($objPiece)
+	protected function parsePiece($objPiece, $strClass='', $intCount=0)
 	{
 		if ($objPiece == null)
 		{
@@ -372,7 +372,7 @@ abstract class ModuleKitchenware extends \Module
 
 				$arrPiece['singleSRC'] = $objModel->path;
 				$arrPiece['fullsize'] = $this->fullsize;
-				$strLightboxId = 'lightbox[lb' . $this->id . ']';
+				$strLightboxId = 'lightbox[plb' . $this->id . ']';
  				$this->addImageToTemplate($objTemplate, $arrPiece,null,$strLightboxId);
 			}
 		}
@@ -417,7 +417,7 @@ abstract class ModuleKitchenware extends \Module
 	 * @param boolean
 	 * @return string
 	 */
-	protected function parseType($objType)
+	protected function parseType($objType, $strClass='', $intCount=0)
 	{
 
 		if ($objType == null)
@@ -463,7 +463,7 @@ abstract class ModuleKitchenware extends \Module
 
 				$arrType['singleSRC'] = $objModel->path;
 				$arrType['fullsize'] = $this->fullsize;
-				$strLightboxId = 'lightbox[lb' . $this->id . ']';
+				$strLightboxId = 'lightbox[tlb' . $this->id . ']';
  				$this->addImageToTemplate($objTemplate, $arrType,null,$strLightboxId);
 			}
 		}
@@ -538,9 +538,9 @@ abstract class ModuleKitchenware extends \Module
 				}
 
 				$arrRelated['singleSRC'] = $objModel->path;
-				$arrRelated['fullsize'] = $this->fullsize;
-				$strLightboxId = 'lightbox[lb' . $this->id . ']';
- 				$this->addImageToTemplate($objTemplate, $arrRelated,null,$strLightboxId);
+				//$arrRelated['fullsize'] = $this->fullsize;
+				//$strLightboxId = 'lightbox[lb' . $this->id . ']';
+ 				$this->addImageToTemplate($objTemplate, $arrRelated);
 			}
 		}
 
