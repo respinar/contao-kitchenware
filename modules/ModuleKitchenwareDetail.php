@@ -75,8 +75,13 @@ class ModuleKitchenwareDetail extends \ModuleKitchenware
 
 		$this->Template->product = '';
 		$this->Template->referer = 'javascript:history.go(-1)';
-		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
+		$this->Template->back =     $GLOBALS['TL_LANG']['MSC']['goBack'];
 
+		$this->Template->txt_types  = $GLOBALS['TL_LANG']['MSC']['types'];
+		$this->Template->txt_pieces = $GLOBALS['TL_LANG']['MSC']['pieces'];
+
+
+		// Generate products
 		$objKitchenwareProduct = \KitchenwareProductModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->kitchenware_categories);
 
 		$arrKitchenwareProduct = $this->parseProduct($objKitchenwareProduct);
@@ -85,6 +90,29 @@ class ModuleKitchenwareDetail extends \ModuleKitchenware
 		$objPage->description = strip_tags(strip_insert_tags($objKitchenwareProduct->description));
 
 		$this->Template->product = $arrKitchenwareProduct;
+
+
+		// Generate pieces
+		if ($this->piece_show)
+		{
+			$objKitchenwarePieces = \KitchenwarePieceModel::findPublishedByPid($objKitchenwareProduct->id);
+
+			if ($objKitchenwarePieces !== null)
+			{
+				$this->Template->pieces = $this->parsePieces($objKitchenwarePieces);
+			}
+		}
+
+		// Generate types
+		if ($this->type_show)
+		{
+			$objKitchenwareTypes = \KitchenwareTypeModel::findPublishedByPid($objKitchenwareProduct->id);
+
+			if ($objKitchenwareTypes !== null)
+			{
+				$this->Template->types = $this->parseTypes($objKitchenwareTypes);
+			}
+		}
 
 	}
 }

@@ -74,13 +74,13 @@ $GLOBALS['TL_DCA']['tl_kitchenware_product'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['types'],
 				'href'                => 'table=tl_kitchenware_type',
-				'icon'                => 'system/modules/kitchenware/assets/color.png'
+				'icon'                => 'system/modules/kitchenware/assets/type.png'
 			),
-			'elements' => array
+			'pieces' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['elements'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['pieces'],
 				'href'                => 'table=tl_kitchenware_piece',
-				'icon'                => 'system/modules/kitchenware/assets/element.png'
+				'icon'                => 'system/modules/kitchenware/assets/piece.png'
 			),
 			'copy' => array
 			(

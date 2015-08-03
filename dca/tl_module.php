@@ -15,6 +15,9 @@
  * Add palettes to tl_module
  */
 
+array_insert($GLOBALS['TL_DCA']['tl_module']['palettes']['__selector__'],1,array('piece_show','type_show','related_show'));
+
+
 $GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_list']      = '{title_legend},name,headline,type;
                                                                         {kitchenware_legend},kitchenware_categories;
                                                                         {template_legend},kitchenware_detailModule,customTpl,kitchenware_featured;
@@ -27,11 +30,15 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_detail']    = '{title_l
                                                                         {kitcehenware_legend},kitchenware_categories;
                                                                         {config_legend},kitchenware_metaFields;
                                                                         {product_legend},product_template,imgSize,fullsize;
-                                                                        {type_legend},type_show,type_template,type_perRow,type_Class,type_imgSize;
-                                                                        {piece_legend},piece_show,piece_template,piece_perRow,piece_Class,piece_imgSize;
-                                                                        {related_legend},related_show,related_template,related_perRow,related_Class,related_imgSize;
+                                                                        {type_legend},type_show;
+                                                                        {piece_legend},piece_show;
+                                                                        {related_legend},related_show;
                                                                         {protected_legend:hide},protected;
                                                                         {expert_legend:hide},guests,cssID,space';
+
+$GLOBALS['TL_DCA']['tl_module']['subpalettes']['piece_show']   = 'piece_template,piece_imgSize,piece_perRow,piece_Class';
+$GLOBALS['TL_DCA']['tl_module']['subpalettes']['type_show']    = 'type_template,type_imgSize,type_perRow,type_Class';
+$GLOBALS['TL_DCA']['tl_module']['subpalettes']['related_show'] = 'related_template,related_imgSize,related_perRow,related_Class';
 
 /**
  * Add fields to tl_module
@@ -103,7 +110,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_template'] = array
 	'exclude'                 => true,
 	'inputType'               => 'select',
 	'options_callback'        => array('tl_module_kitchenware', 'getProductTemplates'),
-	'eval'                    => array('tl_class'=>'w50'),
+	'eval'                    => array(),
 	'sql'                     => "varchar(64) NOT NULL default ''"
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['product_perRow'] = array
@@ -112,37 +119,36 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['product_perRow'] = array
 	'default'              => '4',
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'options'              => array('1','2','3','4','6','12'),
+	'options'              => array('1','2','3','1','6','12'),
 	'eval'                 => array('tl_class'=>'w50'),
-    'sql'                  => "varchar(64) NOT NULL default ''"
+    'sql'                  => "varchar(64) NOT NULL default '1'"
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['piece_show'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['piece_show'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'eval'                    => array(),
+	'eval'                    => array('submitOnChange'=>true),
 	'sql'                     => "char(1) NOT NULL default ''"
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['piece_template'] = array
 (
 	'label'                => &$GLOBALS['TL_LANG']['tl_module']['piece_template'],
-	'default'              => 'product_piece',
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'options_callback'     => array('tl_module_kitchenware', 'getProductTemplates'),
+	'options_callback'     => array('tl_module_kitchenware', 'getPieceTemplates'),
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['piece_perRow'] = array
 (
 	'label'                => &$GLOBALS['TL_LANG']['tl_module']['piece_perRow'],
-	'default'              => '4',
+	'default'              => '1',
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'options'              => array('1','2','3','4','6','12'),
+	'options'              => array('1','2','3','4','5','6','7','8','9','10','11','12'),
 	'eval'                 => array('tl_class'=>'w50'),
-    'sql'                  => "varchar(64) NOT NULL default ''"
+    'sql'                  => "varchar(64) NOT NULL default '1'"
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['piece_Class'] = array
 (
@@ -167,17 +173,16 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['type_show'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['type_show'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'eval'                    => array(),
+	'eval'                    => array('submitOnChange'=>true),
 	'sql'                     => "char(1) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['type_template'] = array
 (
 	'label'                => &$GLOBALS['TL_LANG']['tl_module']['type_template'],
-	'default'              => 'product_type',
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'options_callback'     => array('tl_module_kitchenware', 'getProductTemplates'),
+	'options_callback'     => array('tl_module_kitchenware', 'getTypeTemplates'),
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
@@ -202,19 +207,19 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['type_imgSize'] = array
 $GLOBALS['TL_DCA']['tl_module']['fields']['type_perRow'] = array
 (
 	'label'                => &$GLOBALS['TL_LANG']['tl_module']['type_perRow'],
-	'default'              => '4',
+	'default'              => '1',
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'options'              => array('1','2','3','4','6','12'),
+	'options'              => array('1','2','3','4','5','6','7','8','9','10','11','12'),
 	'eval'                 => array('tl_class'=>'w50'),
-    'sql'                  => "varchar(64) NOT NULL default ''"
+    'sql'                  => "varchar(64) NOT NULL default '1'"
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['related_show'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['related_show'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'eval'                    => array(),
+	'eval'                    => array('submitOnChange'=>true),
 	'sql'                     => "char(1) NOT NULL default ''"
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['related_template'] = array
@@ -238,12 +243,12 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['related_Class'] = array
 $GLOBALS['TL_DCA']['tl_module']['fields']['related_perRow'] = array
 (
 	'label'                => &$GLOBALS['TL_LANG']['tl_module']['related_perRow'],
-	'default'              => '4',
+	'default'              => '1',
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'options'              => array('1','2','3','4','6','12'),
+	'options'              => array('1','2','3','4','5','6','7','8','9','10','11','12'),
 	'eval'                 => array('tl_class'=>'w50'),
-    'sql'                  => "varchar(64) NOT NULL default ''"
+    'sql'                  => "varchar(64) NOT NULL default '1'"
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['related_imgSize'] = array
 (
@@ -309,6 +314,24 @@ class tl_module_kitchenware extends Backend
 	public function getProductTemplates()
 	{
 		return $this->getTemplateGroup('kitchenware_product_');
+	}
+
+    /**
+	 * Return all set templates as array
+	 * @return array
+	 */
+	public function getPieceTemplates()
+	{
+		return $this->getTemplateGroup('kitchenware_piece');
+	}
+
+    /**
+	 * Return all set templates as array
+	 * @return array
+	 */
+	public function getTypeTemplates()
+	{
+		return $this->getTemplateGroup('kitchenware_type');
 	}
 
 }

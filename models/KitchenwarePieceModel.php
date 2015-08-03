@@ -49,7 +49,6 @@ class KitchenwarePieceModel extends \Model
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$time = time();
 			$arrColumns[] = "$t.published=1";
 		}
 

@@ -101,7 +101,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_piece'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},title;{image_legend},singleSRC;{specs_legend},dimensions,capacity,material;{description_legend:hide},description;{publish_legend},published'
+		'default'                     => '{title_legend},title;{image_legend},singleSRC;{specs_legend},dimensions,weight,capacity,material;{description_legend:hide},description;{publish_legend},published'
 	),
 
 	// Fields
@@ -135,6 +135,15 @@ $GLOBALS['TL_DCA']['tl_kitchenware_piece'] = array
 		'dimensions' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_piece']['dimensions'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>128,'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
+		'weight' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_piece']['weight'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',

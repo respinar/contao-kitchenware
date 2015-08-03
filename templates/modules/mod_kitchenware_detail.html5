@@ -5,6 +5,16 @@
 
   <?= $this->product; ?>
 
+  <?php if($this->type_show): ?>
+      <h3><?= $this->txt_types ?></h3>
+      <div class="types"><?= implode('', $this->types); ?></div>
+  <?php endif; ?>
+
+  <?php if($this->piece_show): ?>
+      <h3><?= $this->txt_pieces ?></h3>
+      <div class="pieces"><?= implode('', $this->pieces); ?></div>
+  <?php endif; ?>
+
   <!-- indexer::stop -->
   <p class="back"><a href="<?= $this->referer; ?>" title="<?= $this->back; ?>"><?= $this->back; ?></a></p>
   <!-- indexer::continue -->

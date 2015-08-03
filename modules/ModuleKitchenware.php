@@ -294,6 +294,32 @@ abstract class ModuleKitchenware extends \Module
 	}
 
 	/**
+	 * Parse one or more items and return them as array
+	 * @param object
+	 * @param boolean
+	 * @return array
+	 */
+	protected function parsePieces($objPieces)
+	{
+		$limit = $objPieces->count();
+
+		if ($limit < 1)
+		{
+			return array();
+		}
+
+		$count = 0;
+		$arrPieces = array();
+
+		while ($objPieces->next())
+		{
+			$arrPieces[] = $this->parsePiece($objPieces, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->piece_perRow) == 0) ? ' last_col' : '') . ((($count % $this->piece_perRow) == 1) ? ' first_col' : ''), $count);
+		}
+
+		return $arrPieces;
+	}
+
+	/**
 	 * Generate a pieces as array
 	 * @param string
 	 * @param object
@@ -301,42 +327,85 @@ abstract class ModuleKitchenware extends \Module
 	 * @param boolean
 	 * @return string
 	 */
-	protected function parsePiece($objProduct)
+	protected function parsePiece($objPiece)
 	{
-		$objPiece = \KitchenwarePieceModel::findPublishedByPid($objProduct->id);
-
 		if ($objPiece == null)
 		{
 			return;
 		}
 
-		$arrPiece = array();
+		$objTemplate = new \FrontendTemplate($this->piece_template);
+		$objTemplate->setData($objPiece->row());
 
-		$size = deserialize($this->pieceImageSize);
+		$objTemplate->class = (($this->piece_Class != '') ? ' ' . $this->piece_Class : '') . $strClass;
 
-		while($objPiece->next())
+
+		$objTemplate->addImage = false;
+
+		// Add an image
+		if ($objPiece->singleSRC != '')
 		{
-			$strImage = '';
-			$objImage = \FilesModel::findByPk($objPiece->singleSRC);
+			$objModel = \FilesModel::findByUuid($objPiece->singleSRC);
 
-			// Add photo image
-			if ($objImage !== null)
+			if ($objModel === null)
 			{
-			$strImage = \Image::getHtml(\Image::get($objImage->path, $size[0], $size[1], $size[2]),$objPiece->title);
+				if (!\Validator::isUuid($objPiece->singleSRC))
+				{
+					$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+				}
 			}
+			elseif (is_file(TL_ROOT . '/' . $objModel->path))
+			{
+				// Do not override the field now that we have a model registry (see #6303)
+				$arrPiece = $objPiece->row();
 
-			$arrPiece[] = array
-			(
-				'title'       => $objPiece->title,
-				'model'       => $objPiece->model,
-				'dimensions'  => $objPiece->dimensions,
-				'capacity'    => $objPiece->capacity,
-				'description' => $objPiece->description,
-				'image'       => $strImage,
-			);
+				// Override the default image size
+				if ($this->piece_imgSize != '')
+				{
+					$size = deserialize($this->piece_imgSize);
+
+					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
+					{
+						$arrPiece['size'] = $this->piece_imgSize;
+					}
+				}
+
+				$arrPiece['singleSRC'] = $objModel->path;
+				$arrPiece['fullsize'] = $this->fullsize;
+				$strLightboxId = 'lightbox[lb' . $this->id . ']';
+ 				$this->addImageToTemplate($objTemplate, $arrPiece,null,$strLightboxId);
+			}
 		}
 
-		return $arrPiece;
+		return $objTemplate->parse();
+	}
+
+	/**
+	 * Generate a colors as array
+	 * @param string
+	 * @param object
+	 * @param boolean
+	 * @param boolean
+	 * @return string
+	 */
+	protected function parseTypes($objTypes)
+	{
+		$limit = $objTypes->count();
+
+		if ($limit < 1)
+		{
+			return array();
+		}
+
+		$count = 0;
+		$arrTypes = array();
+
+		while ($objTypes->next())
+		{
+			$arrTypes[] = $this->parseType($objTypes, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->type_perRow) == 0) ? ' last_col' : '') . ((($count % $this->type_perRow) == 1) ? ' first_col' : ''), $count);
+		}
+
+		return $arrTypes;
 
 	}
 
@@ -348,21 +417,58 @@ abstract class ModuleKitchenware extends \Module
 	 * @param boolean
 	 * @return string
 	 */
-	protected function parseTypes($objProducts)
+	protected function parseType($objType)
 	{
 
-	}
+		if ($objType == null)
+		{
+			return;
+		}
 
-	/**
-	 * Generate a colors as array
-	 * @param string
-	 * @param object
-	 * @param boolean
-	 * @param boolean
-	 * @return string
-	 */
-	protected function parseType($objProduct)
-	{
+		$objTemplate = new \FrontendTemplate($this->type_template);
+		$objTemplate->setData($objType->row());
+
+		$objTemplate->class = (($this->type_Class != '') ? ' ' . $this->type_Class : '') . $strClass;
+
+
+		$objTemplate->addImage = false;
+
+		// Add an image
+		if ($objType->singleSRC != '')
+		{
+			$objModel = \FilesModel::findByUuid($objType->singleSRC);
+
+			if ($objModel === null)
+			{
+				if (!\Validator::isUuid($objType->singleSRC))
+				{
+					$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+				}
+			}
+			elseif (is_file(TL_ROOT . '/' . $objModel->path))
+			{
+				// Do not override the field now that we have a model registry (see #6303)
+				$arrType = $objType->row();
+
+				// Override the default image size
+				if ($this->type_imgSize != '')
+				{
+					$size = deserialize($this->type_imgSize);
+
+					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
+					{
+						$arrType['size'] = $this->type_imgSize;
+					}
+				}
+
+				$arrType['singleSRC'] = $objModel->path;
+				$arrType['fullsize'] = $this->fullsize;
+				$strLightboxId = 'lightbox[lb' . $this->id . ']';
+ 				$this->addImageToTemplate($objTemplate, $arrType,null,$strLightboxId);
+			}
+		}
+
+		return $objTemplate->parse();
 
 
 	}
