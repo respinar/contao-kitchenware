@@ -50,6 +50,7 @@ $GLOBALS['TL_LANG']['tl_module']['catalog_legend']   = 'Category';
 $GLOBALS['TL_LANG']['tl_module']['product_legend']   = 'Product setting';
 $GLOBALS['TL_LANG']['tl_module']['protected_legend'] = 'Access protection';
 $GLOBALS['TL_LANG']['tl_module']['type_legend']      = 'Type settings';
+$GLOBALS['TL_LANG']['tl_module']['piece_legend']     = 'Piece settings';
 
 
 /**

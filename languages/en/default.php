@@ -17,3 +17,5 @@
  */
 $GLOBALS['TL_LANG']['MSC']['moredetail']   = 'More Detail';
 $GLOBALS['TL_LANG']['MSC']['txt_features'] = 'Features';
+$GLOBALS['TL_LANG']['MSC']['txt_types']    = 'Types';
+$GLOBALS['TL_LANG']['MSC']['txt_pieces']   = 'Pieces';
