@@ -90,10 +90,10 @@ abstract class ModuleKitchenware extends \Module
 	{
 		global $objPage;
 
-		$objTemplate = new \FrontendTemplate($this->product_template);
+		$objTemplate = new \FrontendTemplate($this->kitchenware_product_template);
 		$objTemplate->setData($objProduct->row());
 
-		$objTemplate->class = (($this->product_Class != '') ? ' ' . $this->product_Class : '') . $strClass;
+		$objTemplate->class = (($this->kitchenware_product_Class != '') ? ' ' . $this->kitchenware_product_Class : '') . $strClass;
 
 		if (time() - $objProduct->date < 2592000) {
 			$objTemplate->new_product = true;
@@ -173,7 +173,7 @@ abstract class ModuleKitchenware extends \Module
 
 		while ($objProducts->next())
 		{
-			$arrProducts[] = $this->parseProduct($objProducts, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->product_perRow) == 0) ? ' last_col' : '') . ((($count % $this->product_perRow) == 1) ? ' first_col' : ''), $count);
+			$arrProducts[] = $this->parseProduct($objProducts, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->kitchenware_product_perRow) == 0) ? ' last_col' : '') . ((($count % $this->kitchenware_product_perRow) == 1) ? ' first_col' : ''), $count);
 		}
 
 		return $arrProducts;
@@ -334,10 +334,10 @@ abstract class ModuleKitchenware extends \Module
 			return;
 		}
 
-		$objTemplate = new \FrontendTemplate($this->piece_template);
+		$objTemplate = new \FrontendTemplate($this->kitchenware_piece_template);
 		$objTemplate->setData($objPiece->row());
 
-		$objTemplate->class = (($this->piece_Class != '') ? ' ' . $this->piece_Class : '') . $strClass;
+		$objTemplate->class = (($this->kitchenware_piece_Class != '') ? ' ' . $this->kitchenware_piece_Class : '') . $strClass;
 
 
 		$objTemplate->addImage = false;
@@ -360,13 +360,13 @@ abstract class ModuleKitchenware extends \Module
 				$arrPiece = $objPiece->row();
 
 				// Override the default image size
-				if ($this->piece_imgSize != '')
+				if ($this->kitchenware_piece_imgSize != '')
 				{
-					$size = deserialize($this->piece_imgSize);
+					$size = deserialize($this->kitchenware_piece_imgSize);
 
 					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
 					{
-						$arrPiece['size'] = $this->piece_imgSize;
+						$arrPiece['size'] = $this->kitchenware_piece_imgSize;
 					}
 				}
 
@@ -402,7 +402,7 @@ abstract class ModuleKitchenware extends \Module
 
 		while ($objTypes->next())
 		{
-			$arrTypes[] = $this->parseType($objTypes, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->type_perRow) == 0) ? ' last_col' : '') . ((($count % $this->type_perRow) == 1) ? ' first_col' : ''), $count);
+			$arrTypes[] = $this->parseType($objTypes, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->kitchenware_type_perRow) == 0) ? ' last_col' : '') . ((($count % $this->kitchenware_type_perRow) == 1) ? ' first_col' : ''), $count);
 		}
 
 		return $arrTypes;
@@ -425,10 +425,10 @@ abstract class ModuleKitchenware extends \Module
 			return;
 		}
 
-		$objTemplate = new \FrontendTemplate($this->type_template);
+		$objTemplate = new \FrontendTemplate($this->kitchenware_type_template);
 		$objTemplate->setData($objType->row());
 
-		$objTemplate->class = (($this->type_Class != '') ? ' ' . $this->type_Class : '') . $strClass;
+		$objTemplate->class = (($this->kitchenware_type_Class != '') ? ' ' . $this->kitchenware_type_Class : '') . $strClass;
 
 
 		$objTemplate->addImage = false;
@@ -451,13 +451,13 @@ abstract class ModuleKitchenware extends \Module
 				$arrType = $objType->row();
 
 				// Override the default image size
-				if ($this->type_imgSize != '')
+				if ($this->kitchenware_type_imgSize != '')
 				{
-					$size = deserialize($this->type_imgSize);
+					$size = deserialize($this->kitchenware_type_imgSize);
 
 					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
 					{
-						$arrType['size'] = $this->type_imgSize;
+						$arrType['size'] = $this->kitchenware_type_imgSize;
 					}
 				}
 
@@ -485,10 +485,10 @@ abstract class ModuleKitchenware extends \Module
 	{
 		global $objPage;
 
-		$objTemplate = new \FrontendTemplate($this->related_template);
+		$objTemplate = new \FrontendTemplate($this->kitchenware_related_template);
 		$objTemplate->setData($objRelated->row());
 
-		$objTemplate->class = (($this->related_Class != '') ? ' ' . $this->related_Class : '') . $strClass;
+		$objTemplate->class = (($this->kitchenware_related_Class != '') ? ' ' . $this->kitchenware_related_Class : '') . $strClass;
 
 		if (time() - $objProduct->date < 2592000) {
 			$objTemplate->new_product = true;
@@ -527,13 +527,13 @@ abstract class ModuleKitchenware extends \Module
 				$arrRelated = $objRelated->row();
 
 				// Override the default image size
-				if ($this->related_imgSize != '')
+				if ($this->kitchenware_related_imgSize != '')
 				{
-					$size = deserialize($this->related_imgSize);
+					$size = deserialize($this->kitchenware_related_imgSize);
 
 					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
 					{
-						$arrRelated['size'] = $this->related_imgSize;
+						$arrRelated['size'] = $this->kitchenware_related_imgSize;
 					}
 				}
 
@@ -568,7 +568,7 @@ abstract class ModuleKitchenware extends \Module
 
 		while ($objRelateds->next())
 		{
-			$arrRelateds[] = $this->parseRelated($objRelateds, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->related_perRow) == 0) ? ' last_col' : '') . ((($count % $this->related_perRow) == 1) ? ' first_col' : ''), $count);
+			$arrRelateds[] = $this->parseRelated($objRelateds, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->kitchenware_related_perRow) == 0) ? ' last_col' : '') . ((($count % $this->kitchenware_related_perRow) == 1) ? ' first_col' : ''), $count);
 		}
 
 		return $arrRelateds;
