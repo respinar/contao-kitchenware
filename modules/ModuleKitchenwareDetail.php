@@ -88,7 +88,7 @@ class ModuleKitchenwareDetail extends \ModuleKitchenware
 		$arrKitchenwareProduct = $this->parseProduct($objKitchenwareProduct);
 
 		$objPage->pageTitle   = strip_tags(strip_insert_tags($objKitchenwareProduct->title));
-		$objPage->description = strip_tags(strip_insert_tags($objKitchenwareProduct->description));
+		$objPage->description = strip_tags(strip_insert_tags($objKitchenwareProduct->meta_description));
 
 		$this->Template->product = $arrKitchenwareProduct;
 
