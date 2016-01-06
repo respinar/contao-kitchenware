@@ -128,7 +128,7 @@ $GLOBALS['TL_DCA']['tl_kitchenware_product'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addEnclosure','package','published'),
-		'default'                     => '{title_legend},title,alias,model,date,featured;{image_legend},singleSRC;{package_legend},package;{certificate_legend},isiri,irifdo;{warranty_legend},warranty;{features_legend},features;{description_legend:hide},description;{related_legend},related;{enclosure_legend:hide},addEnclosure;{publish_legend},published'
+		'default'                     => '{title_legend},title,alias,model,date,featured;{image_legend},singleSRC;{package_legend},package;{certificate_legend},isiri,irifdo;{warranty_legend},warranty;{features_legend},features;{description_legend:hide},description;{meta_legend:hide},meta_description;{related_legend},related;{enclosure_legend:hide},addEnclosure;{publish_legend},published'
 	),
 
 	// Subpalettes
@@ -306,6 +306,15 @@ $GLOBALS['TL_DCA']['tl_kitchenware_product'] = array
 			'options_callback'        => array('tl_kitchenware_product', 'getProducts'),
 			'eval'                    => array('includeBlankOption'=>true,'multiple'=>true),
 			'sql'                     => "blob NULL"
+		),
+        'meta_description' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_kitchenware_product']['meta_description'],
+			'exclude'                 => true,
+			'inputType'               => 'textarea',
+			'search'                  => true,
+			'eval'                    => array('style'=>'height:60px', 'decodeEntities'=>true, 'tl_class'=>'clr'),
+			'sql'                     => "text NULL"
 		),
 		'addEnclosure' => array
 		(
