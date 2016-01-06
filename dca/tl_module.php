@@ -15,7 +15,7 @@
  * Add palettes to tl_module
  */
 
-array_insert($GLOBALS['TL_DCA']['tl_module']['palettes']['__selector__'],1,array('piece_show','type_show','related_show'));
+array_insert($GLOBALS['TL_DCA']['tl_module']['palettes']['__selector__'],1,array('kitchenware_piece_show','kitchenware_type_show','kitchenware_related_show'));
 
 
 $GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_list']      = '{title_legend},name,headline,type;
@@ -36,9 +36,9 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['kitchenware_detail']    = '{title_l
                                                                         {protected_legend:hide},protected;
                                                                         {expert_legend:hide},guests,cssID,space';
 
-$GLOBALS['TL_DCA']['tl_module']['subpalettes']['piece_show']   = 'kitchenware_piece_template,kitchenware_piece_imgSize,kitchenware_piece_perRow,kitchenware_piece_Class';
-$GLOBALS['TL_DCA']['tl_module']['subpalettes']['type_show']    = 'kitchenware_type_template,kitchenware_type_imgSize,kitchenware_type_perRow,kitchenware_type_Class';
-$GLOBALS['TL_DCA']['tl_module']['subpalettes']['related_show'] = 'kitchenware_related_template,kitchenware_related_imgSize,kitchenware_related_perRow,kitchenware_related_Class';
+$GLOBALS['TL_DCA']['tl_module']['subpalettes']['kitchenware_piece_show']   = 'kitchenware_piece_template,kitchenware_piece_imgSize,kitchenware_piece_perRow,kitchenware_piece_Class';
+$GLOBALS['TL_DCA']['tl_module']['subpalettes']['kitchenware_type_show']    = 'kitchenware_type_template,kitchenware_type_imgSize,kitchenware_type_perRow,kitchenware_type_Class';
+$GLOBALS['TL_DCA']['tl_module']['subpalettes']['kitchenware_related_show'] = 'kitchenware_related_template,kitchenware_related_imgSize,kitchenware_related_perRow,kitchenware_related_Class';
 
 /**
  * Add fields to tl_module
