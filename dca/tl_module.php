@@ -119,7 +119,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['kitchenware_product_perRow'] = array
 	'default'              => '4',
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'options'              => array('1','2','3','1','6','12'),
+	'options'              => array('1','2','3','4','5','6','7','8','9','10','11','12'),
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default '1'"
 );
