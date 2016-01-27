@@ -14,13 +14,16 @@
 /**
  * Back end modules
  */
-array_insert($GLOBALS['BE_MOD']['content'], 1, array
+array_insert($GLOBALS['BE_MOD'], 1, array
 (
-	'kitchenware' => array
-	(
-		'tables' => array('tl_kitchenware_category', 'tl_kitchenware_product','tl_kitchenware_type','tl_kitchenware_piece'),
-		'icon'   => 'system/modules/kitchenware/assets/icon.png'
-	)
+    'products' => array (
+        'kitchenware' => array
+        (
+            'tables' => array('tl_kitchenware_category', 'tl_kitchenware_product','tl_kitchenware_type','tl_kitchenware_piece'),
+            'icon'   => 'system/modules/kitchenware/assets/icon.png'
+        )    
+    )
+	
 ));
 
 

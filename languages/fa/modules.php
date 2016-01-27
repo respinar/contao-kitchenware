@@ -11,9 +11,11 @@
  * last-updated: 2015-07-29T23:42:49+04:30
  */
 
+
 $GLOBALS['TL_LANG']['FMD']['kitchenware']             = 'کالاهای آشپزخانه';
 $GLOBALS['TL_LANG']['FMD']['kitchenware_detail']['0'] = 'جزئیات کالای آشپزخانه';
 $GLOBALS['TL_LANG']['FMD']['kitchenware_list']['0']   = 'فهرست کالاهای آشپزخانه';
+$GLOBALS['TL_LANG']['MOD']['products']                = 'کالاها';
 $GLOBALS['TL_LANG']['MOD']['kitchenware']['0']        = 'کالاهای آشپزخانه';
 $GLOBALS['TL_LANG']['MOD']['kitchenware']['1']        = 'مدیریت کالاهای آشپزخانه‌ای';
 

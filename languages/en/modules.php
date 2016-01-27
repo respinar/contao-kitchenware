@@ -15,6 +15,7 @@
 /**
  * Back end modules
  */
+$GLOBALS['TL_LANG']['MOD']['products']    = 'Products';
 $GLOBALS['TL_LANG']['MOD']['kitchenware'] = array('Kitchenware', 'Manage kitchenware Sets and Products');
 
 
