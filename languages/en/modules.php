@@ -22,6 +22,6 @@ $GLOBALS['TL_LANG']['MOD']['kitchenware'] = array('Kitchenware', 'Manage kitchen
 /**
  * Front end modules
  */
-$GLOBALS['TL_LANG']['FMD']['kitchenware']         = 'Kitchenware';
-$GLOBALS['TL_LANG']['FMD']['kitchenware_list']    = array('Kitchenware List', '');
-$GLOBALS['TL_LANG']['FMD']['kitchenware_detail']  = array('Kitchenware Detail', '');
+$GLOBALS['TL_LANG']['FMD']['kitchenware']             = 'Kitchenware';
+$GLOBALS['TL_LANG']['FMD']['mod_kitchenware_list']    = array('Kitchenware List', '');
+$GLOBALS['TL_LANG']['FMD']['mod_kitchenware_detail']  = array('Kitchenware Detail', '');
