@@ -313,7 +313,7 @@ abstract class ModuleKitchenware extends \Module
 
 		while ($objPieces->next())
 		{
-			$arrPieces[] = $this->parsePiece($objPieces, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->piece_perRow) == 0) ? ' last_col' : '') . ((($count % $this->piece_perRow) == 1) ? ' first_col' : ''), $count);
+			$arrPieces[] = $this->parsePiece($objPieces, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->kitchenware_piece_perRow) == 0) ? ' last_col' : '') . ((($count % $this->kitchenware_piece_perRow) == 1) ? ' first_col' : ''), $count);
 		}
 
 		return $arrPieces;

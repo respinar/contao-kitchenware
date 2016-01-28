@@ -5,21 +5,21 @@
 
   <?= $this->product; ?>
 
-  <?php if($this->type_show && $this->types): ?>
+  <?php if($this->kitchenware_type_show && $this->types): ?>
       <div class="types">
           <h3><?= $this->txt_types ?></h3>
           <?= implode('', $this->types); ?>
       </div>
   <?php endif; ?>
 
-  <?php if($this->piece_show && $this->pieces): ?>
+  <?php if($this->kitchenware_piece_show && $this->pieces): ?>
       <div class="pieces">
           <h3><?= $this->txt_pieces ?></h3>
           <?= implode('', $this->pieces); ?>
       </div>
   <?php endif; ?>
 
-  <?php if($this->related_show && $this->relateds): ?>
+  <?php if($this->kitchenware_related_show && $this->relateds): ?>
       <div class="relateds">
           <h3><?= $this->txt_relateds ?></h3>
           <?= implode('', $this->relateds); ?>

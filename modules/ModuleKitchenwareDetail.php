@@ -94,7 +94,7 @@ class ModuleKitchenwareDetail extends \ModuleKitchenware
 
 
 		// Generate pieces
-		if ($this->piece_show)
+		if ($this->kitchenware_piece_show)
 		{
 			$objKitchenwarePieces = \KitchenwarePieceModel::findPublishedByPid($objKitchenwareProduct->id);
 
@@ -105,7 +105,7 @@ class ModuleKitchenwareDetail extends \ModuleKitchenware
 		}
 
 		// Generate types
-		if ($this->type_show)
+		if ($this->kitchenware_type_show)
 		{
 			$objKitchenwareTypes = \KitchenwareTypeModel::findPublishedByPid($objKitchenwareProduct->id);
 
@@ -116,7 +116,7 @@ class ModuleKitchenwareDetail extends \ModuleKitchenware
 		}
 
 		// Generate relateds
-		if ($this->related_show and $objKitchenwareProduct->related)
+		if ($this->kitchenware_related_show and $objKitchenwareProduct->related)
 		{
 			$this->relateds = deserialize($objKitchenwareProduct->related);
 
